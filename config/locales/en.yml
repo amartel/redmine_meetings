@@ -1,0 +1,70 @@
+# English strings go here for Rails i18n
+en:
+
+  project_module_meetings: Meetings
+  meetings: Meetings
+  
+  field_first_hour: Day starts at
+  field_last_hour: Day ends at
+  
+  permission_meetings_settings: Meetings settings
+  permission_manage_meeting: Manage meetings
+  permission_view_meetings: View meetings
+  permission_manage_doodle: Manage doodle
+  permission_view_doodles: View doodles
+  permission_answer_doodle: Answer doodles
+  permission_join_conference: Join conference
+  permission_start_conference: Start conference
+  permission_conference_moderator: Moderator
+    
+  label_title_meeting: Meeting
+  label_meeting_plural: Meetings
+  label_meeting_new: New meeting
+  field_start_date_date: Start
+  field_end_date_date: End
+  field_location: Location
+  field_meeting_web: Use the conference room dedicated to the project
+
+  label_doodle_plural: "Doodles"
+  label_title_doodle: "Doodle"
+  label_doodle_new: "New doodle"
+  field_options: "Options"
+  text_options_help: "Enter one option per line"
+  field_doodle_users: Participants
+  field_emails: External participants
+  text_emails_help: "Enter email addresses for participants who are not project's member (use , as separator)"
+  field_delete_answers: Delete existing answers
+  doodle_update_successfull: "Answers saved"
+  doodle_update_unseccessfull: "Error. Answers not saved"
+  button_save_answers: Save my answers
+  label_notify_author: "As editor of this doodle, you will always receive an email (except if you configured your account to not be notified of changes you make yourself)"
+  field_notify_author: "Notify me when an answer is received"
+  field_notify_participants: Send an email to all participants
+  field_notify_participants2: Send an email to participants who didn't answer
+  label_answer_received: New answer received  
+
+  content_doodle_email1: "You can participate to this doodle (created by %{value}) : "
+  content_doodle_email2: "- By following this link (if you are a registered user) : "
+  content_doodle_email3: "- Or by replying to this email. Just delete options you don't agree with, but leave --BEGIN-- and --END-- lines..."
+  content_doodle_email4: "Proposed options:"
+  content_doodle_invalid_answer: We are sorry but your reply was not processed (we were unable to find your answers). You can either retry to reply again or send an email the author (%{value})...
+  content_doodle_ak_answer: "Your answer has been processed. Thank you." 
+  content_doodle_ak_answer1: "You have accepted the following options:" 
+  content_doodle_ak_answer3: "You have refused all options." 
+  content_doodle_ak_answer2: "If you want, you can update your answer :" 
+  content_doodle_answer: "An answer has been recorded (from %{value}). Follow the link to display it: "
+  
+  label_conference: Web conference
+  label_conference_status: "Status"
+  label_join_conference: Join conference
+  label_conference_start: Start conference
+  label_conference_people: "Participants"
+  label_conference_status_running: In progress
+  label_conference_status_closed: Non started
+  
+  content_meeting_email1: "Organizor : %{value}"
+  content_meeting_email2: "This meeting can be added to your calendar using the attached file, meeting.ics (instructions depend from the software you are using)."
+  content_meeting_email3: "Follow this link to join the web conference : %{value}" 
+  content_meeting_email4: "Link to the meeting : %{value}"
+  
+  download_ics: "ICS (ICalendar)"

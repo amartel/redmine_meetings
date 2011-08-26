@@ -1,0 +1,32 @@
+<h2><%= l(:label_calendar) %></h2>
+
+<% form_tag({:controller => 'meetings', :action => 'index', :project_id => @project}, :method => :get, :id => 'query_form') do %>
+
+<p style="float:right;">
+  <%= link_to_previous_period(@period, @year, @month, @week, @day) %> | <%= link_to_next_period(@period, @year, @month, @week, @day) %>
+</p>
+
+<p class="buttons">
+<%= label_tag('month', l(:label_month)) %>
+  <%= select_month(@month, { :prefix => "month", :discard_type => true }, { :onchange => '$("query_form").submit()' }) %>
+<%= label_tag('year', l(:label_year)) %>
+<%= select_year(@year, { :prefix => "year", :discard_type => true}, { :onchange => '$("query_form").submit()' }) %>
+
+<%= link_to l(:label_today), { :project_id => @project }, :class => 'icon icon-reload' %>
+</p>
+<% end %>
+
+<%= render :partial => @calview, :locals => {:calendar => @calendar} %>
+
+<% other_formats_links do |f| %>
+  <%= f.link_to l(:download_ics), :url => {:action => 'export_meetings', :project_id => @project } %>
+<% end if User.current.allowed_to?(:view_meetings, @project) %>
+
+<% content_for :sidebar do %>
+    <%= render :partial => 'meetings/sidebar' %>
+<% end %>
+
+<% html_title(l(:label_meeting_plural)) -%>
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'redmine_meetings.css', :plugin => "redmine_meetings" %>
+<% end %>

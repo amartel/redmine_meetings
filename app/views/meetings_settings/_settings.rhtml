@@ -1,0 +1,47 @@
+<h3>Conference settings</h3>
+
+<p><label>BigBlueButton server</label>
+<%= text_field_tag 'settings[bbb_server]', @settings['bbb_server'], :size => 80 %><br />
+<em>public url of your BBB server. For example: http://mybbb.domain.com</em>
+</p>
+
+<p><label>Internal address</label>
+<%= text_field_tag 'settings[bbb_ip]', @settings['bbb_ip'], :size => 80 %><br />
+<em>private url of your BBB server (if you are behind a firewall). For example: http://192.168.10.1</em>
+</p>
+
+<p><label>salt</label>
+<%= text_field_tag 'settings[bbb_salt]', @settings['bbb_salt'], :size => 80 %><br />
+<em>You'll find it in /var/lib/tomcat6/webapps/bigbluebutton/WEB-INF/classes/bigbluebutton.properties at line beans.dynamicConferenceService.securitySalt=[your_salt]</em>
+</p>
+
+<p><label>return url</label>
+<%= text_field_tag 'settings[bbb_url]', @settings['bbb_url'], :size => 80 %><br />
+<em>url where users will be redirected when exiting the meeting. Leave empty to go back to the previous url (project's overviwe)...</em>
+</p>
+
+<p><label>Use popup window</label>
+<%= check_box_tag 'settings[bbb_popup]', 1, @settings['bbb_popup'] %><br />
+<em>Checked if you want to use a popup window without menu, toolbars, etc... (chat is not allowed in fullscreen mode)</em>
+</p>
+
+<p><label>Help url</label>
+<%= text_field_tag 'settings[bbb_help]', @settings['bbb_help'], :size => 80 %><br />
+<em>url of the help page</em>
+</p>
+<hr />
+<h3>Doodle settings</h3>
+
+<p><label>Allow mail answer from unknown users</label>
+<%= check_box_tag 'settings[doodle_mail]', 1, @settings['doodle_mail'] %><br />
+<em>Checked if you want to allow users to answer doodle via email, even if they don't have an account on the server</em>
+</p>
+
+<hr />
+
+<h3>Meeting settings</h3>
+
+<p><label>Allow mail answer from unknown users</label>
+<%= check_box_tag 'settings[meeting_mail]', 1, @settings['meeting_mail'] %><br />
+<em>Checked if you want to allow users to accept/refuse meetings via email, even if they don't have an account on the server</em>
+</p>

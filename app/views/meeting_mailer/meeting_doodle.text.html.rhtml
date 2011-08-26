@@ -1,0 +1,10 @@
+<%= textilizable(@doodle, :description, :only_path => false) %>
+<br/><b><%=l(:content_doodle_email4)%></b>
+<br/>-----------BEGIN-------------------
+<% @doodle.tab_options.each do |opt| %>
+<br/><%= opt %>
+<% end %>
+<br/>------------END--------------------
+<br/><br/><%=l(:content_doodle_email1, @doodle.author.name)%>
+<br/><%=l(:content_doodle_email2)%><%= @doodle_url %>
+<br/><%=l(:content_doodle_email3)%>

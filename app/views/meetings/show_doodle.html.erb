@@ -1,0 +1,111 @@
+<div class="contextual">
+<%= link_to_if_authorized(l(:button_edit), {:action => 'edit_doodle', :id => @doodle }, :class => 'icon icon-edit', :accesskey => accesskey(:edit)) %>
+<%= link_to_if_authorized(l(:button_delete), {:action => 'delete_doodle', :id => @doodle}, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del') %>
+</div>
+
+<h2><%= l(:label_title_doodle)%> #<%= @doodle.id %> - <span style="font-size: smaller;"><%= authoring @doodle.created_on, @doodle.author %></span></h2>
+
+<div class="box">
+  <h3><%=h @doodle.title %></h3>
+  <div class="wiki">
+  <%= textilizable(@doodle.description) %>
+  </div>
+
+<fieldset class="collapsible collapsed" style="padding: 0pt;">
+        <legend onclick="toggleFieldset(this);"><%= l(:field_doodle_users) %></legend>
+        <div id="list_doodle_users" style="margin: 0.5em 0pt; overflow: visible; display: none;">
+
+<table border="0">
+<tr valign="top"><td>
+  <p><strong><label><%= l(:label_member_plural) %></label></strong>
+<% @doodle.watcher_users.collect.sort.each do |user| %>
+<br/>&nbsp;&nbsp;&nbsp;<%=h user %>
+<% end %>
+</p>
+</td>
+<td style="width: 40px">&nbsp;</td>
+<td>
+<p><strong><label><%= l(:field_emails) %></label></strong>
+<% @doodle.emails.split(/\n/).split(/,/).sort.each do |email| %>
+<br/>&nbsp;&nbsp;&nbsp;<%=h email %>
+<% end %>
+</p>
+</td>
+</tr></table>
+
+
+</div></fieldset>
+
+</div> 
+<br />  
+
+<% form_tag({:action => 'answer_doodle', :id => @doodle}, {:method => :put}) do %>
+<table class="list doodle">
+  <thead>
+    <tr>
+      <th> </th>
+      <th class="answeree"> </th>
+      <% @doodle.tab_options.each do |option| %>
+        <th class="answer"><%=h option %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @responses.each do |response| %>
+       <% if response.author %>
+          <tr class="<%= cycle('odd', 'even') %>">
+          <td><%= image_tag("edit.png") unless (response.author != User.current || !response.author.mail) %>
+          <%= link_to_if_authorized("", {:action => 'remove', :id => @doodle.id, :rid => response.id}, :method => :post, :class => 'icon icon-del') unless response.author.mail %>
+          
+          </td>
+          <% if response.author.mail %>
+             <td class="answeree"><%=h response.author.name %></td>
+          <% else %>
+             <td class="answeree"><%=h response.name %></td>
+          <% end %>
+          <% column = 1 %>
+          <% response.answers_with_css_classes.each do |answer,css| %>
+              <% if (response.author == User.current && response.author.mail) %>
+                 <td class="<%= css %>"><%= check_box_tag "answers[]", column-1, answer, :disabled => (!(response.author == User.current && response.author.mail)), :onclick => "$(this).up('.answer').toggleClassName('yes').toggleClassName('no')" %></td>
+              <% else %>
+                 <td class="<%= css %>"><%= check_box_tag "answers[]", column-1, answer, :disabled => (!(response.author == User.current && response.author.mail)), :style => "display: none;", :onclick => "$(this).up('.answer').toggleClassName('yes').toggleClassName('no')" %></td>
+              <% end %>
+              <% column += 1 %>
+          <% end %>
+          </tr>
+       <% else %>
+          <tr class="<%= cycle('odd', 'even') %>">
+          <td><%= image_tag("edit.png") %></td>
+          <% if User.current.mail %>
+             <td class="answeree"><%=h User.current.name %></td>
+          <% else %>
+            <td class="answeree"><%= text_field_tag "name", response.name, :size => 40 %></td>
+          <% end %>
+          <% column = 1 %>
+          <% response.answers_with_css_classes.each do |answer,css| %>
+              <td class="<%= css %>"><%= check_box_tag "answers[]", column-1, answer, :disabled => false, :onclick => "$(this).up('.answer').toggleClassName('yes').toggleClassName('no')" %></td>
+              <% column += 1 %>
+          <% end %>
+          </tr>
+       <% end %>
+    <% end %>
+    <tr><td colspan="<%= 2 + @doodle.results.length %>">&nbsp;</td></tr>
+    <tr class="<%= cycle('odd', 'even') %>" style="border-top:1px solid black;">
+      <td colspan="2" align="right" class="answeree"><strong><%= l(:label_result_plural)%></strong></td>
+      <% @doodle.results.each do |res| %>
+        <td class="result"><%= res %></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+<br />  
+<% if User.current.allowed_to?(:answer_doodle, @project) %>
+  <%= submit_tag l(:button_save_answers) %>
+<% end %>
+<% end %>
+
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'redmine_meetings.css', :plugin => "redmine_meetings" %>
+<% end %>
+
+<% html_title "#{l(:label_title_doodle)}" -%>

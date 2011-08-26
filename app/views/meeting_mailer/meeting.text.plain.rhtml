@@ -1,0 +1,15 @@
+<%= l(:content_meeting_email1, @meeting.author.name) %> 
+
+<%= l(:field_start_date_date) %> : <%= @meeting.start_date.utc.strftime("%F %T") %> - <%= User.current.time_zone %>
+<%= l(:field_end_date_date) %> : <%= @meeting.end_date.utc.strftime("%F %T") %> - <%= User.current.time_zone %>
+<%= l(:field_location) %> : <%= @meeting.web ? l(:field_meeting_web) : h(@meeting.location) %>
+<% if @meeting.web %>
+<%= l(:content_meeting_email3, @conf_url) %>
+<% end %>
+
+<%= @meeting.description %>
+
+<% if @meeting.web %>
+  <%= l(:content_meeting_email4, @meeting_url) %>
+<% end %>
+<%= l(:content_meeting_email2) %>

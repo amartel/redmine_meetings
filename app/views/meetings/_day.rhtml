@@ -1,0 +1,47 @@
+<table class="cal">
+<thead>
+<tr><th scope="col" title="" class="week-number"><%= link_to l(:label_month), { :project_id => @project, :year => @year, :month => @month }%><br/><%= link_to l(:label_week), { :project_id => @project, :year => @year, :month => @month, :week => @week }%></th><th scope="col"><%= format_date(calendar.startdt) %><%= link_to_if_authorized('&nbsp;&nbsp;&nbsp;&nbsp;', {:action => 'new_meeting', :project_id => @project, :start => calendar.startdt.to_date}, :class => 'icon-time-add', :style => "float:right;", :title => l(:label_meeting_new)) %></th></tr>
+</thead>
+<tbody>
+
+<% day = calendar.startdt 
+  nbrow = 2
+  h = @meeting_setting.first_hour
+  while h < @meeting_setting.last_hour do
+    nbrow  = nbrow + 1
+    h = h + 2
+  end
+  num_meeting = 0
+%>
+<tr style="height: 100px;">
+    <td class="odd" style="width: 100px;" >00:00</td>
+    <td class="even" rowspan="<%= nbrow %>"  style="width: 100%; " >
+    <div style="position: relative;">
+    <% calendar.meetings_on(day).each do |i| %>
+      <% if i.is_a? Meeting %>
+      <div class="<%= i.css_classe %> day tooltip" style="<%= meeting_style_time i, day, @meeting_setting.first_hour, @meeting_setting.last_hour, num_meeting %>">
+      <%= link_to_meeting i %>
+      <span class="tip"><%= render_meeting_tooltip i %></span>
+      </div>
+      <% num_meeting = num_meeting + 1
+       end %>
+    <% end %>
+    </div>
+    </td>
+</tr>  
+<% hour = @meeting_setting.first_hour
+while hour < @meeting_setting.last_hour %>
+<% disp = "%02d" % hour %>
+  <tr style="height: 60px;">
+  <td class="even" style="width: 100px;" ><%= disp %>:00</td>
+</tr>
+<% hour = hour + 2
+end 
+disp = "%02d" % hour %>
+    <tr style="height: 100px;">
+        <td class="odd" style="width: 100px;" ><%= disp %>:00</td>
+        </td>
+    </tr>  
+
+</tbody>
+</table>

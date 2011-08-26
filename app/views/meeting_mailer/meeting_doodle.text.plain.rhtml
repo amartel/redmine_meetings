@@ -1,0 +1,12 @@
+<%= @doodle.description %>
+
+<%=l(:content_doodle_email4)%>
+-----------BEGIN-------------------
+<% @doodle.tab_options.each do |opt| %>
+<%= opt %>
+<% end %>
+------------END--------------------
+  
+<%=l(:content_doodle_email1, @doodle.author.name)%>
+<%=l(:content_doodle_email2)%><%= @doodle_url %>
+<%=l(:content_doodle_email3)%>

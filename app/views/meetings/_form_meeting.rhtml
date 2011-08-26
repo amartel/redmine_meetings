@@ -1,0 +1,33 @@
+<div class="box">
+  <p><%= f.text_field :subject, :required => true, :size => 80 %></p>
+  <p><%= f.text_field :location, :size => 80 %><br/><%= check_box_tag 'meeting[web]', 'on', @meeting.web %><%= l(:field_meeting_web) %></p>
+  <p><%= f.text_field :start_date_date, :required => true, :size => 10, :onchange => "sync_date('meeting_start_date_date','meeting_end_date_date')" %><%= calendar_for('meeting_start_date_date') %>&nbsp;&nbsp;-&nbsp;&nbsp;<%= select_time @meeting.start_date_time, {:prefix => 'start_time', :minute_step => 5, :time_separator => ':' }, { :onchange => "sync_time(this,'start_time','end_time')" } %></p>
+  <p><%= f.text_field :end_date_date, :required => true, :size => 10 %><%= calendar_for('meeting_end_date_date') %>&nbsp;&nbsp;-&nbsp;&nbsp;<%= select_time @meeting.end_date_time, :prefix => 'end_time', :minute_step => 5, :time_separator => ':' %></p>
+
+  <p><%= f.text_area :description, :cols => 60, :rows => 10, :class => 'wiki-edit' %>
+    <%= wikitoolbar_for 'meeting_description' %>
+  </p>
+  <p id="attachments_form"><%= label_tag('attachments[1][file]', l(:label_attachment_plural))%><%= render :partial => 'attachments/form' %></p>
+</div>
+
+<div class="box tabular">
+<h3> <%= l(:field_doodle_users) %></h3>
+<p><label><%= l(:label_member_plural) %><br>
+<input type="button" value="<%= l(:label_all) %>" onclick="SetAllCheckBoxes(true);return false;" />
+<input type="button" value="<%= l(:label_none) %>" onclick="SetAllCheckBoxes(false);return false;" />
+</label>
+<% @project.users.sort.each do |user| -%>
+  <% if user.allowed_to?(:view_meetings, @project, :global => false) %>
+    <label class="floating"><%= check_box_tag 'watchers[]', user.id, @meeting.watched_by?(user) %> <%=h user %></label>
+  <% end -%>
+<% end -%>
+</p>
+</div>
+
+<div class="box tabular">
+<h3> <%= l(:field_mail_notification) %></h3>
+<p><label></label><%= check_box_tag 'notify_participants', 'on', true %><%= l(:field_notify_participants) %>
+</p>
+</div>
+
+<div style="clear:both;"> </div>  

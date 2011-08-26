@@ -1,0 +1,75 @@
+<h2><%= l(:label_doodle_new) %></h2>
+<% labelled_tabular_form_for :doodle, @doodle, :url => { :controller => 'meetings', :action => 'create_doodle', :project_id => @project }, :html => { :id => 'doodle-form' } do |f| %>
+  <%= error_messages_for 'doodle' %>
+  
+  <script language="javascript">
+  function SetAllCheckBoxes(CheckValue)
+  {
+    if(!document.forms['doodle-form'])
+      return;
+    var objCheckBoxes = document.forms['doodle-form'].elements['watchers_'];
+    if(!objCheckBoxes)
+      return;
+    var countCheckBoxes = objCheckBoxes.length;
+    if(!countCheckBoxes)
+      objCheckBoxes.checked = CheckValue;
+    else
+      // set the check value for all check boxes
+      for(var i = 0; i < countCheckBoxes; i++)
+        objCheckBoxes[i].checked = CheckValue;
+  }
+  </script>
+  
+  <div class="box tabular">
+    <p><%= f.text_field :title, :required => true, :size => 60 %></p>
+    <p><%= f.text_area :description, :cols => 60, :rows => 10, :class => 'wiki-edit' %>
+      <%= wikitoolbar_for 'doodle_description' %>
+    </p>
+      
+    <p><label><%= l(:field_options) %></label><em><%= l(:text_options_help) %></em><br/><%= text_area_tag 'doodle[options]', nil, :cols => 60, :rows => 10 %>
+    </p>
+
+  </div>
+  <div class="box tabular">
+  <h3> <%= l(:field_doodle_users) %></h3>
+  <p><label><%= l(:label_member_plural) %><br>
+  <input type="button" value="<%= l(:label_all) %>" onclick="SetAllCheckBoxes(true);return false;" />
+  <input type="button" value="<%= l(:label_none) %>" onclick="SetAllCheckBoxes(false);return false;" />
+  </label>
+  <% @project.users.sort.each do |user| -%>
+    <% if user.allowed_to?(:answer_doodle, @project, :global => false) && user.allowed_to?(:view_meeting_doodles, @project, :global => false) %>
+      <label class="floating"><%= check_box_tag 'watchers[]', user.id, true %> <%=h user %></label>
+    <% end -%>
+  <% end -%>
+  </p>
+  <hr>
+  <p><%= f.text_area :emails, :cols => 60, :rows => 5 %><br/><em><%= l(:text_emails_help) %></em>
+  </p>
+  </div>
+
+  <div class="box tabular">
+  <h3> <%= l(:field_mail_notification) %></h3>
+  <em><span style="font-size: smaller;"><%= l(:label_notify_author) %></span></em>
+  <p><label></label><%= check_box_tag 'doodle[notify_author]', 'on', true %><%= l(:field_notify_author) %>
+  </p>
+  <p><label></label><%= check_box_tag 'notify_participants', 'on', true %><%= l(:field_notify_participants) %>
+  </p>
+  </div>
+  
+  <%= submit_tag l(:button_create) %>    <%= link_to_remote l(:label_preview),
+                       { :url => { :controller => 'meetings', :action => 'preview_doodle', :project_id => @project },
+                         :method => 'post',
+                         :update => 'preview',
+                         :with => "Form.serialize('doodle-form')",
+                         :complete => "Element.scrollTo('preview')"
+                       }, :accesskey => accesskey(:preview) %>
+
+<% end if @project %>
+<div id="preview" class="wiki"></div>
+
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'redmine_meetings.css', :plugin => "redmine_meetings" %>
+  <%= javascript_include_tag 'redmine_meetings.js', :plugin => "redmine_meetings" %>
+<% end %>
+<%= purl = url_for :controller => 'meetings', :action => 'preview_doodle', :project_id => @project
+javascript_tag "setAutoPreview('#{purl}','doodle-form', 'doodle_description');setAutoPreview('#{purl}','doodle-form', 'doodle_options');" %>

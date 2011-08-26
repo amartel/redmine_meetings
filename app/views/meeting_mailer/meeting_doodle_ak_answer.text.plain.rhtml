@@ -1,0 +1,18 @@
+<% if @accepted.empty? %>
+<%= l(:content_doodle_ak_answer3) %>
+<% else %>
+<%= l(:content_doodle_ak_answer1) %> : <%= h(@accepted) %>
+<% end %>
+
+<%= l(:content_doodle_ak_answer) %>
+
+<%=l(:content_doodle_ak_answer2)%>
+<%=l(:content_doodle_email2)%><%= @doodle_url %>
+<%=l(:content_doodle_email3)%>
+
+<%=l(:content_doodle_email4)%>
+-----------BEGIN-------------------
+<% @doodle.tab_options.each do |opt| %>
+<%= opt %>
+<% end %>
+------------END--------------------

@@ -1,0 +1,14 @@
+<h3><%= l(:label_meeting_plural) %></h3>
+<% if User.current.allowed_to?(:manage_meeting, @project, :global => true) %>
+  <%= link_to l(:label_meeting_new), { :controller => 'meetings', :action => 'new_meeting', :project_id => @project } %><br />
+<% end %>
+<% if User.current.allowed_to?(:join_conference, @project) || User.current.allowed_to?(:start_conference, @project) %>
+  <%= render_sidebar_conference %>
+<% end %>
+<% if User.current.allowed_to?(:view_meeting_doodles, @project, :global => true) %>
+  <h3><%= l(:label_doodle_plural) %></h3>
+  <% if User.current.allowed_to?(:manage_doodle, @project, :global => true) %>
+    <%= link_to(l(:label_doodle_new), :controller => 'meetings', :action => 'new_doodle', :project_id => @project) %><br />
+  <% end %>
+  <%= render_sidebar_doodles %>
+<% end %>

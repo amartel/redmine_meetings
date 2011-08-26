@@ -1,0 +1,28 @@
+table.list.doodle { border: none; width: auto; }
+table.list.doodle td { vertical-align: middle; padding-right: 0.5em }
+table.list.doodle th.answeree { border-right:solid 1px black; }
+table.list.doodle td.answeree { border-right:solid 1px black; }
+table.list.doodle th.answer { text-align: center; border-right:solid 1px black; border-left:solid 1px black; }
+table.list.doodle td.answer { text-align: center; border-right:solid 1px black; border-left:solid 1px black; }
+table.list.doodle td.result { text-align: center; border-right:solid 1px black; border-left:solid 1px black; }
+table.list.doodle img.gravatar { vertical-align: middle; margin-right: 0.5em}
+tr.odd td.no { background-color: #ff9494; }
+tr.even td.no { background-color: #ff9494; }
+tr:hover td.no { background-color: #ffd4d4; }
+tr.odd td.yes { background-color: #94ff94; }
+tr.even td.yes { background-color: #94ff94; }
+tr:hover td.yes { background-color: #c4ffc4; }
+h3.doodles {
+   color: navy;
+   border-top:1px solid #ff9831;
+   border-bottom:1px solid #ff9831;
+}
+
+
+table.meeting th {vertical-align: top; text-align: right; font-weight: bold;}
+
+div.meeting { background-color: #F7A95A; display:block; border: 1px solid black; }
+div.webmeeting { background-color: #A7FAA0; display:block; border: 1px solid black; }
+
+div.meeting.day.tooltip { background-color: #F7A95A; display:block; width: 49%; border: 1px solid black; }
+div.webmeeting.day.tooltip { background-color: #A7FAA0; display:block; width: 49%; border: 1px solid black; }

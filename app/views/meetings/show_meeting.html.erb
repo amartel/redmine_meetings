@@ -1,0 +1,51 @@
+<div class="contextual">
+<%= link_to_if_authorized(l(:button_edit), {:action => 'edit_meeting', :id => @meeting }, :class => 'icon icon-edit', :accesskey => accesskey(:edit)) %>
+<%= link_to_if_authorized(l(:button_delete), {:action => 'delete_meeting', :id => @meeting}, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del') %>
+</div>
+
+<h2><%= l(:label_title_meeting) %> <%= @meeting.id %> - <span style="font-size: smaller;"><%= authoring @meeting.created_on, @meeting.author %></span></h2>
+
+<div class="box">
+  <h3><%=h @meeting.subject %></h3>
+
+  <table class="meeting">
+  <tr><th><%=l(:field_start_date_date)%>: </th><td><%= format_time(@meeting.start_date) %></td></tr>
+  <tr><th><%=l(:field_end_date_date)%>: </th><td><%= format_time(@meeting.end_date) %></td></tr>
+  <tr><th><%=l(:field_location)%>: </th><td>
+  <% if @meeting.web %>
+    <em><%=l(:field_meeting_web)%></em>
+  <% else %>
+    <%= h(@meeting.location) %>
+  <%  end %>
+  </td></tr>
+  </table>
+
+    <hr />
+<p><strong><%=l(:field_description)%></strong></p>
+<div class="wiki">
+<%= textilizable @meeting, :description, :attachments => @meeting.attachments %>
+</div>
+  
+<fieldset class="collapsible" style="padding: 0pt;">
+        <legend onclick="toggleFieldset(this);"><%= l(:field_doodle_users) %></legend>
+        <div id="list_doodle_users" style="margin: 0.5em 0pt; overflow: visible;">
+<% @meeting.watcher_users.collect.sort.each do |user| %>
+<br/>&nbsp;&nbsp;&nbsp;<%=h user %>
+<% end %>
+</div></fieldset>
+
+<% if @meeting.attachments.any? -%>
+    <%= link_to_attachments @meeting %>
+  <% end -%>
+
+
+</div> 
+<% other_formats_links do |f| %>
+  <%= f.link_to l(:download_ics), :url => {:action => 'export_meeting', :id => @meeting } %>
+<% end if User.current.allowed_to?(:view_meetings, @project) %>
+
+
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'redmine_meetings.css', :plugin => "redmine_meetings" %>
+    <%= javascript_include_tag 'redmine_meetings.js', :plugin => "redmine_meetings" %>
+<% end %>

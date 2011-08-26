@@ -1,0 +1,24 @@
+<h2><%= l(:label_title_meeting) %></h2>
+<% labelled_tabular_form_for :meeting, @meeting, :url => { :controller => 'meetings', :action => 'update_meeting', :id => @meeting }, :html => {:multipart => true,  :id => 'meeting-form' } do |f| %>
+  <%= error_messages_for 'meeting' %>
+  
+  <%= render :partial => 'meetings/form_meeting', :locals => {:f => f} %>
+
+          
+  <%= submit_tag l(:button_save) %>    <%= link_to_remote l(:label_preview),
+                       { :url => { :controller => 'meetings', :action => 'preview_meeting', :project_id => @project },
+                         :method => 'post',
+                         :update => 'preview',
+                         :with => "Form.serialize('meeting-form')",
+                         :complete => "Element.scrollTo('preview')"
+                       }, :accesskey => accesskey(:preview) %>
+
+<% end if @project %>
+<div id="preview" class="wiki"></div>
+
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'redmine_meetings.css', :plugin => "redmine_meetings" %>
+    <%= javascript_include_tag 'redmine_meetings.js', :plugin => "redmine_meetings" %>
+<% end %>
+<%= purl = url_for :controller => 'meetings', :action => 'preview_meeting', :project_id => @project
+javascript_tag "setAutoPreview('#{purl}','meeting-form', 'meeting_description');" %>

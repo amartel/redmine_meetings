@@ -1,0 +1,70 @@
+# French strings go here for Rails i18n
+fr:
+
+  project_module_meetings: Réunions
+  meetings: Réunions
+  
+  field_first_hour: Début de journée
+  field_last_hour: Fin de journée
+  
+  permission_meetings_settings: Configuration des réunions
+  permission_manage_meeting: Gérer les réunions
+  permission_view_meetings: Voir les réunions
+  permission_manage_doodle: Gérer les sondages
+  permission_view_doodles: Voir les sondages
+  permission_answer_doodle: Répondre aux sondages
+  permission_join_conference: Rejoindre une réunion
+  permission_start_conference: Démarrer une réunion
+  permission_conference_moderator: Moderateur
+    
+  label_title_meeting: Réunion
+  label_meeting_plural: Réunions
+  label_meeting_new: Nouvelle réunion
+  field_start_date_date: Début
+  field_end_date_date: Fin
+  field_location: Emplacement
+  field_meeting_web: Salle de réunion virtuelle associée au projet
+
+  label_doodle_plural: "Sondages"
+  label_title_doodle: "Sondage"
+  label_doodle_new: "Nouveau sondage"
+  field_options: "Choix possibles"
+  text_options_help: "Saisissez une option par ligne"
+  field_doodle_users: Participants
+  field_emails: Participants externes
+  text_emails_help: "Saisissez les adresses emails des participants qui ne sont pas membres du projet (séparées par , )"
+  field_delete_answers: Supprimer les réponses existantes
+  doodle_update_successfull: "Réponses enregistrées"
+  doodle_update_unseccessfull: "Erreur lors de la sauvegarde de vos réponses"
+  button_save_answers: Enregistrer mes réponses
+  label_notify_author: "En tant qu'editeur du sondage, vous recevrez systématiquement un email à l'issue de la sauvegarde (sauf si vous avez configuré votre compte pour ne pas être notifié des changements que vous effectuez)"
+  field_notify_author: "M'avertir à chaque réponse reçue"
+  field_notify_participants: Envoyer un email à tous les participants
+  field_notify_participants2: "Envoyer un email aux participants qui n'ont pas répondu"
+  label_answer_received: Nouvelle réponse reçue  
+
+  content_doodle_email1: "Vous pouvez participer à ce sondage (organisé par %{value}) : "
+  content_doodle_email2: "- En cliquant sur le lien suivant (si vous avez un compte utilisateur) : "
+  content_doodle_email3: "- Ou en répondant à cet email et en supprimant les choix proposés qui ne vous conviennent pas (mais en conservant les lignes --BEGIN-- et --END--)."
+  content_doodle_email4: "Choix proposés:"
+  content_doodle_invalid_answer: "Nous sommes désolés mais votre réponse n'a pas pu être prise en compte (impossible de trouver vos réponses). Vous pouvez, au choix, tenter de répondre à nouveau ou envoyer directement un email à l'auteur (%{value})..."
+  content_doodle_ak_answer: "Votre réponse a été prise en compte et nous vous remercions de votre participation." 
+  content_doodle_ak_answer1: "Vous avez accepté les choix suivants:" 
+  content_doodle_ak_answer3: "Vous avez refusé tous les choix proposés." 
+  content_doodle_ak_answer2: "Si vous le souhaitez, vous pouvez modifier votre réponse :" 
+  content_doodle_answer: "Une réponse au sondage a été enregistrée (de %{value}). Suivez le lien pour la consulter: "
+  
+  label_conference: Réunion virtuelle
+  label_conference_status: "Etat"
+  label_join_conference: Rejoindre la réunion
+  label_conference_start: Démarrer la réunion
+  label_conference_people: "Participants"
+  label_conference_status_running: En cours
+  label_conference_status_closed: Non demarré
+  
+  content_meeting_email1: "Organisateur : %{value}"
+  content_meeting_email2: "Cette réunion peut être ajoutée dans votre agenda en utilisant le fichier meeting.ics qui est attaché à cet email (le mode opératoire dépend de l'application que vous utilisez)."
+  content_meeting_email3: "Utilisez le lien suivant pour rejoindre la salle de conférence virtuelle : %{value}" 
+  content_meeting_email4: "Lien vers la réunion : %{value}"
+  
+  download_ics: "ICS (ICalendar)"

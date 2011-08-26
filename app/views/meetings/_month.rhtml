@@ -1,0 +1,28 @@
+<table class="cal">
+<thead>
+<tr><th scope="col" title="<%= l(:label_week) %>" class="week-number"></th><% 7.times do |i| %><th scope="col"><%= day_name( (calendar.first_wday+i)%7 ) %></th><% end %></tr>
+</thead>
+<tbody>
+<tr>
+<% day = calendar.startdt
+while day <= calendar.enddt %>
+  <% if day.cwday == calendar.first_wday %>
+  <td class='week-number' title="<%= l(:label_week) %>"><%= link_to (day+(11-day.cwday)%7).cweek, { :project_id => @project, :year => @year, :month => @month, :week => (day+(11-day.cwday)%7).cweek } %></td>
+  <% end %>
+<td class="<%= day.month==calendar.month ? 'even' : 'odd' %><%= ' today' if Date.today == day %>">
+<p class="day-num"><%= link_to day.day, { :project_id => @project, :year => day.year, :month => day.month, :day => day.day } %></p> 
+<% calendar.meetings_on(day).each do |i| %>
+  <% if i.is_a? Meeting %>
+  <div class="<%= i.css_classe %> tooltip">
+  <%= link_to_meeting i, :truncate => 30 %>
+  <span class="tip"><%= render_meeting_tooltip i %></span>
+  </div>
+  <% end %>
+<% end %>
+</td>
+<%= '</tr><tr>' if day.cwday==calendar.last_wday and day!=calendar.enddt %>
+<% day = day + 1
+end %>
+</tr>
+</tbody>
+</table>
