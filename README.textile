@@ -1,0 +1,58 @@
+h1. Introduction
+
+This plugin allows to manage meetings in REDMINE. It includes:
+* Doodles (based on Redmine Doodles plugin, from Felix Schäfer).
+* Web meetings (using BigBlueButton server : http://bigbluebutton.org )
+
+It is possible to answer to a doodle using email, even if you don't have a redmine account (external users can be declared in the doodle using theirs emails). Of course, you will have then to specify unknown_user=accept when you run the rake task to process the received emails on your server (for example, I used *rake redmine:email:receive_imap RAILS_ENV="production" host="imap.acme.com" username="DOMAIN/redmineserver" password="XXXX" move_on_failure="error@acme.com" unknown_user=accept* 
+Meetings can be exported as ICS file (for a specific meetings or for all meetings) and imported in your favorite calendar application. Right now, Outlook 2010 and Outlook 2001 and my webmail (zimbra) have been successfully tested...
+When you save a meeting, you can notify participants. In this case, the ICS file of the meeting is attached to the email and can be processed by participants. If the meeting is a webmeeting, a link to the conference is also included...
+
+h1. Setup
+
+h3. 1. Install plugin
+
+redmine_meetings requires ri_cal:
+* gem install ri_cal
+
+Install redmine_meetings from your vendor/plugins directory with:
+* git clone git://github.com/amartel/redmine_meetings.git
+
+h3. 2. Upgrade database
+
+* rake db:migrate_plugins RAILS_ENV=production
+
+h3. 2. Restart your web server
+
+
+h3. 3. Configure REDMINE with your web browser
+
+If everything is OK, you should see Meetings plugin in the plugin list (Administration -> Plugins)
+Then, you have to configure the plugin:
+* BigBlueButton server: public url of your BigBlueButton server (ie: used by user's browser)
+* Internal address: private url of your BigBlueButton server (if any). Useful when your BBB server is behind a firewall...
+* Salt: salt of your BBB server (to allow use of APIs)
+* return url: url where to be redirected at the end of the meeting (leave blank if you want to be redirected to the project's overview tab)
+* Use popup window: choose if you want to start the meeting in a popup window or not. A popup window is useful because it allows you to resize the windows at the maximum size with chat available... (When switching to fullscreen, chat is disable due to security reasons in the flash plugin...)
+* help url : url of the help page for using BigBlueButton (useful to notice users about requirements for webmeetings...)
+
+Note: Doodle settings and meetings settings are currently unused...
+
+
+New permissions are now available (in Meetings section):
+* :meetings_settings allows manager to configure settings
+* :view_meeting_doodles allows to view doodles in the project
+* :manage_doodle allows to create, update and delete doodles in the project
+* :answer_doodle allows to answer to a doodle
+* :view_meetings allows to view meetings in the project
+* :manage_meeting allows create, update and delete meetings in the project
+* :join_conference allows user to join a new web meeting
+* :start_conference allows user to create and start a new web meeting
+* :conference_moderator grants a MODERATOR access to the user in the meeting
+
+
+When the plugin is activated in a project, you should see a new tab "meetings" in the project.
+
+h1. History
+
+0.0.1: Initial release
