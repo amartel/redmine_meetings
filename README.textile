@@ -1,6 +1,6 @@
 h1. Introduction
 
-This plugin allows to manage meetings in REDMINE. It includes:
+This plugin manage meetings in REDMINE. It includes:
 * Doodles (based on Redmine Doodles plugin, from Felix Schäfer).
 * Web meetings (using BigBlueButton server : http://bigbluebutton.org )
 
@@ -35,9 +35,7 @@ Then, you have to configure the plugin:
 * return url: url where to be redirected at the end of the meeting (leave blank if you want to be redirected to the project's overview tab)
 * Use popup window: choose if you want to start the meeting in a popup window or not. A popup window is useful because it allows you to resize the windows at the maximum size with chat available... (When switching to fullscreen, chat is disable due to security reasons in the flash plugin...)
 * help url : url of the help page for using BigBlueButton (useful to notice users about requirements for webmeetings...)
-
-Note: Doodle settings and meetings settings are currently unused...
-
+* Timeout : timeout to assure that BigBlueButton API requests will not lock the server
 
 New permissions are now available (in Meetings section):
 * :meetings_settings allows manager to configure settings
