@@ -280,6 +280,7 @@ class MeetingsController < ApplicationController
     attendeePW=Digest::SHA1.hexdigest("guest"+@project.identifier)
 
     data = callApi(server, "getMeetingInfo","meetingID=" + @project.identifier + "&password=" + moderatorPW, true)
+    redirect_to url if data.nil?
     doc = REXML::Document.new(data)
     if doc.root.elements['returncode'].text != "FAILED"
       moderatorPW = doc.root.elements['moderatorPW'].text
@@ -305,6 +306,7 @@ class MeetingsController < ApplicationController
     attendeePW=Digest::SHA1.hexdigest("guest"+@project.identifier)
 
     data = callApi(server, "getMeetingInfo","meetingID=" + @project.identifier + "&password=" + moderatorPW, true)
+    redirect_to url if data.nil?
     doc = REXML::Document.new(data)
     if doc.root.elements['returncode'].text == "FAILED"
       #If not, we created it...
@@ -372,8 +374,14 @@ class MeetingsController < ApplicationController
     url = server + "/bigbluebutton/api/" + api + "?" + param + "&checksum=" + checksum
 
     if getcontent
-      connection = open(url)
-      connection.read
+      begin
+        Timeout::timeout(Setting.plugin_redmine_meetings['bbb_timeout'].to_i) do
+          connection = open(url)
+          connection.read
+        end
+      rescue Timeout::Error
+        return nil
+      end
     else
       url
     end

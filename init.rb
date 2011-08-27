@@ -26,7 +26,7 @@ Redmine::Plugin.register :redmine_meetings do
   description 'plugin to manage meetings in REDMINE'
   version '0.0.1'
   
-  settings :default => {'bbb_server' => '', 'bbb_salt' => ''}, :partial => 'meetings_settings/settings'
+  settings :default => {'bbb_server' => '', 'bbb_salt' => '', 'bbb_timeout' => '3'}, :partial => 'meetings_settings/settings'
 
   project_module :meetings do
     permission :meetings_settings, {:meetings_settings => [:show, :update]}

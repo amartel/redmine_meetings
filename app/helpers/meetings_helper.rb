@@ -103,6 +103,7 @@ module MeetingsHelper
         #First, test if meeting room already exists
         moderatorPW=Digest::SHA1.hexdigest("root"+@project.identifier)
         data = callApi(server, "getMeetingInfo","meetingID=" + @project.identifier + "&password=" + moderatorPW, true)
+        return "" if data.nil?
         doc = REXML::Document.new(data)
         if doc.root.elements['returncode'].text == "FAILED"
           output << "#{l(:label_conference_status)}: <b>#{l(:label_conference_status_closed)}</b><br><br>"
@@ -245,8 +246,14 @@ module MeetingsHelper
     url = server + "/bigbluebutton/api/" + api + "?" + param + "&checksum=" + checksum
 
     if getcontent
-      connection = open(url)
-      connection.read
+      begin
+        Timeout::timeout(Setting.plugin_redmine_meetings['bbb_timeout'].to_i) do
+          connection = open(url)
+          connection.read
+        end
+      rescue Timeout::Error
+        return nil
+      end
     else
       url
     end

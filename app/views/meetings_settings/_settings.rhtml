@@ -29,19 +29,8 @@
 <%= text_field_tag 'settings[bbb_help]', @settings['bbb_help'], :size => 80 %><br />
 <em>url of the help page</em>
 </p>
-<hr />
-<h3>Doodle settings</h3>
 
-<p><label>Allow mail answer from unknown users</label>
-<%= check_box_tag 'settings[doodle_mail]', 1, @settings['doodle_mail'] %><br />
-<em>Checked if you want to allow users to answer doodle via email, even if they don't have an account on the server</em>
-</p>
-
-<hr />
-
-<h3>Meeting settings</h3>
-
-<p><label>Allow mail answer from unknown users</label>
-<%= check_box_tag 'settings[meeting_mail]', 1, @settings['meeting_mail'] %><br />
-<em>Checked if you want to allow users to accept/refuse meetings via email, even if they don't have an account on the server</em>
+<p><label>Timeout</label>
+<%= text_field_tag 'settings[bbb_timeout]', @settings['bbb_timeout'], :size => 10 %><br />
+<em>Timeout for API requests (in second)</em>
 </p>
