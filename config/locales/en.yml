@@ -11,7 +11,7 @@ en:
   permission_manage_meeting: Manage meetings
   permission_view_meetings: View meetings
   permission_manage_doodle: Manage doodle
-  permission_view_doodles: View doodles
+  permission_view_meeting_doodles: View doodles
   permission_answer_doodle: Answer doodles
   permission_join_conference: Join conference
   permission_start_conference: Start conference

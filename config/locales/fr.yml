@@ -11,7 +11,7 @@ fr:
   permission_manage_meeting: Gérer les réunions
   permission_view_meetings: Voir les réunions
   permission_manage_doodle: Gérer les sondages
-  permission_view_doodles: Voir les sondages
+  permission_view_meeting_doodles: Voir les sondages
   permission_answer_doodle: Répondre aux sondages
   permission_join_conference: Rejoindre une réunion
   permission_start_conference: Démarrer une réunion
