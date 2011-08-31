@@ -150,7 +150,7 @@ module MeetingsHelper
       doodles = MeetingDoodle.find(:all, :conditions => "project_id = #{@project.id}", :order => "created_on DESC")
       doodles.each do |doodle|
         output << "<br/>"
-        output << link_to("-&nbsp;#{h(doodle.title)}", {:controller => 'meetings', :action => 'show_doodle', :id => doodle.id, :project_id => @project, :only_path => true}) + " <span style='font-size: smaller;'>(#{format_date(doodle.created_on)})</span>"
+        output << link_to("-&nbsp;#{h(doodle.title)}", {:controller => 'meetings', :action => 'show_doodle', :id => doodle.id, :project_id => @project, :only_path => true})
       end
     end
     return output
