@@ -33,10 +33,11 @@ Redmine::Plugin.register :redmine_meetings do
     permission :view_meeting_doodles, {:meetings => [:show_doodle]}
     permission :manage_doodle, {:meetings => [:new_doodle, :create_doodle, :edit_doodle, :update_doodle, :delete_doodle, :preview_doodle]}
     permission :answer_doodle, {:meetings => [:answer_doodle]}
-    permission :view_meetings, {:meetings => [:index, :show_meeting, :export_meeting, :export_meetings]}
+    permission :view_meetings, {:meetings => [:show_meeting, :export_meeting, :export_meetings]}
     permission :manage_meeting, {:meetings => [:new_meeting, :create_meeting, :edit_meeting, :update_meeting, :delete_meeting, :preview_meeting]}
     permission :join_conference, :meetings => :join_conference
     permission :start_conference, :meetings => :start_conference
+    permission :meeting, { :meetings => :index}, :public => true
     permission :conference_moderator, {}
       
   end

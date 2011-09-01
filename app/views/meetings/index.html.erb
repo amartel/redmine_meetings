@@ -1,5 +1,6 @@
 <h2><%= l(:label_calendar) %></h2>
 
+<% if User.current.allowed_to?(:view_meetings, @project) %>
 <% form_tag({:controller => 'meetings', :action => 'index', :project_id => @project}, :method => :get, :id => 'query_form') do %>
 
 <p style="float:right;">
@@ -20,7 +21,9 @@
 
 <% other_formats_links do |f| %>
   <%= f.link_to l(:download_ics), :url => {:action => 'export_meetings', :project_id => @project } %>
-<% end if User.current.allowed_to?(:view_meetings, @project) %>
+<% end %>
+
+<% end %>
 
 <% content_for :sidebar do %>
     <%= render :partial => 'meetings/sidebar' %>
