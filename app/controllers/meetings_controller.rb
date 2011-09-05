@@ -68,7 +68,7 @@ class MeetingsController < ApplicationController
     end
 
     meetings = []
-    meetings += Meeting.find(:all,:include => [ :author ], :conditions => ["((start_date BETWEEN ? AND ?) OR (end_date BETWEEN ? AND ?))", @calendar.startdt, @calendar.enddt, @calendar.startdt, @calendar.enddt])
+    meetings += Meeting.find(:all,:include => [ :author ], :conditions => ["(#{Meeting.table_name}.project_id = ?) AND ((start_date BETWEEN ? AND ?) OR (end_date BETWEEN ? AND ?))", @project.id, @calendar.startdt, @calendar.enddt, @calendar.startdt, @calendar.enddt])
     @calendar.meetings = meetings
 
     render :action => 'index', :layout => false if request.xhr?
