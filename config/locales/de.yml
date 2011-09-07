@@ -1,0 +1,70 @@
+# German strings go here for Rails i18n
+de:
+
+  project_module_meetings: Meetings
+  meetings: Meetings
+  
+  field_first_hour: täglicher Arbeitsbeginn um
+  field_last_hour: tägliches Arbeitsende um
+  
+  permission_meetings_settings: Meeting Einstellungen
+  permission_manage_meeting: Einstellungen verwalten
+  permission_view_meetings: Meeting Termine ansehen
+  permission_manage_doodle: Umfragen verwalten
+  permission_view_meeting_doodles: Umfragen ansehen
+  permission_answer_doodle: Umfrage beantworten
+  permission_join_conference: An Webkonferenz teilnehmen
+  permission_start_conference: Starte Webkonferenz
+  permission_conference_moderator: Moderator
+    
+  label_title_meeting: Meeting
+  label_meeting_plural: Meetings
+  label_meeting_new: Neues Meeting
+  field_start_date_date: Beginn
+  field_end_date_date: Ende
+  field_location: Ort
+  field_meeting_web: Verwenden sie den Webkonferenzraum des Projekts.
+
+  label_doodle_plural: "Umfragen"
+  label_title_doodle: "Umfrage"
+  label_doodle_new: "Neue Umfrage"
+  field_options: "vordefinierte Antworten"
+  text_options_help: "Geben Sie eine ordefinierte Antwort pro Zeile an"
+  field_doodle_users: Teilnehmer
+  field_emails: Externe Teilnehmer (Personen die keine Rolle in diesem Projeket erfüllen bzw. keinen Account haben)
+  text_emails_help: "Bitte geben sie die Email Adressen gentrennt durch Komma an für Teilnehmer die nicht Teil dieses Projkets in InfoMine sind."
+  field_delete_answers: Lösche die bestehenden Anworten.
+  doodle_update_successfull: "Die Antworten wurden gespeichert."
+  doodle_update_unseccessfull: "Beim Speichern der Antworten ist ein Fehler autgetreten."
+  button_save_answers: Speichere meine Anworten.
+  label_notify_author: "Als Autor dieser Umfrage erhalten Sie bei jeder Umfrageantwort eine Benachrichtigung per Email außer in ihren persönlichen Benachrichtigungseinstellungen ist die Checkbox 'ch möchte nicht über Änderungen benachrichtigt werden, die ich selbst durchführe' aktiv"
+  field_notify_author: "Autor bei neuen Antworten benachrichtigen."
+  field_notify_participants: Verschicke die Umfrage an alle Teilnehmer per email.
+  field_notify_participants2: Verschicke die Umfrage an alle welche die Umfrage noch nicht geanwortet haben.
+  label_answer_received: Es ist eine neue Umfrageanwort eingegangen.
+
+  content_doodle_email1: "Sie wurden zu dieser Umfrage von %{value} eingeladen. Zur Teilnahme wählen sie eine der beiden Optionen:"
+  content_doodle_email2: "- Klicken sie diesen Link wenn die eine registrierter Benutzer der InfoMine Plattform sind: "
+  content_doodle_email3: "- oder Anwtorten sie direkt auf diese Email durch 'Reply to'. Just delete options you don't agree with, but leave --BEGIN-- and --END-- lines..."
+  content_doodle_email4: "Proposed options:"
+  content_doodle_invalid_answer: We are sorry but your reply was not processed (we were unable to find your answers). You can either retry to reply again or send an email the author (%{value})...
+  content_doodle_ak_answer: "Your answer has been processed. Thank you."
+  content_doodle_ak_answer1: "You have accepted the following options:"
+  content_doodle_ak_answer3: "You have refused all options."
+  content_doodle_ak_answer2: "If you want, you can update your answer :"
+  content_doodle_answer: "Eine Umfrageantwort von %{value} ist eingegangen. Zum Anzeigen der Anwort klicken sie auf den Link: "
+  
+  label_conference: Webkonferenz
+  label_conference_status: "Status"
+  label_join_conference: An Webkonferenz teilnehmen
+  label_conference_start: Starte Webkonferenz
+  label_conference_people: "Teilnehmer"
+  label_conference_status_running: läuft
+  label_conference_status_closed: hat noch nicht begonnen
+  
+  content_meeting_email1: "Organizator : %{value}"
+  content_meeting_email2: "Sie können den Termin für dieses Meeting in ihren Kalender (Outlook, Notes) importieren, indem sie das Attachment meeting.ics in ihrer Kalendersoftware öffnen."
+  content_meeting_email3: "Klicken sie auf den Link um an der Webkonferenz teilnzunehmen: %{value}"
+  content_meeting_email4: "Link zum Meeting : %{value}"
+  
+  download_ics: "ICS (ICalendar)"
