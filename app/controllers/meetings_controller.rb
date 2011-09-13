@@ -254,7 +254,7 @@ class MeetingsController < ApplicationController
     if @user.mail
       @response = @doodle.responses.find_or_initialize_by_author_id(@user.id)
     elsif !params[:name].to_s.empty?
-      @response = MeetingDoodleAnswers.new(:meeting_doodle => @doodle, :author => @user)
+      @response = MeetingDoodleAnswer.new(:meeting_doodle => @doodle, :author => @user)
     else
       redirect_to :action => 'show_doodle', :id => @doodle
     end

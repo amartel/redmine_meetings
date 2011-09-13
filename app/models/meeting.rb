@@ -70,7 +70,7 @@ class Meeting < ActiveRecord::Base
     recipients = { author.language => [ author.mail ] }
     if to_all
       watcher_users.each do |w|
-        recipients[w.language] = update_recipients (recipients, w.language, w.mail)
+        recipients[w.language] = update_recipients(recipients, w.language, w.mail)
       end
     end
     recipients.each do |language,rec|

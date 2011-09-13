@@ -27,11 +27,11 @@ class MeetingDoodle < ActiveRecord::Base
     recipients = { author.language => [ author.mail ] }
     if to_all
       watcher_users.each do |w|
-        recipients[w.language] = update_recipients (recipients, w.language, w.mail)
+        recipients[w.language] = update_recipients(recipients, w.language, w.mail)
       end
     if !tab_emails.nil? && !tab_emails.empty?
         tab_emails.each do |e|
-          recipients[author.language] = update_recipients (recipients, author.language, e)
+          recipients[author.language] = update_recipients(recipients, author.language, e)
         end
       end
     end
@@ -46,13 +46,13 @@ class MeetingDoodle < ActiveRecord::Base
     if to_all
       watcher_users.each do |w|
         if !responses.find_by_author_id(w.id)
-          recipients[w.language] = update_recipients (recipients, w.language, w.mail)
+          recipients[w.language] = update_recipients(recipients, w.language, w.mail)
         end
       end
       if !tab_emails.nil? && !tab_emails.empty?
         tab_emails.each do |e|
           if !responses.find_by_name(e.strip)
-            recipients[author.language] = update_recipients (recipients, author.language, e.strip)
+            recipients[author.language] = update_recipients(recipients, author.language, e.strip)
           end
         end
       end
