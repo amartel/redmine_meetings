@@ -9,7 +9,7 @@
   <h3><%=h @meeting.subject %></h3>
 
   <table class="meeting">
-  <tr><th><%=l(:field_start_date_date)%>: </th><td><%= format_time(@meeting.start_date) %></td></tr>
+  <tr><th><%=l(:field_start_date_date)%>: </th><td><%= format_time(@meeting.start_date) %>&nbsp;&nbsp;&nbsp;<%= l(:field_time_zone) %>: <%= User.current.time_zone ? User.current.time_zone : ActiveSupport::TimeZone[Setting.plugin_redmine_meetings['meeting_timezone']] %></td></tr>
   <tr><th><%=l(:field_end_date_date)%>: </th><td><%= format_time(@meeting.end_date) %></td></tr>
   <tr><th><%=l(:field_location)%>: </th><td>
   <% if @meeting.web %>

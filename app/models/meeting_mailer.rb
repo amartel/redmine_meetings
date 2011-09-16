@@ -55,7 +55,7 @@ class MeetingMailer < Mailer
     set_language_if_valid language
     @meeting = meeting
 
-    tzid = User.current.time_zone ? User.current.time_zone.tzinfo.identifier : "UTC"
+    tzid = User.current.time_zone ? User.current.time_zone : ActiveSupport::TimeZone[Setting.plugin_redmine_meetings['meeting_timezone']]
     desc = ''
     desc << meeting.description
     if meeting.web
@@ -69,8 +69,8 @@ class MeetingMailer < Mailer
         event.dtstamp     = DateTime.now.utc
         event.summary     = meeting.subject
         event.description = desc
-        event.dtstart     = User.current.time_zone.local_to_utc(meeting.start_date)
-        event.dtend       = User.current.time_zone.local_to_utc(meeting.end_date)
+        event.dtstart     = tzid.local_to_utc(meeting.start_date)
+        event.dtend       = tzid.local_to_utc(meeting.end_date)
         event.location    = meeting.web ? l(:field_meeting_web) : meeting.location
         meeting.watcher_users.collect.sort.each do |user|
           event.add_attendee  user.mail
