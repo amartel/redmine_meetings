@@ -280,7 +280,7 @@ class MeetingsController < ApplicationController
     attendeePW=Digest::SHA1.hexdigest("guest"+@project.identifier)
 
     data = callApi(server, "getMeetingInfo","meetingID=" + @project.identifier + "&password=" + moderatorPW, true)
-    redirect_to url if data.nil?
+    redirect_to back_url if data.nil?
     doc = REXML::Document.new(data)
     if doc.root.elements['returncode'].text != "FAILED"
       moderatorPW = doc.root.elements['moderatorPW'].text
@@ -306,7 +306,7 @@ class MeetingsController < ApplicationController
     attendeePW=Digest::SHA1.hexdigest("guest"+@project.identifier)
 
     data = callApi(server, "getMeetingInfo","meetingID=" + @project.identifier + "&password=" + moderatorPW, true)
-    redirect_to url if data.nil?
+    redirect_to back_url if data.nil?
     doc = REXML::Document.new(data)
     if doc.root.elements['returncode'].text == "FAILED"
       #If not, we created it...
