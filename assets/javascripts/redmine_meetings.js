@@ -38,3 +38,9 @@ function setAutoPreview(url, form, field) {
         });
     });
 }
+
+function start_meeting(url) {
+	var wihe = "width="+screen.availWidth+",height="+screen.availHeight;
+	open(url, "Meeting","directories=no,location=no,resizable=yes,scrollbars=yes,status=no,toolbar=no," + wihe);
+	return false;
+}

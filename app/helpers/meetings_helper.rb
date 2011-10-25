@@ -112,7 +112,7 @@ module MeetingsHelper
           if Setting.plugin_redmine_meetings['bbb_popup'] != '1'
             output << link_to(l(:label_join_conference), {:controller => 'meetings', :action => 'join_conference', :project_id => @project, :only_path => true})
           else
-            output << "<a href='' onclick='javascript:var wihe = \"width=\"+screen.availWidth+\",height=\"+screen.availHeight; open(\"" + url_for(:controller => 'meetings', :action => 'join_conference', :project_id => @project, :only_path => true) + "\",\"Meeting\",\"directories=no,location=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,\" + wihe);return false;'>#{l(:label_join_conference)}</a>"
+            output << "<a href='' onclick='javascript: return start_meeting(\"" + url_for(:controller => 'meetings', :action => 'join_conference', :project_id => @project, :only_path => true) + "\");'>#{l(:label_join_conference)}</a>"
           end
           output << "<br><br>"
           output << "#{l(:label_conference_status)}: <b>#{l(:label_conference_status_running)}</b>"
@@ -129,7 +129,7 @@ module MeetingsHelper
             if Setting.plugin_redmine_meetings['bbb_popup'] != '1'
               output << link_to(l(:label_conference_start), {:controller => 'meetings', :action => 'start_conference', :project_id => @project, :only_path => true})
             else
-              output << "<a href='' onclick='javascript:var wihe = \"width=\"+screen.availWidth+\",height=\"+screen.availHeight; open(\"" + url_for(:controller => 'meetings', :action => 'start_conference', :project_id => @project, :only_path => true) + "\",\"Meeting\",\"directories=no,location=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,\" + wihe);return false;'>#{l(:label_conference_start)}</a>"
+              output << "<a href='' onclick='javascript: return start_meeting(\"" + url_for(:controller => 'meetings', :action => 'start_conference', :project_id => @project, :only_path => true) + "\");'>#{l(:label_conference_start)}</a>"
             end
             output << "<br><br>"
           end
