@@ -316,6 +316,8 @@ class MeetingsController < ApplicationController
         data = callApi(server, "create","name=" + CGI.escape(@project.name) + "&meetingID=" + @project.identifier + "&attendeePW=" + attendeePW + "&moderatorPW=" + moderatorPW + "&logoutURL=" + back_url + "&voiceBridge=" + bridge, true)
         ok_to_join = true
       end
+    else
+      ok_to_join = true if @user.allowed_to?(:join_conference, @project)
     end
     #Now, join meeting...
     if ok_to_join

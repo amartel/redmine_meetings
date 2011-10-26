@@ -105,7 +105,7 @@ module MeetingsHelper
         data = callApi(server, "getMeetingInfo","meetingID=" + @project.identifier + "&password=" + moderatorPW, true)
         return "" if data.nil?
         doc = REXML::Document.new(data)
-        if doc.root.elements['returncode'].text == "FAILED"
+        if doc.root.elements['returncode'].text == "FAILED" || doc.root.elements['attendees'].nil? || doc.root.elements['attendees'].size == 0
           output << "#{l(:label_conference_status)}: <b>#{l(:label_conference_status_closed)}</b><br><br>"
         else
           meeting_started = true
