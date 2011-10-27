@@ -41,3 +41,8 @@
 <%= text_field_tag 'settings[bbb_timeout]', @settings['bbb_timeout'], :size => 10 %><br />
 <em>Timeout for API requests (in second)</em>
 </p>
+
+<p><label>Load presentation</label>
+<%= text_field_tag 'settings[bbb_initpres]', @settings['bbb_initpres'], :size => 80 %><br />
+<em>Optional: url of the default presentation document (will be loaded when the conference is created). For example: http://demo.bigbluebutton.org/demo/pdfs/sample.pdf</em>
+</p>

@@ -313,7 +313,12 @@ class MeetingsController < ApplicationController
       if @user.allowed_to?(:start_conference, @project)
         bridge = "77777" + @project.id.to_s
         bridge = bridge[-5,5]
-        data = callApi(server, "create","name=" + CGI.escape(@project.name) + "&meetingID=" + @project.identifier + "&attendeePW=" + attendeePW + "&moderatorPW=" + moderatorPW + "&logoutURL=" + back_url + "&voiceBridge=" + bridge, true)
+        s = Setting.plugin_redmine_meetings['bbb_initpres']
+        loadPres = ""
+        if !s.nil? && !s.empty?
+          loadPres = "<?xml version='1.0' encoding='UTF-8'?><modules><module name='presentation'><document url='#{s}'/></module></modules>"
+        end
+        data = callApi(server, "create","name=" + CGI.escape(@project.name) + "&meetingID=" + @project.identifier + "&attendeePW=" + attendeePW + "&moderatorPW=" + moderatorPW + "&logoutURL=" + back_url + "&voiceBridge=" + bridge, true, loadPres)
         ok_to_join = true
       end
     else
@@ -370,7 +375,7 @@ class MeetingsController < ApplicationController
                                  :disposition => 'inline'
   end
 
-  def callApi (server, api, param, getcontent)
+  def callApi (server, api, param, getcontent, data="")
     salt = Setting.plugin_redmine_meetings['bbb_salt']
     tmp = api + param + salt
     checksum = Digest::SHA1.hexdigest(tmp)
@@ -379,8 +384,16 @@ class MeetingsController < ApplicationController
     if getcontent
       begin
         Timeout::timeout(Setting.plugin_redmine_meetings['bbb_timeout'].to_i) do
-          connection = open(url)
-          connection.read
+          if data.empty?
+            connection = open(url)
+            connection.read
+          else
+            uri = URI.parse(url)
+            res = Net::HTTP.start(uri.host, uri.port) {|http|
+              response, body = http.post(uri.path+"?" + uri.query, data, {'Content-type'=>'text/xml; charset=utf-8'})
+              body
+            }
+          end
         end
       rescue Timeout::Error
         return nil
