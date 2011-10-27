@@ -16,7 +16,7 @@ de:
   permission_join_conference: An Webkonferenz teilnehmen
   permission_start_conference: Starte Webkonferenz
   permission_conference_moderator: Moderator
-    
+  
   label_title_meeting: Meeting
   label_meeting_plural: Meetings
   label_meeting_new: Neues Meeting
@@ -31,7 +31,7 @@ de:
   field_options: "vordefinierte Antworten"
   text_options_help: "Geben Sie eine ordefinierte Antwort pro Zeile an"
   field_doodle_users: Teilnehmer
-  field_emails: Externe Teilnehmer (Personen die keine Rolle in diesem Projeket erfüllen bzw. keinen Account haben)
+  field_emails: Externe Teilnehmer (Personen die keine Rolle in diesem Projekt erfüllen bzw. keinen Account haben)
   text_emails_help: "Bitte geben sie die Email Adressen gentrennt durch Komma an für Teilnehmer die nicht Teil dieses Projkets in InfoMine sind."
   field_delete_answers: Lösche die bestehenden Anworten.
   doodle_update_successfull: "Die Antworten wurden gespeichert."
@@ -39,19 +39,19 @@ de:
   button_save_answers: Speichere meine Anworten.
   label_notify_author: "Als Autor dieser Umfrage erhalten Sie bei jeder Umfrageantwort eine Benachrichtigung per Email außer in ihren persönlichen Benachrichtigungseinstellungen ist die Checkbox 'ch möchte nicht über Änderungen benachrichtigt werden, die ich selbst durchführe' aktiv"
   field_notify_author: "Autor bei neuen Antworten benachrichtigen."
-  field_notify_participants: Verschicke die Umfrage an alle Teilnehmer per email.
+  field_notify_participants: Verschicke die Einladung an alle Teilnehmer per email.
   field_notify_participants2: Verschicke die Umfrage an alle welche die Umfrage noch nicht geanwortet haben.
   label_answer_received: Es ist eine neue Umfrageanwort eingegangen.
 
   content_doodle_email1: "Sie wurden zu dieser Umfrage von %{value} eingeladen. Zur Teilnahme wählen sie eine der beiden Optionen:"
   content_doodle_email2: "- Klicken sie diesen Link wenn die eine registrierter Benutzer der InfoMine Plattform sind: "
-  content_doodle_email3: "- oder Anwtorten sie direkt auf diese Email durch 'Reply to'. Just delete options you don't agree with, but leave --BEGIN-- and --END-- lines..."
-  content_doodle_email4: "Proposed options:"
-  content_doodle_invalid_answer: We are sorry but your reply was not processed (we were unable to find your answers). You can either retry to reply again or send an email the author (%{value})...
-  content_doodle_ak_answer: "Your answer has been processed. Thank you."
-  content_doodle_ak_answer1: "You have accepted the following options:"
-  content_doodle_ak_answer3: "You have refused all options."
-  content_doodle_ak_answer2: "If you want, you can update your answer :"
+  content_doodle_email3: "- oder Anwtorten sie direkt auf diese Email durch 'Reply to'. Löschen sie die Antworten aus der Email mit denen sie nicht einverstanden sind, aber auf keinen Fall die die Zeilen mit den Worten '--BEGIN--' und '--END--' ."
+  content_doodle_email4: "Mögliche Antworten:"
+  content_doodle_invalid_answer: Leider konnte ihre Umfrageantwort nicht verarbeitet werden (ihre Antworten konnten in der Email nicht gefunden werden). Entweder sie antworten nochmals auf die Umfrage oder schicken dem Verfasser (%{value}) der Umfrage direkt eine Email.
+  content_doodle_ak_answer: "Ihre Anwort wurde erfolgreich verarbeitet. Vielen Dank für die Teilnahme an der Umfrage."
+  content_doodle_ak_answer1: "Sie haben die folgenden Umfrageantworten gewählt:"
+  content_doodle_ak_answer3: "Sie haben keine Wahl getroffen bzw. alle Umfrageantworten abgelehnt."
+  content_doodle_ak_answer2: "Sie können ihre Umfrageantwort auch ändern:"
   content_doodle_answer: "Eine Umfrageantwort von %{value} ist eingegangen. Zum Anzeigen der Anwort klicken sie auf den Link: "
   
   label_conference: Webkonferenz
