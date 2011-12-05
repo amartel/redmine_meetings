@@ -4,8 +4,7 @@ require 'ri_cal'
 class MeetingMailer < Mailer
   def send_doodle(doodle, rec, language)
     set_language_if_valid language
-    @doodle = doodle
-    sub = "[doodle #{doodle.id}]#{@doodle.title}"
+    sub = "[#{doodle.project.name} - doodle #{doodle.id}]#{doodle.title}"
     recipients rec
     subject sub
     body :doodle => doodle,
@@ -15,8 +14,7 @@ class MeetingMailer < Mailer
 
   def send_invalid_answer(doodle, rec, language)
     set_language_if_valid language
-    @doodle = doodle
-    sub = "FAILED:[doodle #{doodle.id}]#{@doodle.title}"
+    sub = "FAILED:[#{doodle.project.name} - doodle #{doodle.id}]#{doodle.title}"
     recipients rec
     subject sub
     body :doodle => doodle
@@ -25,35 +23,34 @@ class MeetingMailer < Mailer
 
   def send_ak_answer(response, rec, language)
     set_language_if_valid language
-    @doodle = response.meeting_doodle
+    doodle = response.meeting_doodle
     accepted = []
-    @doodle.tab_options.zip(response.answers).each do |choice, selected|
+    doodle.tab_options.zip(response.answers).each do |choice, selected|
       accepted << "[#{choice.strip}]" if selected
     end
-    sub = "SUCCESS:[doodle #{@doodle.id}]#{@doodle.title}"
+    sub = "SUCCESS:[#{doodle.project.name} - doodle #{doodle.id}]#{doodle.title}"
     recipients rec
     subject sub
-    body :doodle => @doodle, :response => response, :accepted => accepted.join(', '),
-    :doodle_url => url_for(:controller => 'meetings', :action => 'show_doodle', :id => @doodle)
+    body :doodle => doodle, :response => response, :accepted => accepted.join(', '),
+    :doodle_url => url_for(:controller => 'meetings', :action => 'show_doodle', :id => doodle)
     render_multipart("meeting_doodle_ak_answer", body)
   end
   
   def receive_answer(answer)
-    @doodle = answer.meeting_doodle
-    @name = answer.author.mail ? answer.author.name : answer.name
-    set_language_if_valid @doodle.author.language
-    sub = "ANSWER:[doodle #{@doodle.id}]#{@doodle.title}"
-    recipients @doodle.author.mail
+    doodle = answer.meeting_doodle
+    name = answer.author.mail ? answer.author.name : answer.name
+    set_language_if_valid doodle.author.language
+    sub = "ANSWER:[#{doodle.project.name} - doodle #{doodle.id}]#{doodle.title}"
+    recipients doodle.author.mail
     subject sub
-    body :doodle => @doodle, :name => @name,
-    :doodle_url => url_for(:controller => 'meetings', :action => 'show_doodle', :id => @doodle)
+    body :doodle => doodle, :name => name,
+    :doodle_url => url_for(:controller => 'meetings', :action => 'show_doodle', :id => doodle)
     #from User.current.mail
     render_multipart("meeting_doodle_answer", body)
   end
   
   def send_meeting(meeting, rec, language)
     set_language_if_valid language
-    @meeting = meeting
 
     tzid = User.current.time_zone ? User.current.time_zone : ActiveSupport::TimeZone[Setting.plugin_redmine_meetings['meeting_timezone']]
     desc = ''
@@ -92,7 +89,7 @@ class MeetingMailer < Mailer
     
     @author = User.anonymous
 
-    sub = "[meeting #{meeting.id}]#{@meeting.subject}"
+    sub = "[#{meeting.project.name} - meeting #{meeting.start_date.utc.strftime('%F')}]#{meeting.subject}"
     recipients rec
     subject sub
     reply_to meeting.author.mail
@@ -102,12 +99,10 @@ class MeetingMailer < Mailer
     content_type "multipart/alternative"
     
     part "text/plain" do |p| 
-#      p.content_disposition = ""
       p.body = render(:file => "meeting.text.plain.rhtml", :body => body, :layout => 'mailer.text.plain.erb')
     end 
 
     part "text/html" do |p| 
-#      p.content_disposition = ""
       p.body = render_message("meeting.text.html.rhtml", body) 
     end 
     
