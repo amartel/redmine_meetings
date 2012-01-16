@@ -96,7 +96,7 @@ module MeetingsHelper
         url = Setting.plugin_redmine_meetings['bbb_help']
         link = url.empty? ? "" : "&nbsp;&nbsp;<a href='" + url + "' target='_blank' class='icon icon-help'>&nbsp;</a>"
 
-        output << "<h3>#{l(:label_conference)}#{link}</h3>"
+        output << "<br/><br/><h3>#{l(:label_conference)}#{link}</h3>"
 
         server = Setting.plugin_redmine_meetings['bbb_ip'].empty? ? Setting.plugin_redmine_meetings['bbb_server'] : Setting.plugin_redmine_meetings['bbb_ip']
         meeting_started=false

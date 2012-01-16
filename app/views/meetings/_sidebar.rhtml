@@ -6,6 +6,7 @@
   <%= render_sidebar_conference %>
 <% end %>
 <% if User.current.allowed_to?(:view_meeting_doodles, @project, :global => true) %>
+  <br />
   <h3><%= l(:label_doodle_plural) %></h3>
   <% if User.current.allowed_to?(:manage_doodle, @project, :global => true) %>
     <%= link_to(l(:label_doodle_new), :controller => 'meetings', :action => 'new_doodle', :project_id => @project) %><br />
