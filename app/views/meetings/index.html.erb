@@ -3,6 +3,7 @@
 <% if User.current.allowed_to?(:view_meetings, @project) %>
 <% form_tag({:controller => 'meetings', :action => 'index', :project_id => @project}, :method => :get, :id => 'query_form') do %>
 
+<%= hidden_field_tag('project_id', @project.identifier) %>
 <p style="float:right;">
   <%= link_to_previous_period(@period, @year, @month, @week, @day) %> | <%= link_to_next_period(@period, @year, @month, @week, @day) %>
 </p>
