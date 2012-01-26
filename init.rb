@@ -24,7 +24,8 @@ Redmine::Plugin.register :redmine_meetings do
   name 'Meetings plugin'
   author 'Arnaud Martel'
   description 'plugin to manage meetings in REDMINE'
-  version '0.0.1'
+  version '0.1.0'
+  requires_redmine :version_or_higher => '1.3.0'
   
   settings :default => {'bbb_server' => '', 'bbb_salt' => '', 'bbb_timeout' => '3', 'meeting_timezone' => 'Paris'}, :partial => 'meetings_settings/settings'
 

@@ -99,11 +99,11 @@ class MeetingMailer < Mailer
     content_type "multipart/alternative"
     
     part "text/plain" do |p| 
-      p.body = render(:file => "meeting.text.plain.rhtml", :body => body, :layout => 'mailer.text.plain.erb')
+      p.body = render(:file => "meeting.text.erb", :body => body, :layout => 'mailer.text.erb')
     end 
 
     part "text/html" do |p| 
-      p.body = render_message("meeting.text.html.rhtml", body) 
+      p.body = render_message("meeting.html.erb", body) 
     end 
     
     part 'text/calendar; ; charset="utf-8"; method=REQUEST' do |p|
