@@ -138,7 +138,6 @@ module MeetingsHelper
 
       end
     rescue
-      logger.error("erreur....")
       output = ""
     end
     return output
