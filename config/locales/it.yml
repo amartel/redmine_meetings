@@ -1,0 +1,70 @@
+# Italian strings go here for Rails i18n
+it:
+
+  project_module_meetings: Riunioni
+  meetings: Riunioni
+  
+  field_first_hour: Giorno inizia il
+  field_last_hour: Giorno finisce il
+  
+  permission_meetings_settings: Cambia impostazioni riunioni
+  permission_manage_meeting: Gestisci riunioni
+  permission_view_meetings: Vedi riunioni
+  permission_manage_doodle: Gestisci sondaggi
+  permission_view_meeting_doodles: Vedi sondaggi
+  permission_answer_doodle: Rispondi sondaggi
+  permission_join_conference: Partecipa alla conferenza
+  permission_start_conference: Inizia conferenza
+  permission_conference_moderator: Moderatore
+    
+  label_title_meeting: Riunione
+  label_meeting_plural: Riunioni
+  label_meeting_new: Nuova riunione
+  field_start_date_date: Inizio
+  field_end_date_date: Fine
+  field_location: Luogo
+  field_meeting_web: Usa la 'conference room' come dedicata al progetto
+
+  label_doodle_plural: "Songaggi"
+  label_title_doodle: "Sondaggio"
+  label_doodle_new: "Nuovo sondaggio"
+  field_options: "Opzioni"
+  text_options_help: "Inserisci un opzione per linea"
+  field_doodle_users: Partecipanti
+  field_emails: Partecipanti esterni
+  text_emails_help: "Inserisci indirizzo e-mail per partecipanti non membri del progetto (usa , come separatore)"
+  field_delete_answers: Elimina risposte esistenti
+  doodle_update_successfull: "Risposte salvate"
+  doodle_update_unseccessfull: "Errore. Risposte non salvate"
+  button_save_answers: Salva le mie risposte
+  label_notify_author: "Come autore di questo sondaggio, riceverai sempre un e-mail (eccetto se il tuo account √® configurato per non ricevere notifiche su modifiche apportate da te"
+  field_notify_author: "Notifica quando √® stata ricevuta una risposta"
+  field_notify_participants: Manda un e-mail a tutti i partecipanti
+  field_notify_participants2: Manda un e-mail ai partecipanti che non inviano risposta
+  label_answer_received: Ricevuta nuova risposta
+
+  content_doodle_email1: "Puoi partecipare a questo sondaggio (creato da %{value}) : "
+  content_doodle_email2: "- Seguendo questo link (se sei un utente registrato) : "
+  content_doodle_email3: "- O rispondendo a questa e-mail. Elimina giusto le scelte in cui sei in disaccordo, ma lascia le linee --BEGIN-- e --END-- ..."
+  content_doodle_email4: "Scelte porposte:"
+  content_doodle_invalid_answer: Siamo spiacenti ma la risposta non e' stata processatad (non siamo in grado di trovare le tue risposte). Riprova ancora o invia una e-mail all'autore (%{value})...
+  content_doodle_ak_answer: "La tua risposta √® stata inoltrata. Grazie." 
+  content_doodle_ak_answer1: "Hai accettato le seguenti scelte:" 
+  content_doodle_ak_answer3: "Hai rifiutato tutte le scelte." 
+  content_doodle_ak_answer2: "If desideri, puoi aggiornare la tua risposta :"
+  content_doodle_answer: "E' stata registrata una risposta (da %{value}). Segui il link per mostrarla: "
+  
+  label_conference: Conferenza (Web)
+  label_conference_status: "Stato"
+  label_join_conference: Partecipa alla conferenza
+  label_conference_start: Avvia la conferenza
+  label_conference_people: "Partecipanti"
+  label_conference_status_running: In corso
+  label_conference_status_closed: Non avviata
+  
+  content_meeting_email1: "Organizzatore : %{value}"
+  content_meeting_email2: "Questa riunione pu√≤ essere aggiunta al tuo calendario usano l'allegato, meeting.ics (le istruzioni dipendono dal software che stai utilizzando)."
+  content_meeting_email3: "Segui questo link per partecipare alla Conferenza: %{value}" 
+  content_meeting_email4: "Link alla conferenza : %{value}"
+  
+  download_ics: "ICS (ICalendar)"
