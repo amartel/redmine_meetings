@@ -1,4 +1,4 @@
-<%= l(:content_doodle_invalid_answer, @doodle.author.mail) %>
+<%= l(:content_doodle_invalid_answer, auto_link(@doodle.author.mail)) %>
 <br/><b><%=l(:content_doodle_email4)%></b>
 <br/>-----------BEGIN-------------------
 <% @doodle.tab_options.each do |opt| %>
@@ -6,5 +6,5 @@
 <% end %>
 <br/>------------END--------------------
 <br/><br/><%=l(:content_doodle_email1, @doodle.author.name)%>
-<br/><%=l(:content_doodle_email2)%><%= @doodle_url %>
+<br/><%=l(:content_doodle_email2)%><%= auto_link(@doodle_url) %>
 <br/><%=l(:content_doodle_email3)%>

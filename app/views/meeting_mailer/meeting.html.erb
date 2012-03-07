@@ -3,12 +3,12 @@
 <br/><%= l(:field_end_date_date) %> : <b><%= @meeting.end_date.utc.strftime("%F %R") %> - <%= User.current.time_zone ? User.current.time_zone : ActiveSupport::TimeZone[Setting.plugin_redmine_meetings['meeting_timezone']] %></b>
 <br/><%= l(:field_location) %> : <b><%= @meeting.web ? l(:field_meeting_web) : h(@meeting.location) %></b>
 <% if @meeting.web %>
-<br/><%= l(:content_meeting_email3, @conf_url) %>
+<br/><%= l(:content_meeting_email3, auto_link(@conf_url)) %>
 <% end %>
 
 <%= textilizable(@meeting, :description, :only_path => false) %>
 <hr/>
 <% if @meeting.web %>
-  <br/><%= l(:content_meeting_email4, @meeting_url) %>
+  <br/><%= l(:content_meeting_email4, auto_link(@meeting_url)) %>
 <% end %>
 <br /><%= l(:content_meeting_email2) %>
