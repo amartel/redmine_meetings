@@ -1,6 +1,6 @@
 <h2><%= l(:label_doodle_new) %></h2>
-<% labelled_tabular_form_for :doodle, @doodle, :url => { :controller => 'meetings', :action => 'create_doodle', :project_id => @project }, :html => { :id => 'doodle-form' } do |f| %>
-  <%= error_messages_for 'doodle' %>
+<%= labelled_form_for @doodle, :url => { :controller => 'meetings', :action => 'create_doodle', :project_id => @project }, :html => { :id => 'doodle-form' } do |f| %>
+  <%= error_messages_for @doodle %>
   
   <script language="javascript">
   function SetAllCheckBoxes(CheckValue)
@@ -26,7 +26,7 @@
       <%= wikitoolbar_for 'doodle_description' %>
     </p>
       
-    <p><label><%= l(:field_options) %></label><em><%= l(:text_options_help) %></em><br/><%= text_area_tag 'doodle[options]', nil, :cols => 60, :rows => 10 %>
+    <p><label><%= l(:field_options) %></label><em><%= l(:text_options_help) %></em><br/><%= text_area_tag 'meeting_doodle[options]', nil, :cols => 60, :rows => 10 %>
     </p>
 
   </div>
@@ -50,7 +50,7 @@
   <div class="box tabular">
   <h3> <%= l(:field_mail_notification) %></h3>
   <em><span style="font-size: smaller;"><%= l(:label_notify_author) %></span></em>
-  <p><label></label><%= check_box_tag 'doodle[notify_author]', 'on', true %><%= l(:field_notify_author) %>
+  <p><label></label><%= check_box_tag 'meeting_doodle[notify_author]', 'on', true %><%= l(:field_notify_author) %>
   </p>
   <p><label></label><%= check_box_tag 'notify_participants', 'on', true %><%= l(:field_notify_participants) %>
   </p>

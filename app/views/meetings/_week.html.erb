@@ -10,7 +10,7 @@ while day <= calendar.enddt %>
   <td class='week-number' title="<%= l(:label_week) %>"><%= link_to (day+(11-day.cwday)%7).cweek, { :project_id => @project, :year => @year, :month => @month, :week => (day+(11-day.cwday)%7).cweek } %></td>
   <% end %>
 <td class="<%= day.month==calendar.month ? 'even' : 'odd' %><%= ' today' if Date.today == day %>" >
-<p class="day-num"><%= link_to_if_authorized('&nbsp;&nbsp;&nbsp;&nbsp;', {:action => 'new_meeting', :project_id => @project, :start => day.to_date}, :class => 'icon-time-add', :style => "float:left;", :title => l(:label_meeting_new)) %><%= link_to day.day, { :project_id => @project, :year => day.year, :month => day.month, :day => day.day } %></p> 
+<p class="day-num"><%= link_to_if_authorized('&nbsp;&nbsp;&nbsp;&nbsp;'.html_safe, {:action => 'new_meeting', :project_id => @project, :start => day.to_date}, :class => 'icon-time-add', :style => "float:left;", :title => l(:label_meeting_new)) %><%= link_to day.day, { :project_id => @project, :year => day.year, :month => day.month, :day => day.day } %></p> 
 <% calendar.meetings_on(day).each do |i| %>
   <% if i.is_a? Meeting %>
   <div class="<%= i.css_classe %> tooltip">
