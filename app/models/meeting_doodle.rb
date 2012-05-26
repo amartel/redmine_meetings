@@ -36,7 +36,7 @@ class MeetingDoodle < ActiveRecord::Base
       end
     end
     recipients.each do |language,rec|
-      MeetingMailer.deliver_send_doodle(self, rec, language)
+      MeetingMailer.send_doodle(self, rec, language).deliver
     end
     return true
   end
@@ -58,13 +58,13 @@ class MeetingDoodle < ActiveRecord::Base
       end
     end
     recipients.each do |language,rec|
-      MeetingMailer.deliver_send_doodle(self, rec, language)
+      MeetingMailer.send_doodle(self, rec, language).deliver
     end
     return true
   end
   
   def deliver_invalid_answer(sender_email, user_from)
-    MeetingMailer.deliver_send_invalid_answer(self, sender_email, user_from.language)
+    MeetingMailer.send_invalid_answer(self, sender_email, user_from.language).deliver
   end
   
 

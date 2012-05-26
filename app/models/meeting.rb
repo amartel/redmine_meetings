@@ -74,7 +74,7 @@ class Meeting < ActiveRecord::Base
       end
     end
     recipients.each do |language,rec|
-      MeetingMailer.deliver_send_meeting(self, rec, language)
+      MeetingMailer.send_meeting(self, rec, language).deliver
     end
     return true
   end

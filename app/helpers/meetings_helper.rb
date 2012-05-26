@@ -93,10 +93,10 @@ module MeetingsHelper
     output = ""
     begin
       if User.current.allowed_to?(:join_conference, @project) || User.current.allowed_to?(:start_conference, @project)
-        url = Setting.plugin_redmine_meetings['bbb_help']
-        link = url.empty? ? "" : "&nbsp;&nbsp;<a href='" + url + "' target='_blank' class='icon icon-help'>&nbsp;</a>"
+        url = Setting.plugin_redmine_meetings['bbb_help'].html_safe
+        link = url.empty? ? "".html_safe : "&nbsp;&nbsp;<a href='".html_safe + url + "' target='_blank' class='icon icon-help'>&nbsp;</a>".html_safe
 
-        output << "<br/><br/><h3>#{l(:label_conference)}#{link}</h3>"
+        output << "<br/><br/><h3>#{l(:label_conference)}#{link}</h3>".html_safe
 
         server = Setting.plugin_redmine_meetings['bbb_ip'].empty? ? Setting.plugin_redmine_meetings['bbb_server'] : Setting.plugin_redmine_meetings['bbb_ip']
         meeting_started=false
@@ -112,15 +112,15 @@ module MeetingsHelper
           if Setting.plugin_redmine_meetings['bbb_popup'] != '1'
             output << link_to(l(:label_join_conference), {:controller => 'meetings', :action => 'join_conference', :project_id => @project, :only_path => true})
           else
-            output << "<a href='' onclick='javascript: return start_meeting(\"" + url_for(:controller => 'meetings', :action => 'join_conference', :project_id => @project, :only_path => true) + "\");'>#{l(:label_join_conference)}</a>"
+            output << "<a href='' onclick='javascript: return start_meeting(\"".html_safe + url_for(:controller => 'meetings', :action => 'join_conference', :project_id => @project, :only_path => true) + "\");'>#{l(:label_join_conference)}</a>".html_safe
           end
-          output << "<br><br>"
-          output << "#{l(:label_conference_status)}: <b>#{l(:label_conference_status_running)}</b>"
-          output << "<br><i>#{l(:label_conference_people)}:</i><br>"
+          output << "<br><br>".html_safe
+          output << "#{l(:label_conference_status)}: <b>#{l(:label_conference_status_running)}</b>".html_safe
+          output << "<br><i>#{l(:label_conference_people)}:</i><br>".html_safe
 
           doc.root.elements['attendees'].each do |attendee|
             name=attendee.elements['fullName'].text
-            output << "&nbsp;&nbsp;- #{name}<br>"
+            output << "&nbsp;&nbsp;- #{name}<br>".html_safe
           end
         end
 
@@ -144,12 +144,12 @@ module MeetingsHelper
   end
 
   def render_sidebar_doodles
-    output = ""
+    output = "".html_safe
     if User.current.allowed_to?(:view_meeting_doodles, @project, :global => false)
       doodles = MeetingDoodle.find(:all, :conditions => "project_id = #{@project.id}", :order => "created_on DESC")
       doodles.each do |doodle|
-        output << "<br/>"
-        output << link_to("-&nbsp;#{h(doodle.title)}", {:controller => 'meetings', :action => 'show_doodle', :id => doodle.id, :project_id => @project, :only_path => true})
+        output << "<br/>".html_safe
+        output << link_to("-&nbsp;#{h(doodle.title)}".html_safe, {:controller => 'meetings', :action => 'show_doodle', :id => doodle.id, :project_id => @project, :only_path => true})
       end
     end
     return output
@@ -180,11 +180,11 @@ module MeetingsHelper
     loc = meeting.web ? l(:field_meeting_web) : h(meeting.location)
     o = link_to "#{@cached_label_meeting} ##{meeting.id}: ", {:controller => "meetings", :action => "show_meeting", :id => meeting},
     :class => meeting.css_classe
-    o + "<br />" +
-    "<strong>#{@cached_label_subject}</strong>: #{h(meeting.subject)}<br />" +
-    "<strong>#{@cached_label_start_date}</strong>: #{format_time(meeting.start_date)}<br />" +
-    "<strong>#{@cached_label_end_date}</strong>: #{format_time(meeting.end_date)}<br />" +
-    "<strong>#{@cached_label_location}</strong>: #{loc}"
+    o + "<br />".html_safe +
+    "<strong>#{@cached_label_subject}</strong>: #{h(meeting.subject)}<br />".html_safe +
+    "<strong>#{@cached_label_start_date}</strong>: #{format_time(meeting.start_date)}<br />".html_safe +
+    "<strong>#{@cached_label_end_date}</strong>: #{format_time(meeting.end_date)}<br />".html_safe +
+    "<strong>#{@cached_label_location}</strong>: #{loc}".html_safe
   end
 
   def meeting_style_time (meeting, day, min, max, ind)

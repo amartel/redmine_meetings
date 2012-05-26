@@ -27,8 +27,8 @@ class MeetingsSettingsController < ApplicationController
     setting = MeetingSetting.find_or_create @project.id
     begin
       setting.transaction do
-        setting.first_hour = params[:setting][:first_hour].empty? ? 6 : params[:setting][:first_hour]
-        setting.last_hour = params[:setting][:last_hour].empty? ? 22 : params[:setting][:last_hour]
+        setting.first_hour = params[:meeting_setting][:first_hour].empty? ? 6 : params[:meeting_setting][:first_hour]
+        setting.last_hour = params[:meeting_setting][:last_hour].empty? ? 22 : params[:meeting_setting][:last_hour]
         setting.save!
       end
       flash[:notice] = l(:notice_successful_update)
