@@ -90,7 +90,7 @@ module MeetingsHelper
   end
 
   def render_sidebar_conference
-    output = ""
+    output = "".html_safe
     begin
       if User.current.allowed_to?(:join_conference, @project) || User.current.allowed_to?(:start_conference, @project)
         url = Setting.plugin_redmine_meetings['bbb_help'].html_safe
@@ -106,7 +106,7 @@ module MeetingsHelper
         return "" if data.nil?
         doc = REXML::Document.new(data)
         if doc.root.elements['returncode'].text == "FAILED" || doc.root.elements['attendees'].nil? || doc.root.elements['attendees'].size == 0
-          output << "#{l(:label_conference_status)}: <b>#{l(:label_conference_status_closed)}</b><br><br>"
+          output << "#{l(:label_conference_status)}: <b>#{l(:label_conference_status_closed)}</b><br><br>".html_safe
         else
           meeting_started = true
           if Setting.plugin_redmine_meetings['bbb_popup'] != '1'
@@ -119,7 +119,8 @@ module MeetingsHelper
           output << "<br><i>#{l(:label_conference_people)}:</i><br>".html_safe
 
           doc.root.elements['attendees'].each do |attendee|
-            name=attendee.elements['fullName'].text
+            user = User.find_by_login(attendee.elements['userID'].text)
+            name = user.nil? ? attendee.elements['fullName'].text : link_to(attendee.elements['fullName'].text, :controller => 'users', :action => 'show', :id => user.id)
             output << "&nbsp;&nbsp;- #{name}<br>".html_safe
           end
         end
@@ -131,13 +132,13 @@ module MeetingsHelper
             else
               output << "<a href='' onclick='javascript: return start_meeting(\"" + url_for(:controller => 'meetings', :action => 'start_conference', :project_id => @project, :only_path => true) + "\");'>#{l(:label_conference_start)}</a>"
             end
-            output << "<br><br>"
+            output << "<br><br>".html_safe
           end
 
         end
 
       end
-    rescue
+    rescue => exc
       output = ""
     end
     return output
