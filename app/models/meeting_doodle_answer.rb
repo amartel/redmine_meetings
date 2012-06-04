@@ -23,12 +23,12 @@ class MeetingDoodleAnswer < ActiveRecord::Base
   end
 
   def deliver_ak_answer(sender_email, from_user)
-    MeetingMailer.deliver_send_ak_answer(self, sender_email, from_user.language)
+    MeetingMailer.send_ak_answer(self, sender_email, from_user.language).deliver
   end
 
   def notify_author
     if self.meeting_doodle.notify_author
-      MeetingMailer.deliver_receive_answer(self)
+      MeetingMailer.receive_answer(self).deliver
     end
   end
 end

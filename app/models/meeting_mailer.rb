@@ -2,23 +2,22 @@ require "tzinfo"
 require 'ri_cal'
 
 class MeetingMailer < Mailer
+
   def send_doodle(doodle, rec, language)
     set_language_if_valid language
     sub = "[#{doodle.project.name} - doodle #{doodle.id}]#{doodle.title}"
-    recipients rec
-    subject sub
-    body :doodle => doodle,
-    :doodle_url => url_for(:controller => 'meetings', :action => 'show_doodle', :id => doodle)
-    render_multipart("meeting_doodle", body)
+    @doodle = doodle
+    @doodle_url = url_for(:controller => 'meetings', :action => 'show_doodle', :id => doodle)
+    mail :to => rec,
+      :subject => sub
   end
 
   def send_invalid_answer(doodle, rec, language)
     set_language_if_valid language
     sub = "FAILED:[#{doodle.project.name} - doodle #{doodle.id}]#{doodle.title}"
-    recipients rec
-    subject sub
-    body :doodle => doodle
-    render_multipart("meeting_doodle_invalid_answer", body)
+    @doodle = doodle
+    mail :to => rec,
+      :subject => sub
   end
 
   def send_ak_answer(response, rec, language)
@@ -29,26 +28,29 @@ class MeetingMailer < Mailer
       accepted << "[#{choice.strip}]" if selected
     end
     sub = "SUCCESS:[#{doodle.project.name} - doodle #{doodle.id}]#{doodle.title}"
-    recipients rec
-    subject sub
-    body :doodle => doodle, :response => response, :accepted => accepted.join(', '),
-    :doodle_url => url_for(:controller => 'meetings', :action => 'show_doodle', :id => doodle)
-    render_multipart("meeting_doodle_ak_answer", body)
+
+    @doodle = doodle
+    @response = response
+    @accepted = accepted.join(', ')
+    @doodle_url = url_for(:controller => 'meetings', :action => 'show_doodle', :id => doodle)
+
+    mail :to => rec,
+      :subject => sub
   end
-  
+
   def receive_answer(answer)
     doodle = answer.meeting_doodle
     name = answer.author.mail ? answer.author.name : answer.name
     set_language_if_valid doodle.author.language
     sub = "ANSWER:[#{doodle.project.name} - doodle #{doodle.id}]#{doodle.title}"
-    recipients doodle.author.mail
-    subject sub
-    body :doodle => doodle, :name => name,
-    :doodle_url => url_for(:controller => 'meetings', :action => 'show_doodle', :id => doodle)
-    #from User.current.mail
-    render_multipart("meeting_doodle_answer", body)
+    @doodle = doodle
+    @name = name
+    @doodle_url = url_for(:controller => 'meetings', :action => 'show_doodle', :id => doodle)
+
+    mail :to => doodle.author.mail,
+      :subject => sub
   end
-  
+
   def send_meeting(meeting, rec, language)
     set_language_if_valid language
 
@@ -86,34 +88,18 @@ class MeetingMailer < Mailer
       end
     end
 
-    
+
     @author = User.anonymous
 
     sub = "[#{meeting.project.name} - meeting #{meeting.start_date.utc.strftime('%F')}]#{meeting.subject}"
-    recipients rec
-    subject sub
-    reply_to meeting.author.mail
-    body :meeting => meeting,
-    :conf_url => url_for(:controller => 'meetings', :action => 'join_conference', :project_id => meeting.project),
-    :meeting_url => url_for(:controller => 'meetings', :action => 'show_meeting', :id => meeting)
-    content_type "multipart/alternative"
-    
-    part "text/plain" do |p| 
-      p.body = render(:file => "meeting.text.erb", :body => body, :layout => 'mailer.text.erb')
-    end 
+    @meeting = meeting
+    @conf_url = url_for(:controller => 'meetings', :action => 'join_conference', :project_id => meeting.project)
+    @meeting_url = url_for(:controller => 'meetings', :action => 'show_meeting', :id => meeting)
+    #content_type "multipart/alternative"
 
-    part "text/html" do |p| 
-      p.body = render_message("meeting.html.erb", body) 
-    end 
-    
-    part 'text/calendar; ; charset="utf-8"; method=REQUEST' do |p|
-      p.transfer_encoding = "base64"
-      cal.instance_variable_set(:@tz_source, nil)
-      p.body = cal.to_s
-      p.content_disposition = ''
-    end
-
-    attachment :content_type => "text/calendar", :filename => "meeting.ics", :body => cal.to_s
-     
+    attachments['meeting.ics'] = {:mime_type => "text/calendar", :content => cal.to_s}
+    mail :to => rec,
+      :subject => sub,
+      :reply_to => meeting.author.mail
   end
 end

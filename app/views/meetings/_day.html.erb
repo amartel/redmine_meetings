@@ -1,6 +1,6 @@
 <table class="cal">
 <thead>
-<tr><th scope="col" title="" class="week-number"><%= link_to l(:label_month), { :project_id => @project, :year => @year, :month => @month }%><br/><%= link_to l(:label_week), { :project_id => @project, :year => @year, :month => @month, :week => @week }%></th><th scope="col"><%= format_date(calendar.startdt) %><%= link_to_if_authorized('&nbsp;&nbsp;&nbsp;&nbsp;', {:action => 'new_meeting', :project_id => @project, :start => calendar.startdt.to_date}, :class => 'icon-time-add', :style => "float:right;", :title => l(:label_meeting_new)) %></th></tr>
+<tr><th scope="col" title="" class="week-number"><%= link_to l(:label_month), { :project_id => @project, :year => @year, :month => @month }%><br/><%= link_to l(:label_week), { :project_id => @project, :year => @year, :month => @month, :week => @week }%></th><th scope="col"><%= format_date(calendar.startdt) %><%= link_to_if_authorized('&nbsp;&nbsp;&nbsp;&nbsp;'.html_safe, {:action => 'new_meeting', :project_id => @project, :start => calendar.startdt.to_date}, :class => 'icon-time-add', :style => "float:right;", :title => l(:label_meeting_new)) %></th></tr>
 </thead>
 <tbody>
 

@@ -1,31 +1,31 @@
-h1. Introduction
+= redmine_meetings
 
 This plugin manage meetings in REDMINE. It includes:
+
 * Doodles (based on Redmine Doodles plugin, from Felix Schäfer).
 * Web meetings (using BigBlueButton server : http://bigbluebutton.org )
 
-It is possible to answer to a doodle using email, even if you don't have a redmine account (external users can be declared in the doodle using theirs emails). Of course, you will have then to specify unknown_user=accept when you run the rake task to process the received emails on your server (for example, I used *rake redmine:email:receive_imap RAILS_ENV="production" host="imap.acme.com" username="DOMAIN/redmineserver" password="XXXX" move_on_failure="error@acme.com" unknown_user=accept* 
+It is possible to answer to a doodle using email, even if you don't have a redmine account (external users can be declared in the doodle using theirs emails). Of course, you will have then to specify unknown_user=accept when you run the rake task to process the received emails on your server (for example, I used <tt>rake redmine:email:receive_imap RAILS_ENV="production" host="imap.acme.com" username="DOMAIN/redmineserver" password="XXXX" move_on_failure="error@acme.com" unknown_user=accept</tt>
 Meetings can be exported as ICS file (for a specific meetings or for all meetings) and imported in your favorite calendar application. Right now, Outlook 2010 and Outlook 2001 and my webmail (zimbra) have been successfully tested...
 When you save a meeting, you can notify participants. In this case, the ICS file of the meeting is attached to the email and can be processed by participants. If the meeting is a webmeeting, a link to the conference is also included...
 
-h1. Setup
+== Dependency
 
-h3. 1. Install plugin
+As of 0.2.0 of this plugin, Redmine 2.0.0 or greater is required, Rails 2.3.2 (onwards), as well as Gem files managed by bundler.
 
-redmine_meetings requires ri_cal:
-* gem install ri_cal
+== Installation
 
-Install redmine_meetings from your vendor/plugins directory with:
-* git clone git://github.com/amartel/redmine_meetings.git
+Before installing ensure that the Redmine instance is stopped.
 
-h3. 2. Upgrade database
+1. <tt>cd [redmine-install-dir]/plugins</tt>
+3. <tt>git clone git://github.com/danmunn/redmine_meetings.git</tt>
+4. <tt>cd ..</tt>
+5. <tt>rake redmine:plugins:migrate RAILS_ENV=production</tt>
+6. <tt>bundle install --without development test</tt>
 
-* rake db:migrate_plugins RAILS_ENV=production
+After these steps re-start your instance of Redmine before continuing.
 
-h3. 2. Restart your web server
-
-
-h3. 3. Configure REDMINE with your web browser
+=== Configuring the plugin
 
 If everything is OK, you should see Meetings plugin in the plugin list (Administration -> Plugins)
 Then, you have to configure the plugin:
@@ -48,10 +48,22 @@ New permissions are now available (in Meetings section):
 * :start_conference allows user to create and start a new web meeting
 * :conference_moderator grants a MODERATOR access to the user in the meeting
 
-
 When the plugin is activated in a project, you should see a new tab "meetings" in the project.
 
-h1. History
+== Uninstallation
+
+Before uninstalling please ensure that the Redmine instance is stopped.
+
+1. <tt>cd [redmine-install-dir]</tt>
+2. <tt>rake redmine:plugins:migrate NAME=redmine_meetings VERSION=0 RAILS_ENV=production</tt>
+3. <tt>rm -Rf plugins/redmine_mylyn_connector</tt>
+
+After these steps re-start your instance of Redmine.
+
+== History
+
+0.2.0 : 2012-05-26
+Fixed: compatibility with redmine 2.0.0 stable
 
 0.1.1 : 2012-02-06
 Fixed: compatibility with redmine 1.3.0 stable

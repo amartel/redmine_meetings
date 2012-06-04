@@ -3,12 +3,12 @@
     @meeting_setting = MeetingSetting.find_or_create(@project.id)
 %>
 
-<% labelled_tabular_form_for :setting, @meeting_setting,
+<%= labelled_form_for @meeting_setting,
                              :url => {:controller => 'meetings_settings',
                              :action => 'update', :id => @project, :tab => 'meetings',
                              :partial => 'meetings_settings/update',
                              :setting_id => @meeting_setting.id} do |f| %>
-    <%= error_messages_for 'meeting_setting' %>
+    <%= error_messages_for @meeting_setting %>
     <div class="box">
       <p><%= f.text_field :first_hour, :required => true, :size => 60 %></p>
       <p><%= f.text_field :last_hour, :required => true, :size => 60 %></p>

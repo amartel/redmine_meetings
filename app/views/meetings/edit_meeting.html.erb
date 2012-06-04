@@ -1,5 +1,5 @@
 <h2><%= l(:label_title_meeting) %></h2>
-<% labelled_tabular_form_for :meeting, @meeting, :url => { :controller => 'meetings', :action => 'update_meeting', :id => @meeting }, :html => {:multipart => true,  :id => 'meeting-form' } do |f| %>
+<%= labelled_form_for @meeting, :url => { :controller => 'meetings', :action => 'update_meeting', :id => @meeting }, :html => {:multipart => true, :id => 'meeting-form' } do |f| %>
   <%= error_messages_for 'meeting' %>
   
   <%= render :partial => 'meetings/form_meeting', :locals => {:f => f} %>
