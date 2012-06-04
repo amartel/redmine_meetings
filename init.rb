@@ -15,17 +15,15 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 require 'redmine'
-Dir::foreach(File.join(File.dirname(__FILE__), 'lib')) do |file|
-  next unless /\.rb$/ =~ file
-  require file
-end
+require 'redmine_meetings'
+require 'meetings_calendar'
 
 Redmine::Plugin.register :redmine_meetings do
   name 'Meetings plugin'
   author 'Arnaud Martel'
-  description 'plugin to manage meetings in REDMINE'
-  version '0.1.1'
-  requires_redmine :version_or_higher => '1.3.0'
+  description 'plugin to manage meetings in REDMINE [Modified for Redmine 2.0.0 by Daniel Munn]'
+  version '0.2.0'
+  requires_redmine :version_or_higher => '2.0.0'
   
   settings :default => {'bbb_server' => '', 'bbb_salt' => '', 'bbb_timeout' => '3', 'meeting_timezone' => 'Paris'}, :partial => 'meetings_settings/settings'
 

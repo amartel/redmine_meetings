@@ -170,7 +170,7 @@ class MeetingsController < ApplicationController
   end
 
   def preview_doodle
-    options = params[:doodle][:options].split(/\n/)
+    options = params[:meeting_doodle][:options].split(/\n/)
     tab = "\n\n"
     if !options.empty?
       tab << "||"
@@ -183,15 +183,16 @@ class MeetingsController < ApplicationController
       end
       tab << "\n"
     end
-    @text = params[:doodle][:description]
+    @text = params[:meeting_doodle][:description]
+    @text ||= ""
     @text << tab
     render :partial => 'common/preview'
   end
 
   def create_doodle
     @doodle = MeetingDoodle.new(:project => @project, :author => User.current)
-    @doodle.attributes = params[:doodle]
-    @doodle.notify_author = (params[:doodle][:notify_author] == 'on')
+    @doodle.attributes = params[:meeting_doodle]
+    @doodle.notify_author = (params[:meeting_doodle][:notify_author] == 'on')
     @doodle.watcher_user_ids = params[:watchers]
     if @doodle.save
       @doodle.deliver((params[:notify_participants] == 'on'))
@@ -211,9 +212,9 @@ class MeetingsController < ApplicationController
         r.destroy
       end
     else
-      if (@doodle.options != params[:doodle][:options] && !@doodle.responses.empty?)
+      if (@doodle.options != params[:meeting_doodle][:options] && !@doodle.responses.empty?)
         #options changed and there are responses!!!
-        nl = params[:doodle][:options].split(/\n/).length
+        nl = params[:meeting_doodle][:options].split(/\n/).length
         delta = nl - @doodle.tab_options.length
         if delta != 0
           @doodle.responses.each do |r|
@@ -229,9 +230,9 @@ class MeetingsController < ApplicationController
         end
       end
     end
-    @doodle.attributes = params[:doodle]
+    @doodle.attributes = params[:meeting_doodle]
     @doodle.author = User.current
-    @doodle.notify_author = (params[:doodle][:notify_author] == 'on')
+    @doodle.notify_author = (params[:meeting_doodle][:notify_author] == 'on')
     @doodle.watcher_user_ids = params[:watchers]
     if @doodle.save
       @doodle.deliver_update((params[:notify_participants] == 'on'))

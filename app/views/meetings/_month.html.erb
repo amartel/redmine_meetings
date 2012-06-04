@@ -20,7 +20,7 @@ while day <= calendar.enddt %>
   <% end %>
 <% end %>
 </td>
-<%= '</tr><tr>' if day.cwday==calendar.last_wday and day!=calendar.enddt %>
+<%= "</tr><tr>".html_safe if day.cwday==calendar.last_wday and day!=calendar.enddt %>
 <% day = day + 1
 end %>
 </tr>
