@@ -11,14 +11,14 @@ When you save a meeting, you can notify participants. In this case, the ICS file
 
 == Dependency
 
-As of 0.2.0 of this plugin, Redmine 2.0.0 or greater is required, Rails 2.3.2 (onwards), as well as Gem files managed by bundler.
+As of 0.2.2 of this plugin, Redmine 2.0.2 or greater is required, Rails 3.2.5, as well as Gem files managed by bundler.
 
 == Installation
 
 Before installing ensure that the Redmine instance is stopped.
 
 1. <tt>cd [redmine-install-dir]/plugins</tt>
-3. <tt>git clone git://github.com/danmunn/redmine_meetings.git</tt>
+3. <tt>git clone git://github.com/amartel/redmine_meetings.git</tt>
 4. <tt>cd ..</tt>
 5. <tt>rake redmine:plugins:migrate RAILS_ENV=production</tt>
 6. <tt>bundle install --without development test</tt>
@@ -56,14 +56,19 @@ Before uninstalling please ensure that the Redmine instance is stopped.
 
 1. <tt>cd [redmine-install-dir]</tt>
 2. <tt>rake redmine:plugins:migrate NAME=redmine_meetings VERSION=0 RAILS_ENV=production</tt>
-3. <tt>rm -Rf plugins/redmine_mylyn_connector</tt>
+3. <tt>rm -Rf plugins/redmine_meeting</tt>
 
 After these steps re-start your instance of Redmine.
 
 == History
+0.2.2 : not yet released
+Fixed: compatibility with redmine 2.0.2 + rails 3.2.5 
 
 0.2.0 : 2012-05-26
 Fixed: compatibility with redmine 2.0.0 stable
+
+0.1.2 : 2012-06-04
+Fixed: compatibility with redmine 1.4.2 (cf branch redmine_1.4)
 
 0.1.1 : 2012-02-06
 Fixed: compatibility with redmine 1.3.0 stable

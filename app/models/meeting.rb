@@ -26,7 +26,7 @@ class Meeting < ActiveRecord::Base
   :permission => :view_meetings,
   :find_options => {:joins => "LEFT JOIN #{Project.table_name} ON #{Project.table_name}.id = #{table_name}.project_id"}
 
-  named_scope :visible, lambda {|*args| { :include => :project,
+  scope :visible, lambda {|*args| { :include => :project,
                                           :conditions => Project.allowed_to_condition(args.shift || User.current, :view_meetings, *args) } }
 
   def visible?(user=User.current)

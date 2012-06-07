@@ -14,6 +14,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+#
+#Contributors:
+#  Daniel Munn (Redmine 2.0.0)
 require 'redmine'
 require 'redmine_meetings'
 require 'meetings_calendar'
@@ -21,9 +24,9 @@ require 'meetings_calendar'
 Redmine::Plugin.register :redmine_meetings do
   name 'Meetings plugin'
   author 'Arnaud Martel'
-  description 'plugin to manage meetings in REDMINE [Modified for Redmine 2.0.0 by Daniel Munn]'
-  version '0.2.0'
-  requires_redmine :version_or_higher => '2.0.0'
+  description 'plugin to manage meetings in REDMINE'
+  version '0.2.2'
+  requires_redmine :version_or_higher => '2.0.2'
   
   settings :default => {'bbb_server' => '', 'bbb_salt' => '', 'bbb_timeout' => '3', 'meeting_timezone' => 'Paris'}, :partial => 'meetings_settings/settings'
 

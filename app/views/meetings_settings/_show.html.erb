@@ -9,7 +9,7 @@
                              :partial => 'meetings_settings/update',
                              :setting_id => @meeting_setting.id} do |f| %>
     <%= error_messages_for @meeting_setting %>
-    <div class="box">
+    <div class="box tabular">
       <p><%= f.text_field :first_hour, :required => true, :size => 60 %></p>
       <p><%= f.text_field :last_hour, :required => true, :size => 60 %></p>
     </div>
