@@ -87,7 +87,7 @@ class MeetingsController < ApplicationController
     if params[:start]
       dday = Date.parse(params[:start])
     end
-    dstart = DateTime.civil(dday.year, dday.month, dday.day, Time.now.hour, Time.now.min).to_time
+    dstart = @meeting_tz.local_to_utc(DateTime.civil(dday.year, dday.month, dday.day, Time.now.hour, Time.now.min)).to_time
     @meeting = Meeting.new(:project => @project, :start_date => dstart, :end_date => (dstart + 3600))
   end
 
@@ -98,9 +98,9 @@ class MeetingsController < ApplicationController
     @meeting.location = params[:meeting][:location]
     @meeting.web = (params[:meeting][:web] == 'on')
     tdate = Date.parse(params[:meeting][:start_date_date])
-    @meeting.start_date = DateTime.civil(tdate.year, tdate.month, tdate.day, params[:start_time][:hour].to_i, params[:start_time][:minute].to_i)
+    @meeting.start_date = @meeting_tz.local_to_utc(DateTime.civil(tdate.year, tdate.month, tdate.day, params[:start_time][:hour].to_i, params[:start_time][:minute].to_i))
     tdate = Date.parse(params[:meeting][:end_date_date])
-    @meeting.end_date = DateTime.civil(tdate.year, tdate.month, tdate.day, params[:end_time][:hour].to_i, params[:end_time][:minute].to_i)
+    @meeting.end_date = @meeting_tz.local_to_utc(DateTime.civil(tdate.year, tdate.month, tdate.day, params[:end_time][:hour].to_i, params[:end_time][:minute].to_i))
     @meeting.watcher_user_ids = params[:watchers]
     if @meeting.save
       attachments = Attachment.attach_files(@meeting, params[:attachments])
@@ -122,9 +122,9 @@ class MeetingsController < ApplicationController
     @meeting.location = params[:meeting][:location]
     @meeting.web = (params[:meeting][:web] == 'on')
     tdate = Date.parse(params[:meeting][:start_date_date])
-    @meeting.start_date = DateTime.civil(tdate.year, tdate.month, tdate.day, params[:start_time][:hour].to_i, params[:start_time][:minute].to_i)
+    @meeting.start_date = @meeting_tz.local_to_utc(DateTime.civil(tdate.year, tdate.month, tdate.day, params[:start_time][:hour].to_i, params[:start_time][:minute].to_i))
     tdate = Date.parse(params[:meeting][:end_date_date])
-    @meeting.end_date = DateTime.civil(tdate.year, tdate.month, tdate.day, params[:end_time][:hour].to_i, params[:end_time][:minute].to_i)
+    @meeting.end_date = @meeting_tz.local_to_utc(DateTime.civil(tdate.year, tdate.month, tdate.day, params[:end_time][:hour].to_i, params[:end_time][:minute].to_i))
     @meeting.watcher_user_ids = params[:watchers]
     if @meeting.save
       attachments = Attachment.attach_files(@meeting, params[:attachments])
@@ -416,6 +416,7 @@ class MeetingsController < ApplicationController
   def find_user
     User.current = find_current_user
     @user = User.current
+    @meeting_tz = User.current.time_zone ? User.current.time_zone : ActiveSupport::TimeZone[Setting.plugin_redmine_meetings['meeting_timezone']]
   end
 
   def find_doodle
