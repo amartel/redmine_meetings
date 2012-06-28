@@ -189,10 +189,13 @@ module MeetingsHelper
   end
 
   def meeting_style_time (meeting, day, min, max, ind)
-    if meeting.start_date.day < day.day
+    meeting_tz = User.current.time_zone ? User.current.time_zone : ActiveSupport::TimeZone[Setting.plugin_redmine_meetings['meeting_timezone']]
+    start_date = meeting_tz.utc_to_local(meeting.start_date.to_time)
+    end_date = meeting_tz.utc_to_local(meeting.end_date.to_time)
+    if start_date.day < day.day
       top = 0
     else
-      h = meeting.start_date.hour
+      h = start_date.hour
       if h < min
         top = (h * 100 / min).to_i
       elsif h > max
@@ -200,15 +203,15 @@ module MeetingsHelper
       else
         t = 100
         h = h - min
-        t = t + (h * 30) + (meeting.start_date.min / 2)
+        t = t + (h * 30) + (start_date.min / 2)
         top = t.to_i
       end
     end
 
-    if meeting.end_date.day > day.day
+    if end_date.day > day.day
       height = ((max - min) * 30) + 195
     else
-      h = meeting.end_date.hour
+      h = end_date.hour
       if h < min
         height = (h * 100 / min).to_i
       elsif h > max
@@ -216,7 +219,7 @@ module MeetingsHelper
       else
         t = 100
         h = h - min
-        t = t + (h * 30) + (meeting.end_date.min / 2)
+        t = t + (h * 30) + (end_date.min / 2)
         height = t.to_i
       end
     end
