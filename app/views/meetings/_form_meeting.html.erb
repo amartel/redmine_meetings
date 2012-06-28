@@ -1,4 +1,4 @@
-<div class="box">
+<div class="box tabular">
   <p><%= f.text_field :subject, :required => true, :size => 80 %></p>
   <p><%= f.text_field :location, :size => 80 %><br/><%= check_box_tag 'meeting[web]', 'on', @meeting.web %><%= l(:field_meeting_web) %></p>
   <p><%= f.text_field :start_date_date, :required => true, :size => 10, :onchange => "sync_date('meeting_start_date_date','meeting_end_date_date')" %><%= calendar_for('meeting_start_date_date') %>&nbsp;&nbsp;-&nbsp;&nbsp;<%= select_time @meeting_tz.utc_to_local(@meeting.start_date_time), {:prefix => 'start_time', :minute_step => 5, :time_separator => ':' }, { :onchange => "sync_time(this,'start_time','end_time')" } %>&nbsp;&nbsp;&nbsp;<%= l(:field_time_zone) %>: <%= User.current.time_zone ? User.current.time_zone : ActiveSupport::TimeZone[Setting.plugin_redmine_meetings['meeting_timezone']] %></p>
