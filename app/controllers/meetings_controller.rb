@@ -156,12 +156,16 @@ class MeetingsController < ApplicationController
   def show_doodle
     @author = @doodle.author
     @responses = @doodle.responses
+    @responses ||= []
     if User.current.allowed_to?(:answer_doodle, @project)
       # Give the current user an empty answer if she hasn't answered yet and the doodle is active
       @response = @responses.find_by_author_id(User.current.id) unless !User.current.mail
-      @response ||= MeetingDoodleAnswer.new :author => nil
-      @response.answers ||= Array.new(@doodle.tab_options.size, false)
+      logger.error "@responses : #{@responses}"
+      @response ||= MeetingDoodleAnswer.new :author => nil, :answers => Array.new(@doodle.tab_options.size, false)
+      #@response.answers ||= Array.new(@doodle.tab_options.size, false)
       @responses = @responses | [ @response ]
+logger.error "@response.answers : #{@response.answers}"
+logger.error "@responses : #{Array.new(@doodle.tab_options.size, false)}"
     end
   end
 

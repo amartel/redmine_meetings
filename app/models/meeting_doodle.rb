@@ -2,8 +2,8 @@ class MeetingDoodle < ActiveRecord::Base
 
   belongs_to :project
   belongs_to :author, :class_name => 'User', :foreign_key => 'author_id'
-  has_many :comments, :as => :commented, :dependent => :delete_all, :order => "created_on"
-  has_many :responses, :class_name => 'MeetingDoodleAnswer', :dependent => :destroy, :order => "updated_on", :include => [:author]
+  has_many :comments, :as => :commented, :dependent => :delete_all, :order => "#{Comment.table_name}.created_on ASC"
+  has_many :responses, :class_name => 'MeetingDoodleAnswer', :dependent => :destroy, :order => "#{MeetingDoodleAnswer.table_name}.updated_on ASC", :include => [:author]
   acts_as_watchable
 
   validates_presence_of :title, :options
