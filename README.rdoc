@@ -11,7 +11,7 @@ When you save a meeting, you can notify participants. In this case, the ICS file
 
 == Dependency
 
-As of 0.2.2 of this plugin, Redmine 2.0.2 or greater is required, Rails 3.2.5, as well as Gem files managed by bundler.
+As of 0.2.3 of this plugin, Redmine 2.0.3 or greater is required, Rails 3.2.6, as well as Gem files managed by bundler.
 
 == Installation
 
@@ -61,8 +61,8 @@ Before uninstalling please ensure that the Redmine instance is stopped.
 After these steps re-start your instance of Redmine.
 
 == History
-0.2.2 : not yet released
-Fixed: compatibility with redmine 2.0.2 + rails 3.2.5 
+0.2.3 : not yet released
+Fixed: compatibility with redmine 2.0.3 + rails 3.2.6 
 
 0.2.0 : 2012-05-26
 Fixed: compatibility with redmine 2.0.0 stable
