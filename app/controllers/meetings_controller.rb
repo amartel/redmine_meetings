@@ -286,7 +286,7 @@ class MeetingsController < ApplicationController
     if doc.root.elements['returncode'].text != "FAILED"
       moderatorPW = doc.root.elements['moderatorPW'].text
       server = Setting.plugin_redmine_meetings['bbb_server']
-      url = callApi(server, "join", "meetingID=" + @project.identifier + "&password="+ (@user.allowed_to?(:conference_moderator, @project) ? moderatorPW : attendeePW) + "&fullName=" + CGI.escape(User.current.name), false)
+      url = callApi(server, "join", "meetingID=" + @project.identifier + "&password="+ (@user.allowed_to?(:conference_moderator, @project) ? moderatorPW : attendeePW) + "&fullName=" + CGI.escape(User.current.name) + "&userID=" + @user.id.to_s, false)
       redirect_to url
     else
       #Meeting room doesn't exist

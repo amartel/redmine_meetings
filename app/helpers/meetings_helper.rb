@@ -119,9 +119,10 @@ module MeetingsHelper
           output << "<br><i>#{l(:label_conference_people)}:</i><br>".html_safe
 
           doc.root.elements['attendees'].each do |attendee|
-            user = User.find_by_login(attendee.elements['userID'].text)
-            name = user.nil? ? attendee.elements['fullName'].text : link_to(attendee.elements['fullName'].text, :controller => 'users', :action => 'show', :id => user.id)
-            output << "&nbsp;&nbsp;- #{name}<br>".html_safe
+            user_id = attendee.elements['userID'].text.to_i
+            user = user_id == 0 ? nil : User.find(user_id)
+            name = user.nil? ? "&nbsp;&nbsp;- " + attendee.elements['fullName'].text : link_to("- "+ attendee.elements['fullName'].text, :controller => 'users', :action => 'show', :id => user.id)
+            output << "#{name}<br>".html_safe
           end
         end
 
