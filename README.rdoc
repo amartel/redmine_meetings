@@ -61,7 +61,7 @@ Before uninstalling please ensure that the Redmine instance is stopped.
 After these steps re-start your instance of Redmine.
 
 == History
-0.2.3 : not yet released
+0.2.3 : 2012-06-28
 Fixed: compatibility with redmine 2.0.3 + rails 3.2.6 
 
 0.2.0 : 2012-05-26
