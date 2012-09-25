@@ -56,14 +56,9 @@
   </p>
   </div>
   
-  <%= submit_tag l(:button_create) %>    <%= link_to_remote l(:label_preview),
-                       { :url => { :controller => 'meetings', :action => 'preview_doodle', :project_id => @project },
-                         :method => 'post',
-                         :update => 'preview',
-                         :with => "Form.serialize('doodle-form')",
-                         :complete => "Element.scrollTo('preview')"
-                       }, :accesskey => accesskey(:preview) %>
-
+  <%= submit_tag l(:button_create) %>    
+  <%= preview_link({:controller => 'meetings', :action => 'preview_doodle', :project_id => @project}, 'doodle-form') %>
+  
 <% end if @project %>
 <div id="preview" class="wiki"></div>
 
