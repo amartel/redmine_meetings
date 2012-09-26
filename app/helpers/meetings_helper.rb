@@ -86,7 +86,7 @@ module MeetingsHelper
   end
 
   def link_to_period(link_name, year, month, week=0, day=0)
-    link_to(link_name, { :project_id => @project, :year => year, :month => month, :week => week, :day => day })
+    link_to(link_name.html_safe, { :project_id => @project, :year => year, :month => month, :week => week, :day => day })
   end
 
   def render_sidebar_conference
