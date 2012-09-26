@@ -5,13 +5,8 @@
   <%= render :partial => 'meetings/form_meeting', :locals => {:f => f} %>
 
           
-  <%= submit_tag l(:button_save) %>    <%= link_to_remote l(:label_preview),
-                       { :url => { :controller => 'meetings', :action => 'preview_meeting', :project_id => @project },
-                         :method => 'post',
-                         :update => 'preview',
-                         :with => "Form.serialize('meeting-form')",
-                         :complete => "Element.scrollTo('preview')"
-                       }, :accesskey => accesskey(:preview) %>
+  <%= submit_tag l(:button_save) %>    
+  <%= preview_link({:controller => 'meetings', :action => 'preview_meeting', :project_id => @project}, 'meeting-form') %>  
 
 <% end if @project %>
 <div id="preview" class="wiki"></div>
