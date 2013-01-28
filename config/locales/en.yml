@@ -67,4 +67,7 @@ en:
   content_meeting_email3: "Follow this link to join the web conference : %{value}" 
   content_meeting_email4: "Link to the meeting : %{value}"
   
+  cancel_meeting_email1: "The following meeting has been cancelled/deleted"
+  cancel_meeting_email2: "This meeting can be removed from your calendar using the attached file, meeting.ics (instructions depend from the software you are using)."
+  
   download_ics: "ICS (ICalendar)"

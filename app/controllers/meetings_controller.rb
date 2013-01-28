@@ -102,12 +102,13 @@ class MeetingsController < ApplicationController
     tdate = Date.parse(params[:meeting][:end_date_date])
     @meeting.end_date = @meeting_tz.local_to_utc(DateTime.civil(tdate.year, tdate.month, tdate.day, params[:end_time][:hour].to_i, params[:end_time][:minute].to_i))
     @meeting.watcher_user_ids = params[:watchers]
+    @meeting.notify_participants = (params[:meeting][:notify_participants] == 'on')
     if @meeting.save
       attachments = Attachment.attach_files(@meeting, params[:attachments])
       render_attachment_warning_if_needed(@meeting)
-      @meeting.deliver((params[:notify_participants] == 'on'), @meeting.description)
+      @meeting.deliver()
       flash[:notice] = l(:notice_successful_create)
-      redirect_to :action => 'index', :project_id => @project, :year => @meeting.start_date.year, :week => @meeting.start_date.cweek
+      redirect_to :action => 'index', :project_id => @project, :year => @meeting.start_date.year, :week => @meeting.start_date.to_date.cweek
     else
       render :action => 'new_meeting', :project_id => @project
     end
@@ -126,18 +127,22 @@ class MeetingsController < ApplicationController
     tdate = Date.parse(params[:meeting][:end_date_date])
     @meeting.end_date = @meeting_tz.local_to_utc(DateTime.civil(tdate.year, tdate.month, tdate.day, params[:end_time][:hour].to_i, params[:end_time][:minute].to_i))
     @meeting.watcher_user_ids = params[:watchers]
+    @meeting.notify_participants = (params[:meeting][:notify_participants] == 'on')
     if @meeting.save
       attachments = Attachment.attach_files(@meeting, params[:attachments])
       render_attachment_warning_if_needed(@meeting)
-      @meeting.deliver((params[:notify_participants] == 'on'), @meeting.description)
+      @meeting.deliver()
       flash[:notice] = l(:notice_successful_update)
-      redirect_to :action => 'index', :project_id => @project, :year => @meeting.start_date.year, :week => @meeting.start_date.cweek
+      redirect_to :action => 'index', :project_id => @project, :year => @meeting.start_date.year, :week => @meeting.start_date.to_date.cweek
     else
       render :action => 'edit_meeting', :project_id => @project
     end
   end
 
   def delete_meeting
+    if @meeting.start_date > DateTime.now
+      @meeting.deliver_cancel()
+    end
     @meeting.destroy
     redirect_to :action => 'index', :project_id => @project
   end

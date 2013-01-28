@@ -73,15 +73,28 @@ class Meeting < ActiveRecord::Base
     end
   end
 
-  def deliver(to_all, desc)
+  def deliver()
     recipients = { author.language => [ author.mail ] }
-    if to_all
+    if notify_participants
       watcher_users.each do |w|
         recipients[w.language] = update_recipients(recipients, w.language, w.mail)
       end
     end
     recipients.each do |language,rec|
       MeetingMailer.send_meeting(self, rec, language).deliver
+    end
+    return true
+  end
+  
+  def deliver_cancel()
+    recipients = { author.language => [ author.mail ] }
+    if notify_participants
+      watcher_users.each do |w|
+        recipients[w.language] = update_recipients(recipients, w.language, w.mail)
+      end
+    end
+    recipients.each do |language,rec|
+      MeetingMailer.cancel_meeting(self, rec, language).deliver
     end
     return true
   end

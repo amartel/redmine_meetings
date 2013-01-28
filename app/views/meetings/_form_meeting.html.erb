@@ -26,7 +26,7 @@
 
 <div class="box tabular">
 <h3><%= l(:field_mail_notification) %></h3>
-<p><label></label><%= check_box_tag 'notify_participants', 'on', true %><%= l(:field_notify_participants) %>
+<p><label> </label><%= check_box_tag 'meeting[notify_participants]', 'on', @meeting.notify_participants %><%= l(:field_notify_participants) %>
 </p>
 </div>
 

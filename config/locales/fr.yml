@@ -67,4 +67,7 @@ fr:
   content_meeting_email3: "Utilisez le lien suivant pour rejoindre la salle de conférence virtuelle : %{value}" 
   content_meeting_email4: "Lien vers la réunion : %{value}"
   
+  cancel_meeting_email1: "La réunion suivante a été annulée/supprimée"
+  cancel_meeting_email2: "Cette réunion peut être supprimée de votre agenda en utilisant le fichier meeting.ics qui est attaché à cet email (le mode opératoire dépend de l'application que vous utilisez)."
+  
   download_ics: "ICS (ICalendar)"

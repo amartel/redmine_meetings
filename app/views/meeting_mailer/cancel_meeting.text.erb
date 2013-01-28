@@ -1,0 +1,11 @@
+<%= l(:cancel_meeting_email1) %>
+
+<%= l(:content_meeting_email1, @meeting.author.name) %> 
+
+<%= l(:field_start_date_date) %> : <%= @meeting_tz.utc_to_local(@meeting.start_date.to_time).strftime("%F %R") %> - <%= User.current.time_zone ? User.current.time_zone : ActiveSupport::TimeZone[Setting.plugin_redmine_meetings['meeting_timezone']] %>
+<%= l(:field_end_date_date) %> : <%= @meeting_tz.utc_to_local(@meeting.end_date.to_time).strftime("%F %R") %> - <%= User.current.time_zone ? User.current.time_zone : ActiveSupport::TimeZone[Setting.plugin_redmine_meetings['meeting_timezone']] %>
+<%= l(:field_location) %> : <%= @meeting.web ? l(:field_meeting_web) : h(@meeting.location) %>
+
+<%= @meeting.description %>
+
+<%= l(:cancel_meeting_email2) %>
