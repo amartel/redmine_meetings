@@ -44,7 +44,7 @@ Redmine::Plugin.register :redmine_meetings do
       
   end
   
-  menu :project_menu, :meetings, { :controller => 'meetings', :action => 'index' }, :param => :project_id, :caption => :label_meeting_plural, :if => Proc.new { |p| User.current.allowed_to?(:view_meeting_doodles, p) || User.current.allowed_to?(:view_meetings, p) }
+  menu :project_menu, :meetings, { :controller => 'meetings', :action => 'index' }, :param => :project_id, :caption => :label_meeting_plural, :if => Proc.new { |p| User.current.allowed_to?(:view_meeting_doodles, p) || User.current.allowed_to?(:view_meetings, p) || User.current.allowed_to?(:join_conference, p) }
 
   # Meetings are added to the activity view
   activity_provider :meetings, :class_name => 'Meeting', :default => false
