@@ -176,7 +176,7 @@ class MeetingsController < ApplicationController
   end
 
   def preview_doodle
-    options = params[:meeting_doodle][:options].split(/\n/)
+    options = params[:meeting_doodle][:options].gsub(/\r/,'').split(/\n/)
     tab = "\n\n"
     if !options.empty?
       tab << "||"
