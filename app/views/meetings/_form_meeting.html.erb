@@ -17,7 +17,7 @@
 <input type="button" value="<%= l(:label_none) %>" onclick="SetAllCheckBoxes(false);return false;" />
 </label>
 <% @project.users.sort.each do |user| -%>
-  <% if user.allowed_to?(:view_meetings, @project, :global => false) %>
+  <% if user.allowed_to?(:view_meetings, @project, :global => false) or user.allowed_to?(:join_conference, @project, :global => false) %>
     <label class="floating"><%= check_box_tag 'watchers[]', user.id, @meeting.watched_by?(user) %> <%=h user %></label>
   <% end -%>
 <% end -%>
