@@ -148,8 +148,8 @@ module MeetingsHelper
         if docRecord.root.elements['returncode'].text == "FAILED" || docRecord.root.elements['recordings'].nil? || docRecord.root.elements['recordings'].size == 0
           output << "<b>#{l(:label_conference_records_status)}</b><br><br>".html_safe
         else
+          meeting_tz = User.current.time_zone ? User.current.time_zone : ActiveSupport::TimeZone[Setting.plugin_redmine_meetings['meeting_timezone']]
           docRecord.root.elements['recordings'].each do |recording|
-            meeting_tz = User.current.time_zone ? User.current.time_zone : ActiveSupport::TimeZone[Setting.plugin_redmine_meetings['meeting_timezone']]
             dataFormated = meeting_tz.utc_to_local(recording.elements['startTime'].text).strftime("%F %R") + " - " + meeting_tz
             output << ("&nbsp;&nbsp;- <a href='#{server}/playback/slides/playback.html?meetingId=" + recording.elements['recordID'].text + "' target='" + (Setting.plugin_redmine_meetings['bbb_popup'] != '1' ? '_self' : '_blank') + "'>"+ dataFormated + "</a><br>").html_safe
           end
