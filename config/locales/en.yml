@@ -63,6 +63,8 @@ en:
   label_conference_status_running: In progress
   label_conference_status_closed: Non started
   
+  label_conference_records: "Records"
+  
   content_meeting_email1: "Organizor : %{value}"
   content_meeting_email2: "This meeting can be added to your calendar using the attached file, meeting.ics (instructions depend from the software you are using)."
   content_meeting_email3: "Follow this link to join the web conference : %{value}" 

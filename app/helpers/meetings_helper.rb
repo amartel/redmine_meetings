@@ -125,6 +125,18 @@ module MeetingsHelper
             output << "#{name}<br>".html_safe
           end
         end
+        
+        data = callApi(server, "getRecordings","meetingID=" + @project.identifier, true)
+        return "" if data.nil?
+        doc = REXML::Document.new(data)
+        if doc.root.elements['returncode'].text == "FAILED" || doc.root.elements['recordings'].nil? || doc.root.elements['recordings'].size == 0
+          output << "<br /><br /><h3>#{l(:label_conference_records)}</h3>".html_safe
+          doc.root.elements['recordings'].each do |recording|
+            playback = '&nbsp;&nbsp;- <a href="'+ server + '/playback/slides/playback.html?meetingId=' + record.elements['recorID'] + '" target="_blank">'+ recording.elements['startTime'].text + '</a>'
+            output << "#{playback}<br>".html_safe
+          end
+        end
+        else
 
         if !meeting_started
           if User.current.allowed_to?(:start_conference, @project)

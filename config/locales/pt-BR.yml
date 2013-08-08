@@ -62,6 +62,8 @@ pt-BR:
   label_conference_status_running: Em andamento
   label_conference_status_closed: Não iniciada
   
+  label_conference_records: "Gravações"
+  
   content_meeting_email1: "Organizador : %{value}"
   content_meeting_email2: "Esta reunião pode ser adicionada ao seu calendário usando o arquivo anexo, meeting.ics (A forma de uso pode variar dependendo do software que você estiver usando)."
   content_meeting_email3: "Acesse o link para entrar na conferência via web : %{value}" 
