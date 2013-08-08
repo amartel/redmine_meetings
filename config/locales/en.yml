@@ -58,6 +58,7 @@ en:
   label_conference_status: "Status"
   label_join_conference: Join conference
   label_conference_start: Start conference
+  label_conference_start_with_record: Start conference with record
   label_conference_people: "Participants"
   label_conference_status_running: In progress
   label_conference_status_closed: Non started

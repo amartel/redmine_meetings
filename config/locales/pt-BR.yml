@@ -1,0 +1,73 @@
+pt-BR:
+
+  project_module_meetings: Reuniões
+  Reuniões: Reuniões
+  
+  field_first_hour: Inicia no dia
+  field_last_hour: Encerra no dia
+  
+  permission_meetings_settings: Reuniões Configuracoes
+  permission_manage_meeting: Gerenciar Reuniões
+  permission_view_meetings: Exibir Reuniões
+  permission_manage_doodle: Gerenciar esboços
+  permission_view_meeting_doodles: Exibir esboços
+  permission_answer_doodle: Resposta de esboço
+  permission_join_conference: Participar de conferência
+  permission_start_conference: Iniciar conferência
+  permission_conference_moderator: Moderador
+    
+  label_title_meeting: Reunião
+  label_meeting_plural: Reuniões
+  label_meeting_new: Nova Reunião
+  field_start_date_date: Inicia em
+  field_end_date_date: Encerra em
+  field_location: Local
+  field_meeting_web: Usar sala de conferência exclusiva para o projeto
+
+  label_doodle_plural: "Esboços"
+  label_title_doodle: "esboço"
+  label_doodle_new: "Novo esboço"
+  field_options: "Opções"
+  text_options_help: "Informe uma opção por linha"
+  field_doodle_users: Participantes
+  field_emails: Participantes externos
+  text_emails_help: "Informe o email do participante que não é membro do projeto (use , como separador)"
+  field_delete_answers: Remover respostas existentes
+  doodle_update_successfull: "Resposta salvas"
+  doodle_update_unseccessfull: "Erro. Resposta não foi salva"
+  button_save_answers: Salvar minhas respostas
+  label_notify_author: "Como editor deste esboço, voce sempre receberá um email (exceto se você configurar sua conta para não receber notificações de alteracão feitas por voce)"
+  field_notify_author: "Notifique-me quando uma resposta for recebida"
+  field_notify_participants: Enviar um email para todos os participantes
+  field_notify_participants2: Enviar uma email para participantes que não responderam
+  label_answer_received: Nova resposta recebida  
+
+  content_doodle_email1: "Você esta participando deste esboço (criado por %{value}) : "
+  content_doodle_email2: "- Acesse este link (se você for um usuário registrado) : "
+  content_doodle_email3: "- Ou responda este email. Apenas remova as opções que você não concorda, mas mantenha as linhas --BEGIN-- e --END-- ..."
+  content_doodle_email4: "Opções propostas:"
+  content_doodle_invalid_answer: Desculpe, mas sua resposta não foi processada (não conseguimos encontrar sua resposta). Você pode responder novamente ou enviar um email para o autor (%{value})...
+  content_doodle_ak_answer: "Sua resposta foi processada. Obrigado." 
+  content_doodle_ak_answer1: "Você aceitou as seguintes opções:" 
+  content_doodle_ak_answer3: "Você rejeitou todas as opções." 
+  content_doodle_ak_answer2: "Se desejar, você pode atualizar sua resposta :" 
+  content_doodle_answer: "A resposta foi gravada (de %{value}). Acesse o link para visualizar: "
+  
+  label_conference: Conferência via web
+  label_conference_status: "Situação"
+  label_join_conference: Entrar na conferência
+  label_conference_start: Iniciar conferência
+  label_conference_start_with_record: Iniciar conferência com gravação
+  label_conference_people: "Participantes"
+  label_conference_status_running: Em andamento
+  label_conference_status_closed: Não iniciada
+  
+  content_meeting_email1: "Organizador : %{value}"
+  content_meeting_email2: "Esta reunião pode ser adicionada ao seu calendário usando o arquivo anexo, meeting.ics (A forma de uso pode variar dependendo do software que você estiver usando)."
+  content_meeting_email3: "Acesse o link para entrar na conferência via web : %{value}" 
+  content_meeting_email4: "Link para a reunião : %{value}"
+  
+  cancel_meeting_email1: "A reunião foi cancelada/removida"
+  cancel_meeting_email2: "Esta reunião pode ser removida do seu calendário usando o arquivo anexo, meeting.ics (A forma de uso pode variar dependendo do software que você estiver usando)."
+  
+  download_ics: "ICS (ICalendar)"
