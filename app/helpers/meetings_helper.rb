@@ -149,7 +149,7 @@ module MeetingsHelper
         else
           output << "<br/><br/><h3>#{l(:label_conference_records)}</h3>".html_safe
           docRecord.root.elements['recordings'].each do |recording|
-            output << ("&nbsp;&nbsp;- <a href='#{server}/playback/slides/playback.html?meetingId=" + recording.elements['recordID'].text + "' target='_blank'>"+ recording.elements['startTime'].text + "</a><br>").html_safe
+            output << ("&nbsp;&nbsp;- <a href='#{server}/playback/slides/playback.html?meetingId=" + recording.elements['recordID'].text + "' target='_blank'>"+ Time.at(recording.elements['startTime'].text) + " - " + Time.at(recording.elements['sendTime'].text) + "</a><br>").html_safe
           end
         end
 
