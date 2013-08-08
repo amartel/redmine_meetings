@@ -130,13 +130,12 @@ module MeetingsHelper
         return "" if data.nil?
         doc = REXML::Document.new(data)
         if doc.root.elements['returncode'].text == "SUCCESS" && doc.root.elements['recordings'].size > 0
-          output << "<br /><br /><h3>#{l(:label_conference_records)}</h3>".html_safe
+          output << "<br/><br/><h3>#{l(:label_conference_records)}</h3>".html_safe
           doc.root.elements['recordings'].each do |recording|
-            playback = '&nbsp;&nbsp;- <a href="'+ server + '/playback/slides/playback.html?meetingId=' + record.elements['recordID'] + '" target="_blank">'+ recording.elements['startTime'].text + '</a>'
-            output << "#{playback}<br>".html_safe
+            output << ("&nbsp;&nbsp;- <a href='#{server}/playback/slides/playback.html?meetingId=" + record.elements['recordID'] + "' target='_blank'>"+ recording.elements['startTime'].text + "</a><br>").html_safe
           end
         end
-        else
+        
 
         if !meeting_started
           if User.current.allowed_to?(:start_conference, @project)
