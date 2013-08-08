@@ -141,13 +141,13 @@ module MeetingsHelper
         end
         
         #Gravacoes
+        output << "<br/><br/><h3>#{l(:label_conference_records)}</h3>".html_safe
         dataRecord = callApi(server, "getRecordings","meetingID=" + @project.identifier, true)
         return "" if dataRecord.nil?
         docRecord = REXML::Document.new(dataRecord)
         if docRecord.root.elements['returncode'].text == "FAILED" || docRecord.root.elements['recordings'].nil? || docRecord.root.elements['recordings'].size == 0
           output << "<b>#{l(:label_conference_records_status)}</b><br><br>".html_safe
         else
-          output << "<br/><br/><h3>#{l(:label_conference_records)}</h3>".html_safe
           docRecord.root.elements['recordings'].each do |recording|
             output << ("&nbsp;&nbsp;- <a href='#{server}/playback/slides/playback.html?meetingId=" + recording.elements['recordID'].text + "' target='_blank'>"+ recording.elements['startTime'].text + "</a><br>").html_safe
           end
