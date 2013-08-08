@@ -149,7 +149,8 @@ module MeetingsHelper
           output << "<b>#{l(:label_conference_records_status)}</b><br><br>".html_safe
         else
           docRecord.root.elements['recordings'].each do |recording|
-            output << ("&nbsp;&nbsp;- <a href='#{server}/playback/slides/playback.html?meetingId=" + recording.elements['recordID'].text + "' target='_blank'>"+ recording.elements['startTime'].text + "</a><br>").html_safe
+            dataFormated = @meeting_tz.utc_to_local(@meeting.start_date.to_time).strftime("%F %R") + " - " + User.current.time_zone ? User.current.time_zone : ActiveSupport::TimeZone[Setting.plugin_redmine_meetings['meeting_timezone']]
+            output << ("&nbsp;&nbsp;- <a href='#{server}/playback/slides/playback.html?meetingId=" + recording.elements['recordID'].text + "' target='" + (Setting.plugin_redmine_meetings['bbb_popup'] != '1' ? '_self' : '_blank') + "'>"+ dataFormated + "</a><br>").html_safe
           end
         end
 
