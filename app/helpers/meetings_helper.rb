@@ -130,6 +130,7 @@ module MeetingsHelper
           if User.current.allowed_to?(:start_conference, @project)
             if Setting.plugin_redmine_meetings['bbb_popup'] != '1'
               output << link_to(l(:label_conference_start), {:controller => 'meetings', :action => 'start_conference', :project_id => @project, :only_path => true})
+              output << "<br><br>".html_safe
               output << link_to(l(:label_conference_start_with_record), {:controller => 'meetings', :action => 'start_conference', :project_id => @project, :only_path => true, :record => true})
             else
               output << ("<a href='' onclick='return start_meeting(\"" + url_for(:controller => 'meetings', :action => 'start_conference', :project_id => @project, :only_path => true) + "\");'>#{l(:label_conference_start)}</a>").html_safe
