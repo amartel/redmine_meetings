@@ -132,7 +132,7 @@ module MeetingsHelper
         if doc.root.elements['returncode'].text == "SUCCESS" && doc.root.elements['recordings'].size > 0
           output << "<br /><br /><h3>#{l(:label_conference_records)}</h3>".html_safe
           doc.root.elements['recordings'].each do |recording|
-            playback = '&nbsp;&nbsp;- <a href="'+ server + '/playback/slides/playback.html?meetingId=' + record.elements['recorID'] + '" target="_blank">'+ recording.elements['startTime'].text + '</a>'
+            playback = '&nbsp;&nbsp;- <a href="'+ server + '/playback/slides/playback.html?meetingId=' + record.elements['recordID'] + '" target="_blank">'+ recording.elements['startTime'].text + '</a>'
             output << "#{playback}<br>".html_safe
           end
         end
