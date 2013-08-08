@@ -150,7 +150,7 @@ module MeetingsHelper
         else
           meeting_tz = User.current.time_zone ? User.current.time_zone : ActiveSupport::TimeZone[Setting.plugin_redmine_meetings['meeting_timezone']]
           docRecord.root.elements['recordings'].each do |recording|
-            dataFormated = metting_tz.utc_to_local(Time.at(recording.elements['startTime'].text.to_i)) 
+            dataFormated = recording.elements['startTime'].text
             output << ("&nbsp;&nbsp;- <a href='#{server}/playback/slides/playback.html?meetingId=" + recording.elements['recordID'].text + "' target='" + (Setting.plugin_redmine_meetings['bbb_popup'] != '1' ? '_self' : '_blank') + "'>"+ dataFormated + "</a><br>").html_safe
           end
         end
