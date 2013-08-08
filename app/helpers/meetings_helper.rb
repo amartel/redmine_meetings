@@ -126,15 +126,17 @@ module MeetingsHelper
           end
         end
 
-        # dataRecord = callApi(server, "getRecordings","meetingID=" + @project.identifier, true)
-        # return "" if dataRecord.nil?
-        # docRecord = REXML::Document.new(dataRecord)
-        # if docRecord.root.elements['returncode'].text == "SUCCESS" && docRecord.root.elements['recordings'].size > 0
-          # output << "<br/><br/><h3>#{l(:label_conference_records)}</h3>".html_safe
-          # docRecord.root.elements['recordings'].each do |recording|
-            # output << ("&nbsp;&nbsp;- <a href='#{server}/playback/slides/playback.html?meetingId=" + recording.elements['recordID'] + "' target='_blank'>"+ recording.elements['startTime'].text + "</a><br>").html_safe
-          # end
-        # end
+        dataRecord = callApi(server, "getRecordings","meetingID=" + @project.identifier, true)
+        return "" if dataRecord.nil?
+        docRecord = REXML::Document.new(dataRecord)
+        if docRecord.root.elements['returncode'].text == "FAILED" || docRecord.root.elements['recordings'].nil? || docRecord.root.elements['recordings'].size == 0
+          output << "<b>#{l(:label_conference_records_status)}</b><br><br>".html_safe
+        else
+          output << "<br/><br/><h3>#{l(:label_conference_records)}</h3>".html_safe
+          docRecord.root.elements['recordings'].each do |recording|
+            output << ("&nbsp;&nbsp;- <a href='#{server}/playback/slides/playback.html?meetingId=" + recording.elements['recordID'] + "' target='_blank'>"+ recording.elements['startTime'].text + "</a><br>").html_safe
+          end
+        end
 
         if !meeting_started
           if User.current.allowed_to?(:start_conference, @project)
