@@ -157,7 +157,7 @@ module MeetingsHelper
 
       end
     rescue => exc
-      output = ""
+      output = exc
     end
     return output
   end
