@@ -125,17 +125,16 @@ module MeetingsHelper
             output << "#{name}<br>".html_safe
           end
         end
-        
-        data = callApi(server, "getRecordings","meetingID=" + @project.identifier, true)
-        return "" if data.nil?
-        doc = REXML::Document.new(data)
-        if doc.root.elements['returncode'].text == "SUCCESS" && doc.root.elements['recordings'].size > 0
+
+        dataRecord = callApi(server, "getRecordings","meetingID=" + @project.identifier, true)
+        return "" if dataRecord.nil?
+        docRecord = REXML::Document.new(dataRecord)
+        if docRecord.root.elements['returncode'].text == "SUCCESS" && docRecord.root.elements['recordings'].size > 0
           output << "<br/><br/><h3>#{l(:label_conference_records)}</h3>".html_safe
-          doc.root.elements['recordings'].each do |recording|
-            output << ("&nbsp;&nbsp;- <a href='#{server}/playback/slides/playback.html?meetingId=" + record.elements['recordID'] + "' target='_blank'>"+ recording.elements['startTime'].text + "</a><br>").html_safe
+          docRecord.root.elements['recordings'].each do |recording|
+            output << ("&nbsp;&nbsp;- <a href='#{server}/playback/slides/playback.html?meetingId=" + recording.elements['recordID'] + "' target='_blank'>"+ recording.elements['startTime'].text + "</a><br>").html_safe
           end
         end
-        
 
         if !meeting_started
           if User.current.allowed_to?(:start_conference, @project)
@@ -207,34 +206,34 @@ module MeetingsHelper
     start_date = meeting_tz.utc_to_local(meeting.start_date.to_time)
     end_date = meeting_tz.utc_to_local(meeting.end_date.to_time)
     if start_date.day < day.day
-      top = 0
+    top = 0
     else
       h = start_date.hour
       if h < min
-        top = (h * 100 / min).to_i
+      top = (h * 100 / min).to_i
       elsif h > max
-        top = ((h - max) * 100 / (24 - max)).to_i
+      top = ((h - max) * 100 / (24 - max)).to_i
       else
-        t = 100
-        h = h - min
-        t = t + (h * 30) + (start_date.min / 2)
-        top = t.to_i
+      t = 100
+      h = h - min
+      t = t + (h * 30) + (start_date.min / 2)
+      top = t.to_i
       end
     end
 
     if end_date.day > day.day
-      height = ((max - min) * 30) + 195
+    height = ((max - min) * 30) + 195
     else
       h = end_date.hour
       if h < min
-        height = (h * 100 / min).to_i
+      height = (h * 100 / min).to_i
       elsif h > max
-        height = ((h - max) * 100 / (24 - max)).to_i
+      height = ((h - max) * 100 / (24 - max)).to_i
       else
-        t = 100
-        h = h - min
-        t = t + (h * 30) + (end_date.min / 2)
-        height = t.to_i
+      t = 100
+      h = h - min
+      t = t + (h * 30) + (end_date.min / 2)
+      height = t.to_i
       end
     end
     height = height - top
@@ -247,7 +246,7 @@ module MeetingsHelper
   def each_xml_element(node, name)
     if node && node[name]
       if node[name].is_a?(Hash)
-        yield node[name]
+      yield node[name]
       else
         node[name].each do |element|
           yield element
@@ -272,7 +271,7 @@ module MeetingsHelper
         return nil
       end
     else
-      url
+    url
     end
 
   end
