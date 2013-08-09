@@ -58,9 +58,13 @@ en:
   label_conference_status: "Status"
   label_join_conference: Join conference
   label_conference_start: Start conference
+  label_conference_start_with_record: Start conference with record
   label_conference_people: "Participants"
   label_conference_status_running: In progress
   label_conference_status_closed: Non started
+  
+  label_conference_records: "Records"
+  label_conference_records_status: "No records found"
   
   content_meeting_email1: "Organizor : %{value}"
   content_meeting_email2: "This meeting can be added to your calendar using the attached file, meeting.ics (instructions depend from the software you are using)."
