@@ -325,7 +325,11 @@ class MeetingsController < ApplicationController
         if !s.nil? && !s.empty?
           loadPres = "<?xml version='1.0' encoding='UTF-8'?><modules><module name='presentation'><document url='#{s}'/></module></modules>"
         end
-        data = callApi(server, "create","name=" + CGI.escape(@project.name) + "&meetingID=" + @project.identifier + "&attendeePW=" + attendeePW + "&moderatorPW=" + moderatorPW + "&logoutURL=" + back_url + "&voiceBridge=" + bridge, true, loadPres)
+        record = "false"
+        if params[:record]
+          record = "true"
+        end
+        data = callApi(server, "create","name=" + CGI.escape(@project.name) + "&meetingID=" + @project.identifier + "&attendeePW=" + attendeePW + "&moderatorPW=" + moderatorPW + "&logoutURL=" + back_url + "&voiceBridge=" + bridge + "&record=" + record, true, loadPres)
         ok_to_join = true
       end
     else

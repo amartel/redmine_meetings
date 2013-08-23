@@ -130,6 +130,8 @@ module MeetingsHelper
           if User.current.allowed_to?(:start_conference, @project)
             if Setting.plugin_redmine_meetings['bbb_popup'] != '1'
               output << link_to(l(:label_conference_start), {:controller => 'meetings', :action => 'start_conference', :project_id => @project, :only_path => true})
+              output << "<br><br>".html_safe
+              output << link_to(l(:label_conference_start_with_record), {:controller => 'meetings', :action => 'start_conference', :project_id => @project, :only_path => true, :record => true})
             else
               output << ("<a href='' onclick='return start_meeting(\"" + url_for(:controller => 'meetings', :action => 'start_conference', :project_id => @project, :only_path => true) + "\");'>#{l(:label_conference_start)}</a>").html_safe
             end
@@ -137,10 +139,27 @@ module MeetingsHelper
           end
 
         end
+        
+        #Gravacoes
+        output << "<br/><br/><h3>#{l(:label_conference_records)}</h3>".html_safe
+        dataRecord = callApi(server, "getRecordings","meetingID=" + @project.identifier, true)
+        return "" if dataRecord.nil?
+        docRecord = REXML::Document.new(dataRecord)
+        if docRecord.root.elements['returncode'].text == "FAILED" || docRecord.root.elements['recordings'].nil? || docRecord.root.elements['recordings'].size == 0
+          output << "<b>#{l(:label_conference_records_status)}</b><br><br>".html_safe
+        else
+          meeting_tz = User.current.time_zone ? User.current.time_zone : ActiveSupport::TimeZone[Setting.plugin_redmine_meetings['meeting_timezone']]
+          docRecord.root.elements['recordings'].each do |recording|
+            dateRecord = Time.at(recording.elements['startTime'].text.to_i / 1000)
+            dataFormated = meeting_tz.local_to_utc(dateRecord).strftime("%F %R") 
+            #dataFormated = Time.at(recording.elements['startTime'].text.to_i).strftime("%F %R") 
+            output << ("&nbsp;&nbsp;- <a href='#{server}/playback/slides/playback.html?meetingId=" + recording.elements['recordID'].text + "' target='" + (Setting.plugin_redmine_meetings['bbb_popup'] != '1' ? '_self' : '_blank') + "'>"+ format_time(dataFormated) + "</a><br>").html_safe
+          end
+        end
 
       end
     rescue => exc
-      output = ""
+      output = exc
     end
     return output
   end
@@ -194,34 +213,34 @@ module MeetingsHelper
     start_date = meeting_tz.utc_to_local(meeting.start_date.to_time)
     end_date = meeting_tz.utc_to_local(meeting.end_date.to_time)
     if start_date.day < day.day
-      top = 0
+    top = 0
     else
       h = start_date.hour
       if h < min
-        top = (h * 100 / min).to_i
+      top = (h * 100 / min).to_i
       elsif h > max
-        top = ((h - max) * 100 / (24 - max)).to_i
+      top = ((h - max) * 100 / (24 - max)).to_i
       else
-        t = 100
-        h = h - min
-        t = t + (h * 30) + (start_date.min / 2)
-        top = t.to_i
+      t = 100
+      h = h - min
+      t = t + (h * 30) + (start_date.min / 2)
+      top = t.to_i
       end
     end
 
     if end_date.day > day.day
-      height = ((max - min) * 30) + 195
+    height = ((max - min) * 30) + 195
     else
       h = end_date.hour
       if h < min
-        height = (h * 100 / min).to_i
+      height = (h * 100 / min).to_i
       elsif h > max
-        height = ((h - max) * 100 / (24 - max)).to_i
+      height = ((h - max) * 100 / (24 - max)).to_i
       else
-        t = 100
-        h = h - min
-        t = t + (h * 30) + (end_date.min / 2)
-        height = t.to_i
+      t = 100
+      h = h - min
+      t = t + (h * 30) + (end_date.min / 2)
+      height = t.to_i
       end
     end
     height = height - top
@@ -234,7 +253,7 @@ module MeetingsHelper
   def each_xml_element(node, name)
     if node && node[name]
       if node[name].is_a?(Hash)
-        yield node[name]
+      yield node[name]
       else
         node[name].each do |element|
           yield element
@@ -259,7 +278,7 @@ module MeetingsHelper
         return nil
       end
     else
-      url
+    url
     end
 
   end
