@@ -9,7 +9,7 @@
 
 <p><label>BigBlueButton server</label>
 <%= text_field_tag 'settings[bbb_server]', @settings['bbb_server'], :size => 80 %><br />
-<em>public url of your BBB server. For example: http://mybbb.domain.com</em>
+<em>public url of your BBB server. For example: http://mybbb.domain.com. Leave it empty if you don't use a BigBlueButton server</em>
 </p>
 
 <p><label>Internal address</label>
@@ -45,4 +45,9 @@
 <p><label>Load presentation</label>
 <%= text_field_tag 'settings[bbb_initpres]', @settings['bbb_initpres'], :size => 80 %><br />
 <em>Optional: url of the default presentation document (will be loaded when the conference is created). For example: http://demo.bigbluebutton.org/demo/pdfs/sample.pdf</em>
+</p>
+
+<p><label>Allow recording</label>
+<%= check_box_tag 'settings[bbb_recording]', 1, @settings['bbb_recording'] %><br />
+<em>Checked if you want to allow conference to be recorded</em>
 </p>

@@ -92,7 +92,7 @@ module MeetingsHelper
   def render_sidebar_conference
     output = "".html_safe
     begin
-      if User.current.allowed_to?(:join_conference, @project) || User.current.allowed_to?(:start_conference, @project)
+      if !Setting.plugin_redmine_meetings['bbb_server'].empty? && (User.current.allowed_to?(:join_conference, @project) || User.current.allowed_to?(:start_conference, @project))
         url = Setting.plugin_redmine_meetings['bbb_help'].html_safe
         link = url.empty? ? "".html_safe : "&nbsp;&nbsp;<a href='".html_safe + url + "' target='_blank' class='icon icon-help'>&nbsp;</a>".html_safe
 
@@ -130,30 +130,33 @@ module MeetingsHelper
           if User.current.allowed_to?(:start_conference, @project)
             if Setting.plugin_redmine_meetings['bbb_popup'] != '1'
               output << link_to(l(:label_conference_start), {:controller => 'meetings', :action => 'start_conference', :project_id => @project, :only_path => true})
-              output << "<br><br>".html_safe
-              output << link_to(l(:label_conference_start_with_record), {:controller => 'meetings', :action => 'start_conference', :project_id => @project, :only_path => true, :record => true})
+              if Setting.plugin_redmine_meetings['bbb_recording'] == '1'
+                output << "<br><br>".html_safe
+                output << link_to(l(:label_conference_start_with_record), {:controller => 'meetings', :action => 'start_conference', :project_id => @project, :only_path => true, :record => true})
+              end
             else
               output << ("<a href='' onclick='return start_meeting(\"" + url_for(:controller => 'meetings', :action => 'start_conference', :project_id => @project, :only_path => true) + "\");'>#{l(:label_conference_start)}</a>").html_safe
             end
             output << "<br><br>".html_safe
           end
-
         end
         
-        #Gravacoes
-        output << "<br/><br/><h3>#{l(:label_conference_records)}</h3>".html_safe
-        dataRecord = callApi(server, "getRecordings","meetingID=" + @project.identifier, true)
-        return "" if dataRecord.nil?
-        docRecord = REXML::Document.new(dataRecord)
-        if docRecord.root.elements['returncode'].text == "FAILED" || docRecord.root.elements['recordings'].nil? || docRecord.root.elements['recordings'].size == 0
-          output << "<b>#{l(:label_conference_records_status)}</b><br><br>".html_safe
-        else
-          meeting_tz = User.current.time_zone ? User.current.time_zone : ActiveSupport::TimeZone[Setting.plugin_redmine_meetings['meeting_timezone']]
-          docRecord.root.elements['recordings'].each do |recording|
-            dateRecord = Time.at(recording.elements['startTime'].text.to_i / 1000)
-            dataFormated = meeting_tz.local_to_utc(dateRecord).strftime("%F %R") 
-            #dataFormated = Time.at(recording.elements['startTime'].text.to_i).strftime("%F %R") 
-            output << ("&nbsp;&nbsp;- <a href='#{server}/playback/slides/playback.html?meetingId=" + recording.elements['recordID'].text + "' target='" + (Setting.plugin_redmine_meetings['bbb_popup'] != '1' ? '_self' : '_blank') + "'>"+ format_time(dataFormated) + "</a><br>").html_safe
+        #Records
+        if Setting.plugin_redmine_meetings['bbb_recording'] == '1' && User.current.allowed_to?(:view_recorded_conference, @project)
+          output << "<br/><br/><h3>#{l(:label_conference_records)}</h3>".html_safe
+          dataRecord = callApi(server, "getRecordings","meetingID=" + @project.identifier, true)
+          return "" if dataRecord.nil?
+          docRecord = REXML::Document.new(dataRecord)
+          if docRecord.root.elements['returncode'].text == "FAILED" || docRecord.root.elements['recordings'].nil? || docRecord.root.elements['recordings'].size == 0
+            output << "<b>#{l(:label_conference_no_records)}</b><br><br>".html_safe
+          else
+            meeting_tz = User.current.time_zone ? User.current.time_zone : ActiveSupport::TimeZone[Setting.plugin_redmine_meetings['meeting_timezone']]
+            docRecord.root.elements['recordings'].each do |recording|
+              dateRecord = Time.at(recording.elements['startTime'].text.to_i / 1000)
+              dataFormated = meeting_tz.local_to_utc(dateRecord).strftime("%F %R")
+              #dataFormated = Time.at(recording.elements['startTime'].text.to_i).strftime("%F %R")
+              output << ("&nbsp;&nbsp;- <a href='#{Setting.plugin_redmine_meetings['bbb_server']}/playback/slides/playback.html?meetingId=" + recording.elements['recordID'].text + "' target='" + (Setting.plugin_redmine_meetings['bbb_popup'] != '1' ? '_self' : '_blank') + "'>"+ format_time(dataFormated) + "</a><br>").html_safe
+            end
           end
         end
 

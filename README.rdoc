@@ -46,6 +46,7 @@ New permissions are now available (in Meetings section):
 * :manage_meeting allows create, update and delete meetings in the project
 * :join_conference allows user to join a new web meeting
 * :start_conference allows user to create and start a new web meeting
+* :view_recorded_conference allows user to view all previously recorded web meetings
 * :conference_moderator grants a MODERATOR access to the user in the meeting
 
 When the plugin is activated in a project, you should see a new tab "meetings" in the project.
@@ -61,6 +62,9 @@ Before uninstalling please ensure that the Redmine instance is stopped.
 After these steps re-start your instance of Redmine.
 
 == History
+0.2.4 : 2013-08-23
+Add: allow meetings recording 
+
 0.2.3 : 2012-06-28
 Fixed: compatibility with redmine 2.0.3 + rails 3.2.6 
 

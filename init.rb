@@ -25,10 +25,10 @@ Redmine::Plugin.register :redmine_meetings do
   name 'Meetings plugin'
   author 'Arnaud Martel'
   description 'plugin to manage meetings in REDMINE'
-  version '0.2.3'
+  version '0.2.4'
   requires_redmine :version_or_higher => '2.0.3'
   
-  settings :default => {'bbb_server' => '', 'bbb_salt' => '', 'bbb_timeout' => '3', 'meeting_timezone' => 'Paris'}, :partial => 'meetings_settings/settings'
+  settings :default => {'bbb_server' => '', 'bbb_salt' => '', 'bbb_timeout' => '3', 'meeting_timezone' => 'Paris', 'bbb_recording' => ''}, :partial => 'meetings_settings/settings'
 
   project_module :meetings do
     permission :meetings_settings, {:meetings_settings => [:show, :update]}
@@ -41,6 +41,7 @@ Redmine::Plugin.register :redmine_meetings do
     permission :start_conference, :meetings => :start_conference
     permission :meeting, { :meetings => :index}, :public => true
     permission :conference_moderator, {}
+    permission :view_recorded_conference, {}
       
   end
   

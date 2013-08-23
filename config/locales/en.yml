@@ -64,7 +64,7 @@ en:
   label_conference_status_closed: Non started
   
   label_conference_records: "Records"
-  label_conference_records_status: "No records found"
+  label_conference_no_records: "No records found"
   
   content_meeting_email1: "Organizor : %{value}"
   content_meeting_email2: "This meeting can be added to your calendar using the attached file, meeting.ics (instructions depend from the software you are using)."

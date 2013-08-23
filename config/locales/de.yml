@@ -58,9 +58,13 @@ de:
   label_conference_status: "Status"
   label_join_conference: An Webkonferenz teilnehmen
   label_conference_start: Starte Webkonferenz
+  label_conference_start_with_record: Starte Webkonferenz (record)
   label_conference_people: "Teilnehmer"
   label_conference_status_running: läuft
   label_conference_status_closed: hat noch nicht begonnen
+  
+  label_conference_records: "Records"
+  label_conference_no_records: "No records found"
   
   content_meeting_email1: "Organizator : %{value}"
   content_meeting_email2: "Sie können den Termin für dieses Meeting in ihren Kalender (Outlook, Notes) importieren, indem sie das Attachment meeting.ics in ihrer Kalendersoftware öffnen."

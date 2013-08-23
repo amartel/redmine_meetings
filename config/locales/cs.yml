@@ -58,9 +58,13 @@ cs:
   label_conference_status: "Stav"
   label_join_conference: Připojit se ke konferenci
   label_conference_start: Spustit konferenci
+  label_conference_start_with_record: Spustit konferenci (record)
   label_conference_people: "Účastníci"
   label_conference_status_running: Právě probíhající
   label_conference_status_closed: Nezahájená
+  
+  label_conference_records: "Records"
+  label_conference_no_records: "No records found"
   
   content_meeting_email1: "Organizátor : %{value}"
   content_meeting_email2: "Tuto poradu můžete přidat do svého kalendáře pomocí přiloženého souboru meeting.ics (postup závisí na konkrétním použitém software)."
