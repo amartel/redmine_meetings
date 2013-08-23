@@ -91,7 +91,7 @@ class MeetingMailer < Mailer
 
     @author = User.anonymous
 
-    sub = "[#{meeting.project.name} - meeting #{meeting.start_date.strftime('%F')}]#{meeting.subject}"
+    sub = "[#{meeting.project.name} - meeting #{meeting.start_date.strftime('%F')}] #{meeting.subject}"
     @meeting = meeting
     @conf_url = url_for(:controller => 'meetings', :action => 'join_conference', :project_id => meeting.project)
     @meeting_url = url_for(:controller => 'meetings', :action => 'show_meeting', :id => meeting)
@@ -144,7 +144,7 @@ def cancel_meeting(meeting, rec, language)
 
   @author = User.anonymous
 
-  sub = "[#{meeting.project.name} - meeting #{meeting.start_date.strftime('%F')}]#{meeting.subject}"
+  sub = "[#{meeting.project.name} - meeting #{meeting.start_date.strftime('%F')}] #{meeting.subject}"
   @meeting = meeting
   @conf_url = url_for(:controller => 'meetings', :action => 'join_conference', :project_id => meeting.project)
   @meeting_url = url_for(:controller => 'meetings', :action => 'show_meeting', :id => meeting)

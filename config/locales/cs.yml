@@ -1,0 +1,73 @@
+# Czech strings go here for Rails i18n
+cs:
+
+  project_module_meetings: Meetings
+  meetings: Porady
+  
+  field_first_hour: Začátek pracovního dne
+  field_last_hour: Konec pracovního dne
+  
+  permission_meetings_settings: Nastavení porad
+  permission_manage_meeting: Správa porad
+  permission_view_meetings: Zobrazení porad
+  permission_manage_doodle: Správa doodlu
+  permission_view_meeting_doodles: Zobrazení doodlů
+  permission_answer_doodle: Odpověď na doodle
+  permission_join_conference: Připojit se ke konferenci
+  permission_start_conference: Spustit konferenci
+  permission_conference_moderator: Moderátor
+    
+  label_title_meeting: Porada
+  label_meeting_plural: Porady
+  label_meeting_new: Nová porada
+  field_start_date_date: Začátek
+  field_end_date_date: Konec
+  field_location: Místo
+  field_meeting_web: Využít zasedačku vyhrazenou tomuto projektu
+
+  label_doodle_plural: "Doodly"
+  label_title_doodle: "Doodle"
+  label_doodle_new: "Nový doodle"
+  field_options: "Možnosti"
+  text_options_help: "Zadejte jedno nastavení na každý řádek"
+  field_doodle_users: Účastníci
+  field_emails: Externí účastníci
+  text_emails_help: "Zadejte emaily účastníků, kteří nejsou členy projektu (použijte čárku jako oddělovač)"
+  field_delete_answers: Smazat existující odpovědi
+  doodle_update_successfull: "Odpovědi uloženy"
+  doodle_update_unseccessfull: "Chyba - odpovědi nebyly uloženy"
+  button_save_answers: Uložit mé odpovědi
+  label_notify_author: "Jako editor tohoto doodlu vždy obdržíte email (pokud jste v nastavení svého účtu nezadali, že si nepřejete být upozorňováni na vlastní změny"
+  field_notify_author: "Upozornění při obdržení odpovědi"
+  field_notify_participants: Zaslat email všem účastníkům
+  field_notify_participants2: Zaslat email všem účastníkům, kteří neodpověděli
+  label_answer_received: Obdržena nová odpověď
+
+  content_doodle_email1: "Můžete se účastnit tohoto doodlu (vytvořen uživatelem %{value}): "
+  content_doodle_email2: "- Kliknutím na tento odkaz (jste-li registrovaným uživatelem): "
+  content_doodle_email3: "- Nebo odpovědí na tento email. V tom případě smažte volby, se kterými nesouhlasíte, ale ponechte řádky --BEGIN-- a --END-- ..."
+  content_doodle_email4: "Navrhované volby:"
+  content_doodle_invalid_answer: Omlouváme se, ale Vaše odpověď nebyla zpracována (nemohli jsme ji najít). Můžete buď zkusit odpovědět znova, nebo poslat email autorovi (%{value})...
+  content_doodle_ak_answer: "Vaše odpověď byla zpracována. Děkujeme." 
+  content_doodle_ak_answer1: "Přijal(a) jste následující volby:" 
+  content_doodle_ak_answer3: "Odmítl jste veškeré volby." 
+  content_doodle_ak_answer2: "Chcete-li, můžete upravit odpověď:" 
+  content_doodle_answer: "Odpověď byla zaznamenána (od uživatele %{value}). Klikněte na odkaz pro zobrazení: "
+  
+  label_conference: Webová konference
+  label_conference_status: "Stav"
+  label_join_conference: Připojit se ke konferenci
+  label_conference_start: Spustit konferenci
+  label_conference_people: "Účastníci"
+  label_conference_status_running: Právě probíhající
+  label_conference_status_closed: Nezahájená
+  
+  content_meeting_email1: "Organizátor : %{value}"
+  content_meeting_email2: "Tuto poradu můžete přidat do svého kalendáře pomocí přiloženého souboru meeting.ics (postup závisí na konkrétním použitém software)."
+  content_meeting_email3: "Klikněte na tento odkaz pro přidání se k webové konferenci: %{value}" 
+  content_meeting_email4: "Odkaz na poradu: %{value}"
+  
+  cancel_meeting_email1: "Tato porada byla zrušena/smazána"
+  cancel_meeting_email2: "Tuto poradu můžete odstranit z kalendáře pomocí přiloženého souboru meeting.ics (postup závisí na konkrétním použitém software)."
+  
+  download_ics: "ICS (ICalendar)"
