@@ -38,7 +38,7 @@ Redmine::Plugin.register :redmine_meetings do
     permission :view_meetings, {:meetings => [:show_meeting, :export_meeting, :export_meetings]}
     permission :manage_meeting, {:meetings => [:new_meeting, :create_meeting, :edit_meeting, :update_meeting, :delete_meeting, :preview_meeting]}
     permission :join_conference, :meetings => :join_conference
-    permission :start_conference, :meetings => :start_conference
+    permission :start_conference, {:meetings => [:start_conference, :delete_conference]}
     permission :meeting, { :meetings => :index}, :public => true
     permission :conference_moderator, {}
     permission :view_recorded_conference, {}

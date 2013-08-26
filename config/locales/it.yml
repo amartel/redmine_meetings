@@ -67,6 +67,7 @@ it:
   label_conference_records: "Records"
   label_conference_no_records: "No records found"
   label_recording_meeting: "This meeting is recorded and may be viewed in the future"
+  label_delete_record: "Delete this recorded meeting"
   
   content_meeting_email1: "Organizzatore : %{value}"
   content_meeting_email2: "Questa riunione pu√≤ essere aggiunta al tuo calendario usano l'allegato, meeting.ics (le istruzioni dipendono dal software che stai utilizzando)."

@@ -67,6 +67,7 @@ cs:
   label_conference_records: "Records"
   label_conference_no_records: "No records found"
   label_recording_meeting: "This meeting is recorded and may be viewed in the future"
+  label_delete_record: "Delete this recorded meeting"
   
   content_meeting_email1: "Organizátor : %{value}"
   content_meeting_email2: "Tuto poradu můžete přidat do svého kalendáře pomocí přiloženého souboru meeting.ics (postup závisí na konkrétním použitém software)."

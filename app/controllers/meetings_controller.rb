@@ -343,6 +343,23 @@ class MeetingsController < ApplicationController
     end
   end
 
+  def delete_conference
+    server = Setting.plugin_redmine_meetings['bbb_ip'].empty? ? Setting.plugin_redmine_meetings['bbb_server'] : Setting.plugin_redmine_meetings['bbb_ip']
+    if params[:record_id]
+      data = callApi(server, "getRecordings","meetingID=" + @project.identifier, true)
+      if !data.nil?
+        docRecord = REXML::Document.new(data)
+        docRecord.root.elements['recordings'].each do |recording|
+          if recording.elements['recordID'].text == params[:record_id]
+            data = callApi(server, "deleteRecordings","recordID=" + params[:record_id], true)
+            break
+          end
+        end
+      end
+    end
+    redirect_to :action => 'index', :project_id => @project
+  end
+
   private
 
   def download_ics_for(meetings)

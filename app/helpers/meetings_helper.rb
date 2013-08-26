@@ -157,12 +157,20 @@ module MeetingsHelper
             output << "<b>#{l(:label_conference_no_records)}</b><br><br>".html_safe
           else
             meeting_tz = User.current.time_zone ? User.current.time_zone : ActiveSupport::TimeZone[Setting.plugin_redmine_meetings['meeting_timezone']]
-            playback_url = Setting.plugin_redmine_meetings['bbb_playback'].empty? ? "#{Setting.plugin_redmine_meetings['bbb_server']}/playback/slides/playback.html" : Setting.plugin_redmine_meetings['bbb_playback']
             docRecord.root.elements['recordings'].each do |recording|
               dateRecord = Time.at(recording.elements['startTime'].text.to_i / 1000)
               dataFormated = meeting_tz.local_to_utc(dateRecord).strftime("%F %R")
               #dataFormated = Time.at(recording.elements['startTime'].text.to_i).strftime("%F %R")
-              output << ("&nbsp;&nbsp;- <a href='#{playback_url}?meetingId=" + recording.elements['recordID'].text + "' target='" + (Setting.plugin_redmine_meetings['bbb_popup'] != '1' ? '_self' : '_blank') + "'>"+ format_time(dataFormated) + "</a><br>").html_safe
+              playback_url = recording.elements['playback'].elements['format'].elements['url'].text
+              if !Setting.plugin_redmine_meetings['bbb_ip'].empty?
+                playback_url = Setting.plugin_redmine_meetings['bbb_server'] + playback_url[Setting.plugin_redmine_meetings['bbb_ip'].length..-1]
+              end
+              output << ("&nbsp;&nbsp;- <a href='#{playback_url}' target='" + (Setting.plugin_redmine_meetings['bbb_popup'] != '1' ? '_self' : '_blank') + "'>"+ format_time(dataFormated) + "</a>").html_safe
+              if User.current.allowed_to?(:start_conference, @project)
+                output << "&nbsp;&nbsp;".html_safe
+                output << link_to(image_tag("delete.png"), {:controller => 'meetings', :action => 'delete_conference', :project_id => @project, :record_id => recording.elements['recordID'].text, :only_path => true}, :data => { :confirm => l(:text_are_you_sure)}, :title => l(:label_delete_record))
+              end
+              output << ("<br>").html_safe
             end
           end
         end

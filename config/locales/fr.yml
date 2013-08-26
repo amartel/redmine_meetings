@@ -67,6 +67,7 @@ fr:
   label_conference_records: "Enregistrements"
   label_conference_no_records: "Aucun enregistrement trouvé"
   label_recording_meeting: "Cette réunion est enregistrée et pourra être visionnée ultérieurement"
+  label_delete_record: "Supprimer cet enregistrement"
   
   content_meeting_email1: "Organisateur : %{value}"
   content_meeting_email2: "Cette réunion peut être ajoutée dans votre agenda en utilisant le fichier meeting.ics qui est attaché à cet email (le mode opératoire dépend de l'application que vous utilisez)."

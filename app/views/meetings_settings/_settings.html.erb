@@ -51,8 +51,3 @@
 <%= check_box_tag 'settings[bbb_recording]', 1, @settings['bbb_recording'] %><br />
 <em>Checked if you want to allow conference to be recorded</em>
 </p>
-
-<p><label>Playback url</label>
-<%= text_field_tag 'settings[bbb_playback]', @settings['bbb_playback'], :size => 80 %><br />
-<em>Optional: url of the playback.html page (for example, http://[BBB server]/playback/presentation/playback.html with BBB 0.81). When empty, http://[BBB server]/playback/slides/playback.html will be used</em>
-</p>
