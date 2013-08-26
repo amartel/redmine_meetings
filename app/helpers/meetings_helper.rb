@@ -109,13 +109,17 @@ module MeetingsHelper
           output << "#{l(:label_conference_status)}: <b>#{l(:label_conference_status_closed)}</b><br><br>".html_safe
         else
           meeting_started = true
+          recording_status = ""
+          if !doc.root.elements['recording'].nil? && doc.root.elements['recording'].text.downcase == "true"
+            recording_status = image_tag("recorder.png", :plugin => "redmine_meetings", :alt => l(:label_recording_meeting), :title => l(:label_recording_meeting))
+          end
           if Setting.plugin_redmine_meetings['bbb_popup'] != '1'
             output << link_to(l(:label_join_conference), {:controller => 'meetings', :action => 'join_conference', :project_id => @project, :only_path => true})
           else
             output << ("<a href='' onclick='return start_meeting(\"" + url_for(:controller => 'meetings', :action => 'join_conference', :project_id => @project, :only_path => true) + "\");'>#{l(:label_join_conference)}</a>").html_safe
           end
           output << "<br><br>".html_safe
-          output << "#{l(:label_conference_status)}: <b>#{l(:label_conference_status_running)}</b>".html_safe
+          output << "#{l(:label_conference_status)}: <b>#{l(:label_conference_status_running)}</b>#{recording_status}".html_safe
           output << "<br><i>#{l(:label_conference_people)}:</i><br>".html_safe
 
           doc.root.elements['attendees'].each do |attendee|
@@ -136,6 +140,8 @@ module MeetingsHelper
               end
             else
               output << ("<a href='' onclick='return start_meeting(\"" + url_for(:controller => 'meetings', :action => 'start_conference', :project_id => @project, :only_path => true) + "\");'>#{l(:label_conference_start)}</a>").html_safe
+              output << "<br><br>".html_safe
+              output << ("<a href='' onclick='return start_meeting(\"" + url_for(:controller => 'meetings', :action => 'start_conference', :project_id => @project, :only_path => true, :record => true) + "\");'>#{l(:label_conference_start_with_record)}</a>").html_safe
             end
             output << "<br><br>".html_safe
           end
@@ -151,11 +157,12 @@ module MeetingsHelper
             output << "<b>#{l(:label_conference_no_records)}</b><br><br>".html_safe
           else
             meeting_tz = User.current.time_zone ? User.current.time_zone : ActiveSupport::TimeZone[Setting.plugin_redmine_meetings['meeting_timezone']]
+            playback_url = Setting.plugin_redmine_meetings['bbb_playback'].empty? ? "#{Setting.plugin_redmine_meetings['bbb_server']}/playback/slides/playback.html" : Setting.plugin_redmine_meetings['bbb_playback']
             docRecord.root.elements['recordings'].each do |recording|
               dateRecord = Time.at(recording.elements['startTime'].text.to_i / 1000)
               dataFormated = meeting_tz.local_to_utc(dateRecord).strftime("%F %R")
               #dataFormated = Time.at(recording.elements['startTime'].text.to_i).strftime("%F %R")
-              output << ("&nbsp;&nbsp;- <a href='#{Setting.plugin_redmine_meetings['bbb_server']}/playback/slides/playback.html?meetingId=" + recording.elements['recordID'].text + "' target='" + (Setting.plugin_redmine_meetings['bbb_popup'] != '1' ? '_self' : '_blank') + "'>"+ format_time(dataFormated) + "</a><br>").html_safe
+              output << ("&nbsp;&nbsp;- <a href='#{playback_url}?meetingId=" + recording.elements['recordID'].text + "' target='" + (Setting.plugin_redmine_meetings['bbb_popup'] != '1' ? '_self' : '_blank') + "'>"+ format_time(dataFormated) + "</a><br>").html_safe
             end
           end
         end
@@ -281,7 +288,7 @@ module MeetingsHelper
         return nil
       end
     else
-    url
+      url
     end
 
   end

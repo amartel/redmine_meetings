@@ -16,6 +16,7 @@ de:
   permission_join_conference: An Webkonferenz teilnehmen
   permission_start_conference: Starte Webkonferenz
   permission_conference_moderator: Moderator
+  permission_view_recorded_conference: View recorded meetings
   
   label_title_meeting: Meeting
   label_meeting_plural: Meetings
@@ -65,6 +66,7 @@ de:
   
   label_conference_records: "Records"
   label_conference_no_records: "No records found"
+  label_recording_meeting: "This meeting is recorded and may be viewed in the future"
   
   content_meeting_email1: "Organizator : %{value}"
   content_meeting_email2: "Sie können den Termin für dieses Meeting in ihren Kalender (Outlook, Notes) importieren, indem sie das Attachment meeting.ics in ihrer Kalendersoftware öffnen."
