@@ -140,8 +140,10 @@ module MeetingsHelper
               end
             else
               output << ("<a href='' onclick='return start_meeting(\"" + url_for(:controller => 'meetings', :action => 'start_conference', :project_id => @project, :only_path => true) + "\");'>#{l(:label_conference_start)}</a>").html_safe
-              output << "<br><br>".html_safe
-              output << ("<a href='' onclick='return start_meeting(\"" + url_for(:controller => 'meetings', :action => 'start_conference', :project_id => @project, :only_path => true, :record => true) + "\");'>#{l(:label_conference_start_with_record)}</a>").html_safe
+              if Setting.plugin_redmine_meetings['bbb_recording'] == '1'
+                output << "<br><br>".html_safe
+                output << ("<a href='' onclick='return start_meeting(\"" + url_for(:controller => 'meetings', :action => 'start_conference', :project_id => @project, :only_path => true, :record => true) + "\");'>#{l(:label_conference_start_with_record)}</a>").html_safe
+              end
             end
             output << "<br><br>".html_safe
           end
