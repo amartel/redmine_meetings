@@ -7,8 +7,6 @@
 <% end %>
 
 <%= textilizable(@meeting, :description, :only_path => false) %>
-<hr/>
-<% if @meeting.web %>
-  <br/><%= l(:content_meeting_email4, link_to(h(@meeting_url), @meeting_url)).html_safe %>
-<% end %>
-<br /><%= l(:content_meeting_email2) %>
+<br /><hr/>
+<%= l(:content_meeting_email4, link_to(h(@meeting_url), @meeting_url)).html_safe %>
+<br/><br /><%= l(:content_meeting_email2) %>
