@@ -164,7 +164,7 @@ module MeetingsHelper
               dataFormated = meeting_tz.local_to_utc(dateRecord).strftime("%F %R")
               #dataFormated = Time.at(recording.elements['startTime'].text.to_i).strftime("%F %R")
               playback_url = recording.elements['playback'].elements['format'].elements['url'].text
-              if !playback_url.start_with("/")
+              if !playback_url.start_with?("/")
                 playback_url = "/" + playback_url
               end
               if !Setting.plugin_redmine_meetings['bbb_ip'].empty?
