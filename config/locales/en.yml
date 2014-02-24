@@ -25,6 +25,8 @@ en:
   field_end_date_date: End
   field_location: Location
   field_meeting_web: Use the conference room dedicated to the project
+  field_agenda: Agenda
+  field_highlights: Highlights
 
   label_doodle_plural: "Doodles"
   label_title_doodle: "Doodle"

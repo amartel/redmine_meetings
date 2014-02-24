@@ -95,6 +95,8 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.new(:project => @project, :start_date => DateTime.now, :end_date => DateTime.now + 3600, :author => User.current, :web => false)
     @meeting.subject = params[:meeting][:subject]
     @meeting.description = params[:meeting][:description]
+    @meeting.agenda = params[:meeting][:agenda]
+    @meeting.highlights = params[:meeting][:highlights]
     @meeting.location = params[:meeting][:location]
     @meeting.web = (params[:meeting][:web] == 'on')
     tdate = Date.parse(params[:meeting][:start_date_date])
@@ -120,6 +122,8 @@ class MeetingsController < ApplicationController
   def update_meeting
     @meeting.subject = params[:meeting][:subject]
     @meeting.description = params[:meeting][:description]
+    @meeting.agenda = params[:meeting][:agenda]
+    @meeting.highlights = params[:meeting][:highlights]
     @meeting.location = params[:meeting][:location]
     @meeting.web = (params[:meeting][:web] == 'on')
     tdate = Date.parse(params[:meeting][:start_date_date])

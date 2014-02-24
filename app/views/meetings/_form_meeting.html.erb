@@ -5,6 +5,8 @@
   <p><%= f.text_field :end_date_date, :required => true, :size => 10 %><%= calendar_for('meeting_end_date_date') %>&nbsp;&nbsp;-&nbsp;&nbsp;<%= select_time @meeting_tz.utc_to_local(@meeting.end_date_time), :prefix => 'end_time', :minute_step => 5, :time_separator => ':' %></p>
 
   <p><%= f.text_area :description, :cols => 60, :rows => 10, :class => 'wiki-edit' %>
+  <p><%= f.text_area :agenda, :cols => 60, :rows => 10, :class => 'wiki-edit' %>
+  <p><%= f.text_area :highlights, :cols => 60, :rows => 10, :class => 'wiki-edit' %>
     <%= wikitoolbar_for 'meeting_description' %>
   </p>
   <p id="attachments_form"><%= label_tag('attachments[1][file]', l(:label_attachment_plural))%><%= render :partial => 'attachments/form' %></p>

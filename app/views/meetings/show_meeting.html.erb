@@ -25,6 +25,14 @@
 <div class="wiki">
 <%= textilizable @meeting, :description, :attachments => @meeting.attachments %>
 </div>
+<p><strong><%=l(:field_agenda)%></strong></p>
+<div class="wiki">
+<%= textilizable @meeting, :agenda %>
+</div>
+<p><strong><%=l(:field_highlights)%></strong></p>
+<div class="wiki">
+<%= textilizable @meeting, :highlights %>
+</div>
   
 <fieldset class="collapsible" style="padding: 0pt;">
         <legend onclick="toggleFieldset(this);"><%= l(:field_doodle_users) %></legend>
