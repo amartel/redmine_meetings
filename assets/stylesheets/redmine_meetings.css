@@ -26,3 +26,5 @@ div.webmeeting { background-color: #A7FAA0; display:block; border: 1px solid bla
 
 div.meeting.day.tooltip { background-color: #F7A95A; display:block; width: 49%; border: 1px solid black; }
 div.webmeeting.day.tooltip { background-color: #A7FAA0; display:block; width: 49%; border: 1px solid black; }
+
+select#start_time_hour, select#start_time_minute, select#end_time_hour, select#end_time_minute{ width: 4%; }
