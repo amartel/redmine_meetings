@@ -40,6 +40,10 @@
 <% @meeting.watcher_users.collect.sort.each do |user| %>
 <br/>&nbsp;&nbsp;&nbsp;<%=h user %>
 <% end %>
+
+<% @meeting.easy_contacts.collect.sort.each do |contact| %>
+<br/>&nbsp;&nbsp;&nbsp;<%=h contact %>
+<% end %>
 </div></fieldset>
 
 <% if @meeting.attachments.any? -%>

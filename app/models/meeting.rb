@@ -3,6 +3,9 @@ class Meeting < ActiveRecord::Base
   belongs_to :project
   belongs_to :author, :class_name => 'User', :foreign_key => 'author_id'
 
+  has_many :meeting_contacts, dependent: :destroy
+  has_many :easy_contacts, through: :meeting_contacts
+
   validates_presence_of :start_date, :end_date, :subject
   validates_length_of :subject, :maximum => 255
   validates_length_of :location, :maximum => 255
@@ -79,18 +82,31 @@ class Meeting < ActiveRecord::Base
       watcher_users.each do |w|
         recipients[w.language] = update_recipients(recipients, w.language, w.mail)
       end
+
+      easy_contacts.each do |c|
+        contact = get_contact_email_and_language(c)
+
+        recipients[contact[:language]] = update_recipients(recipients, contact[:language], contact[:email])
+      end
     end
+
     recipients.each do |language,rec|
       MeetingMailer.send_meeting(self, rec, language).deliver
     end
     return true
   end
-  
+
   def deliver_cancel()
     recipients = { author.language => [ author.mail ] }
     if notify_participants
       watcher_users.each do |w|
         recipients[w.language] = update_recipients(recipients, w.language, w.mail)
+      end
+
+      easy_contacts.each do |c|
+        contact = get_contact_email_and_language(c)
+
+        recipients[contact[:language]] = update_recipients(recipients, contact[:language], contact[:email])
       end
     end
     recipients.each do |language,rec|
@@ -114,7 +130,14 @@ class Meeting < ActiveRecord::Base
     if !valide
     errors.add(:end_date_date, :greater_than_start_date)
     end
-    
+  end
+
+  def watched_by?(object)
+    if object.is_a?(EasyContact)
+      easy_contact_ids.include?(object.id)
+    else
+      super
+    end
   end
 
   private
@@ -125,4 +148,16 @@ class Meeting < ActiveRecord::Base
     mails << mail
   end
 
+  def get_contact_email_and_language(object)
+    contact = {}
+    custom_fields = object.custom_field_values
+
+    email_custom_field = custom_fields.find{ |cfv| cfv.custom_field.field_format == 'email' }
+    contact[:email] = email_custom_field.custom_field.custom_values.first.value
+
+    language_custom_field = custom_fields.find{ |cfv| cfv.custom_field.name == 'Language' }
+    contact[:language] = language_custom_field.nil? ? 'en' : language_custom_field.custom_field.custom_values.first.value
+
+    contact
+  end
 end

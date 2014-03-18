@@ -24,6 +24,17 @@
     <label class="floating"><%= check_box_tag 'watchers[]', user.id, @meeting.watched_by?(user) %> <%=h user %></label>
   <% end -%>
 <% end -%>
+
+<hr />
+
+<label>Contacts</label>
+<br />
+<input type="button" value="<%= l(:label_all) %>" onclick="SetAllContactCheckBoxes(true);return false;" />
+<input type="button" value="<%= l(:label_none) %>" onclick="SetAllContactCheckBoxes(false);return false;" />
+<br />
+<% @project.easy_contacts.sort.each do |contact| -%>
+    <label class="floating"><%= check_box_tag 'contacts[]', contact.id, @meeting.watched_by?(contact) %> <%=h contact %></label>
+<% end %>
 </p>
 </div>
 

@@ -1,7 +1,7 @@
-function SetAllCheckBoxes(CheckValue) {
+function SetCheckBoxes(CheckValue, element) {
 	if (!document.forms['meeting-form'])
 		return;
-	var objCheckBoxes = document.forms['meeting-form'].elements['watchers_'];
+	var objCheckBoxes = document.forms['meeting-form'].elements[element];
 	if (!objCheckBoxes)
 		return;
 	var countCheckBoxes = objCheckBoxes.length;
@@ -11,6 +11,15 @@ function SetAllCheckBoxes(CheckValue) {
 		// set the check value for all check boxes
 		for ( var i = 0; i < countCheckBoxes; i++)
 			objCheckBoxes[i].checked = CheckValue;
+}
+
+function SetAllCheckBoxes(CheckValue) {
+  SetCheckBoxes(CheckValue, 'watchers_');
+}
+
+
+function SetAllContactCheckBoxes(CheckValue) {
+  SetCheckBoxes(CheckValue, 'contacts_');
 }
 
 function sync_date(from, to) {
