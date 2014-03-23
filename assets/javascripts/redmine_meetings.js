@@ -1,7 +1,7 @@
-function SetCheckBoxes(CheckValue, element) {
+function SetAllCheckBoxes(CheckValue) {
 	if (!document.forms['meeting-form'])
 		return;
-	var objCheckBoxes = document.forms['meeting-form'].elements[element];
+	var objCheckBoxes = document.forms['meeting-form'].elements['watchers_'];
 	if (!objCheckBoxes)
 		return;
 	var countCheckBoxes = objCheckBoxes.length;
@@ -13,14 +13,6 @@ function SetCheckBoxes(CheckValue, element) {
 			objCheckBoxes[i].checked = CheckValue;
 }
 
-function SetAllCheckBoxes(CheckValue) {
-  SetCheckBoxes(CheckValue, 'watchers_');
-}
-
-
-function SetAllContactCheckBoxes(CheckValue) {
-  SetCheckBoxes(CheckValue, 'contacts_');
-}
 
 function sync_date(from, to) {
 	document.getElementById(to).value = document.getElementById(from).value;
@@ -38,14 +30,14 @@ function sync_time(obj, from, to) {
 }
 
 function setAutoPreview(url, form, field) {
-    new Field.Observer(field,2, function(){
-        new Ajax.Updater('preview', url, {
-            asynchronous:true,
-            evalScripts:true,
-            method:'post',
-            parameters:Form.serialize(form)
-        });
+  new Field.Observer(field,2, function(){
+    new Ajax.Updater('preview', url, {
+      asynchronous:true,
+      evalScripts:true,
+      method:'post',
+      parameters:Form.serialize(form)
     });
+  });
 }
 
 function start_meeting(url) {

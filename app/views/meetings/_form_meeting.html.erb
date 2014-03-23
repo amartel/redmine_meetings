@@ -34,13 +34,22 @@
 <hr />
 
 <label>Contacts</label>
-<br />
-<input type="button" value="<%= l(:label_all) %>" onclick="SetAllContactCheckBoxes(true);return false;" />
-<input type="button" value="<%= l(:label_none) %>" onclick="SetAllContactCheckBoxes(false);return false;" />
-<br />
-<% @project.easy_contacts.sort.each do |contact| -%>
-    <label class="floating"><%= check_box_tag 'contacts[]', contact.id, @meeting.watched_by?(contact) %> <%=h contact %></label>
-<% end %>
+
+<table id="meeting-form-contacts-table">
+  <tr>
+    <td class="select-box">
+      <%= select_tag 'project_contacts_list', options_for_meeting_contacts[:project_contacts], { multiple: true, size: 10 } %>
+    </td>
+    <td class="buttons">
+      <%= button_tag '→', type: 'button', onclick: "moveOptions($(this.form).find('#project_contacts_list')[0], $(this.form).find('#selected_meeting_contacts')[0]);" %>
+      <%= button_tag '←', type: 'button', onclick: "moveOptions($(this.form).find('#selected_meeting_contacts')[0], $(this.form).find('#project_contacts_list')[0]);" %>
+    </td>
+    <td class="select-box">
+      <%= select_tag 'contacts[]', options_for_meeting_contacts[:meeting_contacts], { multiple: true, size: 10, id: 'selected_meeting_contacts' } %>
+    </td>
+  </tr>
+</table>
+
 </p>
 </div>
 

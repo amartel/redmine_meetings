@@ -139,6 +139,16 @@ class MeetingsController < ApplicationController
     @meeting.watcher_user_ids = params[:watchers]
     @meeting.notify_participants = (params[:meeting][:notify_participants] == 'on')
     if @meeting.save
+      # Clean meeting contacts
+      # Just rebuild the contacts list after the clean up
+      @meeting.meeting_contacts.delete_all
+
+      if params[:contacts]
+        params[:contacts].each do |contact|
+          @meeting.meeting_contacts.create(easy_contact: @meeting.project.easy_contacts.find(contact))
+        end
+      end
+
       attachments = Attachment.attach_files(@meeting, params[:attachments])
       render_attachment_warning_if_needed(@meeting)
       @meeting.deliver()

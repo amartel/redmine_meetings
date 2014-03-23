@@ -12,6 +12,7 @@
 <div id="preview" class="wiki"></div>
 
 <% content_for :header_tags do %>
+    <%= javascript_include_tag 'pmgov_customs.js', :plugin => "redmine_meetings" %>
     <%= stylesheet_link_tag 'redmine_meetings.css', :plugin => "redmine_meetings" %>
     <%= javascript_include_tag 'redmine_meetings.js', :plugin => "redmine_meetings" %>
 <% end %>

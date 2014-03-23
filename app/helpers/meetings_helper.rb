@@ -271,6 +271,19 @@ module MeetingsHelper
     "top: #{top}px; height: #{height}px; z-order: #{top}; position: absolute; left: #{ind * 10}px;"
   end
 
+  def options_for_meeting_contacts
+    project_list = @project.easy_contacts.reject do |c|
+      @meeting.easy_contacts.include?(c)
+    end
+
+    project_list_options = project_list.empty? ? nil : options_from_collection_for_select(project_list, 'id', 'name')
+
+    {
+      project_contacts: project_list_options,
+      meeting_contacts: options_from_collection_for_select(@meeting.easy_contacts, 'id', 'name')
+    }
+  end
+
   private
 
   def each_xml_element(node, name)

@@ -153,7 +153,7 @@ class Meeting < ActiveRecord::Base
     custom_fields = object.custom_field_values
 
     email_custom_field = custom_fields.find{ |cfv| cfv.custom_field.field_format == 'email' }
-    contact[:email] = email_custom_field.custom_field.custom_values.first.value
+    contact[:email] = email_custom_field.custom_field.custom_values.find{ |cv| cv.customized_id == object.id }.value
 
     language_custom_field = custom_fields.find{ |cfv| cfv.custom_field.name == 'Language' }
     contact[:language] = language_custom_field.nil? ? 'en' : language_custom_field.custom_field.custom_values.first.value
