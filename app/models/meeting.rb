@@ -150,13 +150,12 @@ class Meeting < ActiveRecord::Base
 
   def get_contact_email_and_language(object)
     contact = {}
-    custom_fields = object.custom_field_values
 
-    email_custom_field = custom_fields.find{ |cfv| cfv.custom_field.field_format == 'email' }
-    contact[:email] = email_custom_field.custom_field.custom_values.find{ |cv| cv.customized_id == object.id }.value
+    email_custom_field = object.custom_values.find{ |cv| cv.custom_field.name =~ /(E|e)(\-|)(M|m)ail/  }
+    contact[:email] = email_custom_field.value
 
-    language_custom_field = custom_fields.find{ |cfv| cfv.custom_field.name == 'Language' }
-    contact[:language] = language_custom_field.nil? ? 'en' : language_custom_field.custom_field.custom_values.first.value
+    language_custom_field = object.custom_values.find{ |cv| cv.custom_field.name =~ /(L|l)anguage/  }
+    contact[:language] = language_custom_field.nil? ? 'en' : language_custom_field.value
 
     contact
   end
