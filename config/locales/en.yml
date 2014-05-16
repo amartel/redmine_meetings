@@ -27,6 +27,7 @@ en:
   field_meeting_web: Use the conference room dedicated to the project
   field_agenda: Agenda
   field_highlights: Highlights
+  field_action: Action
 
   label_doodle_plural: "Doodles"
   label_title_doodle: "Doodle"

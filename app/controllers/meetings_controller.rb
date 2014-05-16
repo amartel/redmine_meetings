@@ -97,6 +97,7 @@ class MeetingsController < ApplicationController
     @meeting.description = params[:meeting][:description]
     @meeting.agenda = params[:meeting][:agenda]
     @meeting.highlights = params[:meeting][:highlights]
+    @meeting.action = params[:meeting][:action]
     @meeting.location = params[:meeting][:location]
     @meeting.web = (params[:meeting][:web] == 'on')
     tdate = Date.parse(params[:meeting][:start_date_date])
@@ -130,6 +131,7 @@ class MeetingsController < ApplicationController
     @meeting.description = params[:meeting][:description]
     @meeting.agenda = params[:meeting][:agenda]
     @meeting.highlights = params[:meeting][:highlights]
+    @meeting.action = params[:meeting][:action]
     @meeting.location = params[:meeting][:location]
     @meeting.web = (params[:meeting][:web] == 'on')
     tdate = Date.parse(params[:meeting][:start_date_date])

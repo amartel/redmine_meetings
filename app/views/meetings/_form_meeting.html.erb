@@ -11,11 +11,15 @@
     <p><%= submit_tag l(:button_create) %> <strong>NOTE: This will submit the form</strong> </p>
   <% end %>
 
-  <p><%= f.text_area :description, :cols => 60, :rows => 10, :class => 'wiki-edit' %>
-  <p><%= f.text_area :agenda, :cols => 60, :rows => 10, :class => 'wiki-edit' %>
-  <p><%= f.text_area :highlights, :cols => 60, :rows => 10, :class => 'wiki-edit' %>
+  <p>
+    <%= f.text_area :description, :cols => 60, :rows => 10, :class => 'wiki-edit' %>
     <%= wikitoolbar_for 'meeting_description' %>
   </p>
+  <p><%= f.text_area :agenda, :cols => 60, :rows => 10, :class => 'wiki-edit' %></p>
+  <% unless @meeting.new_record? %>
+    <p><%= f.text_area :highlights, :cols => 60, :rows => 10, :class => 'wiki-edit' %></p>
+    <p><%= f.text_area :action, :cols => 60, :rows => 10, :class => 'wiki-edit' %></p>
+  <% end %>
   <p id="attachments_form"><%= label_tag('attachments[1][file]', l(:label_attachment_plural))%><%= render :partial => 'attachments/form' %></p>
 </div>
 
