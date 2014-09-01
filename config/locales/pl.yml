@@ -1,0 +1,80 @@
+# English strings go here for Rails i18n
+pl:
+
+  project_module_meetings: Zebrania
+  meetings: Zebrania
+  
+  field_first_hour: Dzień zaczyna się o
+  field_last_hour: Dzień kończy się o
+  
+  permission_meetings_settings: Ustawienia zebrań
+  permission_manage_meeting: Zarządzanie zebraniami
+  permission_view_meetings: Oglądanie zebrań
+  permission_manage_doodle: Zarządzanie ankietami
+  permission_view_meeting_doodles: Oglądanie ankiet
+  permission_answer_doodle: Udział w ankiecie
+  permission_join_conference: Udział w telekonferencji
+  permission_start_conference: Rozpoczęcie telekonferencji
+  permission_conference_moderator: Moderator
+  permission_view_recorded_conference: Oglądanie zapisanych telekonferencji
+    
+  label_title_meeting: Zebranie
+  label_meeting_plural: Zebrania
+  label_meeting_new: Nowe zebranie
+  field_start_date_date: Początek
+  field_end_date_date: Koniec
+  field_location: Miejsce
+  field_meeting_web: Pokój telekonferencji przydzielony do projektu
+
+  label_doodle_plural: "Ankiety"
+  label_title_doodle: "Ankieta"
+  label_doodle_new: "Nowa ankieta"
+  field_options: "Opcje"
+  text_options_help: "Wprowadź jedną opcje w każdej linii"
+  field_doodle_users: Uczestnicy
+  field_emails: Uczestnicy zewnętrzni
+  text_emails_help: "Wprowadź adresy email uczestników, którzy nie są członkami projektu (użyj przecinka jako separatora)"
+  field_delete_answers: Skasuj obecne odpowiedzi
+  doodle_update_successfull: "Odpowiedzi zapisane"
+  doodle_update_unseccessfull: "Błąd. Odpowiedzi nie zapisane"
+  button_save_answers: Zapisz moje odpowiedzi
+  label_notify_author: "Jako edytor tej ankiety, zawsze dostaniesz powiadomienie e-mail (o ile nie wyłączyłeś maili dla zmian, które sam wprowadzasz)"
+  field_notify_author: "Powiadom mnie kiedy przyjdzie odpowiedź"
+  field_notify_participants: Wyślij wiadomość do wszystkich uczestników
+  field_notify_participants2: Wyślij wiadomość do wszystkich uczestników, którzy jeszcze nie odpowiedzieli
+  label_answer_received: Otrzymano nową odpowiedź
+
+  content_doodle_email1: "Możesz wziąć udział w tej ankiecie (którą utworzył %{value}): "
+  content_doodle_email2: "- Używając następującego linku (jeśli jesteś zarejestrowanym użytkownikiem): "
+  content_doodle_email3: "- Odpowiadając ma tego maila. Po prostu skasuj opcje, z którymi się nie zgadzasz zostawiając linie --BEGIN-- oraz --END--."
+  content_doodle_email4: "Proponowane opcje:"
+  content_doodle_invalid_answer: Przykro nam, ale Twoja odpowiedź nie została zarejstrowana (nie możemy znaleźć wybranych opcji). Możesz albo spróbować ponownie, albo wysłać maila do autora, którym jest %{value}...
+  content_doodle_ak_answer: "Twoja odpowiedź została zarejestrowana. Dziękujemy."
+  content_doodle_ak_answer1: "Zaakceptowałeś/łaś następujące opcje:"
+  content_doodle_ak_answer3: "Odrzuciłeś/łaś wszystkie opcje." 
+  content_doodle_ak_answer2: "Jeśli chcesz, możesz zmienić swoją odpowiedź:" 
+  content_doodle_answer: "Odpowiedź została zarejestrowana (%{value}). Tutaj możesz ją zobaczyć: "
+  
+  label_conference: Telekonferencja
+  label_conference_status: "Status"
+  label_join_conference: Dołącz do telekonferencji
+  label_conference_start: Rozpocznij telekonferencję
+  label_conference_start_with_record: Rozpocznij rejestrowaną telekonferencję
+  label_conference_people: "Uczestnicy"
+  label_conference_status_running: W trakcie
+  label_conference_status_closed: Nie rozpoczęta
+  
+  label_conference_records: "Nagrania"
+  label_conference_no_records: "Brak nagrań"
+  label_recording_meeting: "Ta telekonferencja jest rejestrowana i może być odtworzona w przyszłości"
+  label_delete_record: "Skasuj tę zarejestrowaną telekonferencję"
+  
+  content_meeting_email1: "Organizor: %{value}"
+  content_meeting_email2: "To zebranie może zostać dodane do Twojego kalendarza przy pomocy załączonego pliku (sposób dodania zależy od używanego programu)."
+  content_meeting_email3: "Kliknij na następujący link by dołączyć do konferencji: %{value}" 
+  content_meeting_email4: "Link do zebrania: %{value}"
+  
+  cancel_meeting_email1: "Następujące zebranie zostało odwołane"
+  cancel_meeting_email2: "To zebranie może zostać usunięte z Twojego kalendarza przy pomocy załączonego pliku (sposób użycia pliku zależy od używanego programu)."
+  
+  download_ics: "ICS (ICalendar)"

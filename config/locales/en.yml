@@ -62,7 +62,7 @@ en:
   label_conference_start_with_record: Start conference with record
   label_conference_people: "Participants"
   label_conference_status_running: In progress
-  label_conference_status_closed: Non started
+  label_conference_status_closed: Not started
   
   label_conference_records: "Records"
   label_conference_no_records: "No records found"
