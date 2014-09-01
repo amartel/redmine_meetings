@@ -1,13 +1,13 @@
 # English strings go here for Rails i18n
 pl:
 
-  project_module_meetings: Zebrania
-  meetings: Zebrania
+  project_module_meetings: Spotkania
+  meetings: Spotkania
   
   field_first_hour: Dzień zaczyna się o
   field_last_hour: Dzień kończy się o
   
-  permission_meetings_settings: Ustawienia zebrań
+  permission_meetings_settings: Ustawienia spotkań
   permission_manage_meeting: Zarządzanie zebraniami
   permission_view_meetings: Oglądanie zebrań
   permission_manage_doodle: Zarządzanie ankietami
