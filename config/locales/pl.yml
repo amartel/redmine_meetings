@@ -70,11 +70,11 @@ pl:
   label_delete_record: "Skasuj tę zarejestrowaną telekonferencję"
   
   content_meeting_email1: "Organizor: %{value}"
-  content_meeting_email2: "To zebranie może zostać dodane do Twojego kalendarza przy pomocy załączonego pliku (sposób dodania zależy od używanego programu)."
+  content_meeting_email2: "To zebranie może zostać dodane do Twojego kalendarza przy pomocy załączonego pliku „meeting.ics” (sposób dodania zależy od stosowanego programu)."
   content_meeting_email3: "Kliknij na następujący link by dołączyć do konferencji: %{value}" 
   content_meeting_email4: "Link do zebrania: %{value}"
   
   cancel_meeting_email1: "Następujące zebranie zostało odwołane"
-  cancel_meeting_email2: "To zebranie może zostać usunięte z Twojego kalendarza przy pomocy załączonego pliku (sposób użycia pliku zależy od używanego programu)."
+  cancel_meeting_email2: "To zebranie może zostać usunięte z Twojego kalendarza przy pomocy załączonego pliku „meeting.ics” (sposób użycia pliku zależy od stosowanego programu)."
   
   download_ics: "ICS (ICalendar)"
