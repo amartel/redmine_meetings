@@ -378,8 +378,8 @@ class MeetingsController < ApplicationController
           event.dtstamp     = DateTime.now.utc
           event.summary     = meeting.subject
           event.description = desc
-          event.dtstart     = tzid.local_to_utc(meeting.start_date)
-          event.dtend       = tzid.local_to_utc(meeting.end_date)
+          event.dtstart     = meeting.start_date.to_time
+          event.dtend       = meeting.end_date.to_time
           event.location    = meeting.web ? l(:field_meeting_web) : meeting.location
           meeting.watcher_users.collect.sort.each do |user|
             event.add_attendee  user.mail
