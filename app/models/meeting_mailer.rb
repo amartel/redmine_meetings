@@ -5,7 +5,7 @@ class MeetingMailer < Mailer
 
   def send_doodle(doodle, rec, language)
     set_language_if_valid language
-    sub = "[#{doodle.project.name} - doodle #{doodle.id}]#{doodle.title}"
+    sub = "[#{doodle.project.name} - #{t :label_title_doodle} #{doodle.id}]#{doodle.title}"
     @doodle = doodle
     @doodle_url = url_for(:controller => 'meetings', :action => 'show_doodle', :id => doodle)
     mail :to => rec,
@@ -14,7 +14,7 @@ class MeetingMailer < Mailer
 
   def send_invalid_answer(doodle, rec, language)
     set_language_if_valid language
-    sub = "FAILED:[#{doodle.project.name} - doodle #{doodle.id}]#{doodle.title}"
+    sub = "FAILED:[#{doodle.project.name} - #{t :label_title_doodle} #{doodle.id}]#{doodle.title}"
     @doodle = doodle
     mail :to => rec,
       :subject => sub
@@ -27,7 +27,7 @@ class MeetingMailer < Mailer
     doodle.tab_options.zip(response.answers).each do |choice, selected|
       accepted << "[#{choice.strip}]" if selected
     end
-    sub = "SUCCESS:[#{doodle.project.name} - doodle #{doodle.id}]#{doodle.title}"
+    sub = "SUCCESS:[#{doodle.project.name} - #{t :label_title_doodle} #{doodle.id}]#{doodle.title}"
 
     @doodle = doodle
     @response = response
@@ -42,7 +42,7 @@ class MeetingMailer < Mailer
     doodle = answer.meeting_doodle
     name = answer.author.mail ? answer.author.name : answer.name
     set_language_if_valid doodle.author.language
-    sub = "ANSWER:[#{doodle.project.name} - doodle #{doodle.id}]#{doodle.title}"
+    sub = "ANSWER:[#{doodle.project.name} - #{t :label_title_doodle} #{doodle.id}]#{doodle.title}"
     @doodle = doodle
     @name = name
     @doodle_url = url_for(:controller => 'meetings', :action => 'show_doodle', :id => doodle)
@@ -91,7 +91,7 @@ class MeetingMailer < Mailer
 
     @author = User.anonymous
 
-    sub = "[#{meeting.project.name} - meeting #{meeting.start_date.strftime('%F')}] #{meeting.subject}"
+    sub = "[#{meeting.project.name} - #{t :label_title_meeting} #{meeting.start_date.strftime('%F')}] #{meeting.subject}"
     @meeting = meeting
     @conf_url = url_for(:controller => 'meetings', :action => 'join_conference', :project_id => meeting.project)
     @meeting_url = url_for(:controller => 'meetings', :action => 'show_meeting', :id => meeting)
@@ -144,7 +144,7 @@ def cancel_meeting(meeting, rec, language)
 
   @author = User.anonymous
 
-  sub = "[#{meeting.project.name} - meeting #{meeting.start_date.strftime('%F')}] #{meeting.subject}"
+  sub = "[#{meeting.project.name} - #{t :label_title_meeting} #{meeting.start_date.strftime('%F')}] #{meeting.subject}"
   @meeting = meeting
   @conf_url = url_for(:controller => 'meetings', :action => 'join_conference', :project_id => meeting.project)
   @meeting_url = url_for(:controller => 'meetings', :action => 'show_meeting', :id => meeting)
