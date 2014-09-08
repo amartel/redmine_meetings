@@ -83,11 +83,12 @@ class MeetingsController < ApplicationController
   end
 
   def new_meeting
-    dday = Time.now
+    dday = @meeting_tz.utc_to_local(Time.now.utc)
+    dnow = @meeting_tz.utc_to_local(Time.now.utc)
     if params[:start]
       dday = Date.parse(params[:start])
     end
-    dstart = @meeting_tz.local_to_utc(DateTime.civil(dday.year, dday.month, dday.day, Time.now.hour, Time.now.min)).to_time
+    dstart = @meeting_tz.local_to_utc(DateTime.civil(dday.year, dday.month, dday.day, dnow.hour, dnow.min)).to_time
     @meeting = Meeting.new(:project => @project, :start_date => dstart, :end_date => (dstart + 3600))
   end
 
@@ -378,8 +379,8 @@ class MeetingsController < ApplicationController
           event.dtstamp     = DateTime.now.utc
           event.summary     = meeting.subject
           event.description = desc
-          event.dtstart     = meeting.start_date.to_time
-          event.dtend       = meeting.end_date.to_time
+          event.dtstart     = meeting.start_date.utc
+          event.dtend       = meeting.end_date.utc
           event.location    = meeting.web ? l(:field_meeting_web) : meeting.location
           meeting.watcher_users.collect.sort.each do |user|
             event.add_attendee  user.mail

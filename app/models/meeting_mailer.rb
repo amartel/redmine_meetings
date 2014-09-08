@@ -5,6 +5,7 @@ class MeetingMailer < Mailer
 
   def send_doodle(doodle, rec, language)
     set_language_if_valid language
+    redmine_headers 'Meeting-Doodle-ID' => doodle.id
     sub = "[#{doodle.project.name} - #{t :label_title_doodle} #{doodle.id}]#{doodle.title}"
     @doodle = doodle
     @doodle_url = url_for(:controller => 'meetings', :action => 'show_doodle', :id => doodle)
@@ -14,6 +15,7 @@ class MeetingMailer < Mailer
 
   def send_invalid_answer(doodle, rec, language)
     set_language_if_valid language
+    redmine_headers 'Meeting-Doodle-ID' => doodle.id
     sub = "FAILED:[#{doodle.project.name} - #{t :label_title_doodle} #{doodle.id}]#{doodle.title}"
     @doodle = doodle
     mail :to => rec,
@@ -23,6 +25,7 @@ class MeetingMailer < Mailer
   def send_ak_answer(response, rec, language)
     set_language_if_valid language
     doodle = response.meeting_doodle
+    redmine_headers 'Meeting-Doodle-ID' => doodle.id
     accepted = []
     doodle.tab_options.zip(response.answers).each do |choice, selected|
       accepted << "[#{choice.strip}]" if selected
@@ -42,6 +45,7 @@ class MeetingMailer < Mailer
     doodle = answer.meeting_doodle
     name = answer.author.mail ? answer.author.name : answer.name
     set_language_if_valid doodle.author.language
+    redmine_headers 'Meeting-Doodle-ID' => doodle.id
     sub = "ANSWER:[#{doodle.project.name} - #{t :label_title_doodle} #{doodle.id}]#{doodle.title}"
     @doodle = doodle
     @name = name
@@ -68,8 +72,8 @@ class MeetingMailer < Mailer
         event.dtstamp     = DateTime.now.utc
         event.summary     = meeting.subject
         event.description = desc
-        event.dtstart     = meeting.start_date.to_time
-        event.dtend       = meeting.end_date.to_time
+        event.dtstart     = meeting.start_date.to_utc
+        event.dtend       = meeting.end_date.to_utc
         event.location    = meeting.web ? l(:field_meeting_web) : meeting.location
         meeting.watcher_users.collect.sort.each do |user|
           event.add_attendee  user.mail
