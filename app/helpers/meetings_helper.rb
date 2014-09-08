@@ -1,4 +1,5 @@
 module MeetingsHelper
+
   def link_to_previous_period(period, year, month, week, day)
     target_day = 0
     target_week = 0

@@ -1,7 +1,7 @@
 <%= l(:content_meeting_email1, @meeting.author.name) %> 
-<br/><%= l(:field_start_date_date) %> : <b><%= @meeting_tz.utc_to_local(@meeting.start_date.to_time).strftime("%F %R") %> - <%= User.current.time_zone ? User.current.time_zone : ActiveSupport::TimeZone[Setting.plugin_redmine_meetings['meeting_timezone']] %></b>
-<br/><%= l(:field_end_date_date) %> : <b><%= @meeting_tz.utc_to_local(@meeting.end_date.to_time).strftime("%F %R") %> - <%= User.current.time_zone ? User.current.time_zone : ActiveSupport::TimeZone[Setting.plugin_redmine_meetings['meeting_timezone']] %></b>
-<br/><%= l(:field_location) %> : <b><%= @meeting.web ? l(:field_meeting_web) : h(@meeting.location) %></b>
+<br/><%= l(:field_start_date_date) %>: <b><%= @meeting_tz.utc_to_local(@meeting.start_date.to_time).strftime("%F %R") %> - <%= User.current.time_zone ? User.current.time_zone: ActiveSupport::TimeZone[Setting.plugin_redmine_meetings['meeting_timezone']] %></b>
+<br/><%= l(:field_end_date_date) %>: <b><%= @meeting_tz.utc_to_local(@meeting.end_date.to_time).strftime("%F %R") %> - <%= User.current.time_zone ? User.current.time_zone: ActiveSupport::TimeZone[Setting.plugin_redmine_meetings['meeting_timezone']] %></b>
+<br/><%= l(:field_location) %>: <b><%= @meeting.web ? l(:field_meeting_web) : h(@meeting.location) %></b>
 <% if @meeting.web %>
 <br/><%= l(:content_meeting_email3, link_to(h(@conf_url), @conf_url)).html_safe %>
 <% end %>

@@ -44,15 +44,15 @@ en:
   field_notify_participants2: Send an email to participants who didn't answer
   label_answer_received: New answer received  
 
-  content_doodle_email1: "You can participate to this doodle (created by %{value}) : "
-  content_doodle_email2: "- By following this link (if you are a registered user) : "
+  content_doodle_email1: "You can participate to this doodle (created by %{value}): "
+  content_doodle_email2: "- By following this link (if you are a registered user): "
   content_doodle_email3: "- Or by replying to this email. Just delete options you don't agree with, but leave --BEGIN-- and --END-- lines..."
   content_doodle_email4: "Proposed options:"
   content_doodle_invalid_answer: We are sorry but your reply was not processed (we were unable to find your answers). You can either retry to reply again or send an email the author (%{value})...
   content_doodle_ak_answer: "Your answer has been processed. Thank you." 
   content_doodle_ak_answer1: "You have accepted the following options:" 
   content_doodle_ak_answer3: "You have refused all options." 
-  content_doodle_ak_answer2: "If you want, you can update your answer :" 
+  content_doodle_ak_answer2: "If you want, you can update your answer:" 
   content_doodle_answer: "An answer has been recorded (from %{value}). Follow the link to display it: "
   
   label_conference: Web conference
@@ -62,17 +62,17 @@ en:
   label_conference_start_with_record: Start conference with record
   label_conference_people: "Participants"
   label_conference_status_running: In progress
-  label_conference_status_closed: Non started
+  label_conference_status_closed: Not started
   
   label_conference_records: "Records"
   label_conference_no_records: "No records found"
   label_recording_meeting: "This meeting is recorded and may be viewed in the future"
   label_delete_record: "Delete this recorded meeting"
   
-  content_meeting_email1: "Organizor : %{value}"
+  content_meeting_email1: "Organizor: %{value}"
   content_meeting_email2: "This meeting can be added to your calendar using the attached file, meeting.ics (instructions depend from the software you are using)."
-  content_meeting_email3: "Follow this link to join the web conference : %{value}" 
-  content_meeting_email4: "Link to the meeting : %{value}"
+  content_meeting_email3: "Follow this link to join the web conference: %{value}" 
+  content_meeting_email4: "Link to the meeting: %{value}"
   
   cancel_meeting_email1: "The following meeting has been cancelled/deleted"
   cancel_meeting_email2: "This meeting can be removed from your calendar using the attached file, meeting.ics (instructions depend from the software you are using)."
