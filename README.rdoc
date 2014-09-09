@@ -62,6 +62,11 @@ Before uninstalling please ensure that the Redmine instance is stopped.
 After these steps re-start your instance of Redmine.
 
 == History
+0.2.5 : 2014-09-09
+Add: polish locale (macdems)
+Add: subject is now localized (macdems)
+fixed: timezone bugs (macdems)
+
 0.2.4 : 2013-08-23
 Add: allow meetings recording 
 
