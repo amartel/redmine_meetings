@@ -5,6 +5,8 @@ class MeetingMailer < Mailer
 
   def send_doodle(doodle, rec, language)
     set_language_if_valid language
+    message_id doodle
+    references doodle
     redmine_headers 'Meeting-Doodle-ID' => doodle.id
     sub = "[#{doodle.project.name} - #{t :label_title_doodle} #{doodle.id}]#{doodle.title}"
     @doodle = doodle
@@ -15,6 +17,7 @@ class MeetingMailer < Mailer
 
   def send_invalid_answer(doodle, rec, language)
     set_language_if_valid language
+    references doodle
     redmine_headers 'Meeting-Doodle-ID' => doodle.id
     sub = "FAILED:[#{doodle.project.name} - #{t :label_title_doodle} #{doodle.id}]#{doodle.title}"
     @doodle = doodle
@@ -25,6 +28,7 @@ class MeetingMailer < Mailer
   def send_ak_answer(response, rec, language)
     set_language_if_valid language
     doodle = response.meeting_doodle
+    references doodle
     redmine_headers 'Meeting-Doodle-ID' => doodle.id
     accepted = []
     doodle.tab_options.zip(response.answers).each do |choice, selected|
@@ -45,7 +49,6 @@ class MeetingMailer < Mailer
     doodle = answer.meeting_doodle
     name = answer.author.mail ? answer.author.name : answer.name
     set_language_if_valid doodle.author.language
-    redmine_headers 'Meeting-Doodle-ID' => doodle.id
     sub = "ANSWER:[#{doodle.project.name} - #{t :label_title_doodle} #{doodle.id}]#{doodle.title}"
     @doodle = doodle
     @name = name
