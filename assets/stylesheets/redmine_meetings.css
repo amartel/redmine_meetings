@@ -17,7 +17,7 @@ h3.doodles {
    border-top:1px solid #ff9831;
    border-bottom:1px solid #ff9831;
 }
-table.list.doodle th { background-color: #66a3eb; border: none; }
+table.list.doodle th { background-color: #ECEEF0; border: none; font-weight: bold; }
 
 
 table.meeting th {vertical-align: top; text-align: right; font-weight: bold;}
