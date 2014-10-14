@@ -75,8 +75,8 @@ class MeetingMailer < Mailer
         event.dtstamp     = DateTime.now.utc
         event.summary     = meeting.subject
         event.description = desc
-        event.dtstart     = meeting.start_date.to_utc
-        event.dtend       = meeting.end_date.to_utc
+        event.dtstart     = meeting.start_date.utc
+        event.dtend       = meeting.end_date.utc
         event.location    = meeting.web ? l(:field_meeting_web) : meeting.location
         meeting.watcher_users.collect.sort.each do |user|
           event.add_attendee  user.mail
@@ -128,8 +128,8 @@ def cancel_meeting(meeting, rec, language)
       event.dtstamp     = DateTime.now.utc
       event.summary     = meeting.subject
       event.description = desc
-      event.dtstart     = meeting.start_date.to_time
-      event.dtend       = meeting.end_date.to_time
+      event.dtstart     = meeting.start_date.utc
+      event.dtend       = meeting.end_date.utc
       event.location    = meeting.web ? l(:field_meeting_web) : meeting.location
       meeting.watcher_users.collect.sort.each do |user|
         event.add_attendee  user.mail
